@@ -63,7 +63,7 @@ public class GameMain extends JFrame implements Runnable {
 	
 	private void updateGame()
 	{
-		//Nothing
+		//IDK
 	}
 	
 	private void startGame()
