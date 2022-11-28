@@ -1,0 +1,127 @@
+package vh.main;
+
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
+import vh.input.KeyboardInput;
+import vh.input.MouseInput;
+
+public class GameMain extends JFrame implements Runnable {
+	private GameScreen screen;
+	
+	private Thread gameThread;
+	
+	private final double SET_FPS = 120.0;
+	private final double SET_UPS = 60.0;
+	
+	private MouseInput mouseListener;
+	private KeyboardInput keyboardListener;
+	
+	private GameRenders gameRenderer;
+	
+	public GameMain() {
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		gameRenderer = new GameRenders(this);
+		screen = new GameScreen(this);
+		add(screen);
+	
+		pack();
+		
+		setVisible(true);
+		setLocationRelativeTo(null);
+	}
+	
+	private void initializeInput() {
+		mouseListener = new MouseInput();
+		keyboardListener = new KeyboardInput();
+		
+		addMouseListener(mouseListener);
+		addMouseMotionListener(mouseListener);
+		addKeyListener(keyboardListener);
+		
+		requestFocus();
+	}
+	
+	private void updateGame()
+	{
+		//IDK
+	}
+	
+	private void startGame()
+	{
+		gameThread = new Thread(this) {
+		};
+		
+		gameThread.start();
+	}
+
+	public static void main(String[] args) {
+		GameMain game = new GameMain();
+		game.initializeInput();
+		game.startGame();
+		
+//		Thread t = new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+	}
+
+	@Override
+	public void run() 
+	{
+		double timePerFrame = 1000000000.0 / SET_FPS;
+		double timePerUpdate = 1000000000.0 / SET_UPS;
+		
+		long lastUpdate = System.nanoTime();
+		long lastFrame = System.nanoTime();
+		
+		int frames = 0;
+		int updates = 0;
+		
+		long lastTimeCheck = System.currentTimeMillis();
+		long curNano;
+		
+		while(true)
+		{
+			curNano = System.nanoTime();
+			//Render
+			if (curNano - lastFrame >= timePerFrame)
+			{
+				lastFrame = curNano;
+				repaint();
+				frames++;
+			}
+			
+			//Update
+			if (curNano - lastUpdate >= timePerUpdate)
+			{
+				updateGame();
+				lastUpdate = curNano;
+				updates++;
+			}
+			
+			//Check FPS & UPS
+			if (System.currentTimeMillis() - lastTimeCheck >= 1000)
+			{
+				System.out.println("FPS : " + frames + ", UPS : " + updates);
+				frames = 0;
+				updates = 0;
+				lastTimeCheck = System.currentTimeMillis();
+			}
+		}
+	}
+	
+	//Getters & Setters
+	public GameRenders getRenderer() {
+		return gameRenderer;
+	}
+}

@@ -1,0 +1,20 @@
+package vh.scene;
+
+import java.awt.Graphics;
+
+import vh.main.GameMain;
+
+public class Settings extends GameScene implements SceneMethods {
+
+	public Settings(GameMain game) {
+		super(game);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void render(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

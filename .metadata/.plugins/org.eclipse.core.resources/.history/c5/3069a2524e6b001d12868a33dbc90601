@@ -1,0 +1,44 @@
+package vh.main;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JPanel;
+
+public class GameScreen extends JPanel{
+	private GameMain game;
+	private Dimension size;
+	
+	private GameRenders gameRenderer;
+	
+	public GameScreen(GameMain game) {
+		this.game = game;
+		gameRenderer = new GameRenders(this);
+		
+		this.map = map;
+		this.sprite = sprite;
+		this.random = new Random();
+		
+		setPanelSize();
+	}
+	
+	private void setPanelSize() {
+		size = new Dimension(700, 400);
+		setMinimumSize(size);
+		setPreferredSize(size);
+		setMaximumSize(size);
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		g.drawImage(map, 0, 0, null);
+		g.drawImage(sprites.get(0), 0, 0, null);
+		
+//		g.drawImage(sprite.getSubimage(0, 0, 17, 29), 100, 50, null);
+	}
+}

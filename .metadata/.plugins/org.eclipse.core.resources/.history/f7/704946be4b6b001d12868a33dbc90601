@@ -1,0 +1,26 @@
+package vh.main;
+
+public class GameRenders {
+
+	private GameScreen gameScreen;
+	
+	public GameRenders(GameScreen gs) {
+		this.gameScreen = gs;
+	}
+	
+	public void render(Graphics g) {
+		
+		switch(GameStates.gameState) {
+		
+		case MENU :
+			break;
+			
+		case SETTINGS :
+			break;
+			
+		case PLAYING :
+			break;
+		
+		}
+	}
+}

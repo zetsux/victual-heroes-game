@@ -1,0 +1,5 @@
+package vh.scene;
+
+public class Playing extends GameScene implements SceneMethods {
+
+}
