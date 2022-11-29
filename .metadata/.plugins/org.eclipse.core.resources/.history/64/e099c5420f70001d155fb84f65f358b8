@@ -108,7 +108,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 		}
 
 		else if(quitButton.getBounds().contains(x, y)) {
-			System.exit(1);
+			System.exit(69);
 		}
 		
 	}
@@ -117,17 +117,12 @@ public class MainMenu extends GameScene implements SceneMethods {
 		// TODO Auto-generated method stub
 		playingButton.setMouseOverButton(false);
 		settingButton.setMouseOverButton(false);
-		quitButton.setMouseOverButton(false);
 		if(playingButton.getBounds().contains(x, y)) {
 			playingButton.setMouseOverButton(true);
 		}
 		
 		else if(settingButton.getBounds().contains(x, y)) {
 			settingButton.setMouseOverButton(true);
-		}
-		
-		else if(quitButton.getBounds().contains(x, y)) {
-			quitButton.setMouseOverButton(true);
 		}
 	}
 
@@ -142,10 +137,6 @@ public class MainMenu extends GameScene implements SceneMethods {
 			settingButton.setMousePressedButton(true);
 		}
 		
-		else if(quitButton.getBounds().contains(x, y)) {
-			quitButton.setMousePressedButton(true);
-		}
-		
 	}
 
 	@Override
@@ -153,7 +144,6 @@ public class MainMenu extends GameScene implements SceneMethods {
 		// TODO Auto-generated method stub
 		playingButton.resetMouseState();
 		settingButton.resetMouseState();
-		quitButton.resetMouseState();
 	}
 
 }
