@@ -21,9 +21,6 @@ public class GameMain extends JFrame implements Runnable {
 	private final double SET_FPS = 120.0;
 	private final double SET_UPS = 60.0;
 	
-	private MouseInput mouseListener;
-	private KeyboardInput keyboardListener;
-	
 	//Classes
 	private GameRenders gameRenderer;
 	private MainMenu menu;
@@ -38,8 +35,9 @@ public class GameMain extends JFrame implements Runnable {
 		add(screen);
 		pack();
 		
-		setVisible(true);
 		setLocationRelativeTo(null);
+		setResizable(false);
+		setVisible(true);
 	}
 
 	private void initializeClasses() {
@@ -48,17 +46,6 @@ public class GameMain extends JFrame implements Runnable {
 		menu = new MainMenu(this);
 		playing = new Playing(this);
 		settings = new Settings(this);
-	}
-
-	private void initializeInput() {
-		mouseListener = new MouseInput();
-		keyboardListener = new KeyboardInput();
-		
-		addMouseListener(mouseListener);
-		addMouseMotionListener(mouseListener);
-		addKeyListener(keyboardListener);
-		
-		requestFocus();
 	}
 	
 	private void updateGame()
@@ -76,7 +63,7 @@ public class GameMain extends JFrame implements Runnable {
 
 	public static void main(String[] args) {
 		GameMain game = new GameMain();
-		game.initializeInput();
+		game.screen.initializeInput();
 		game.startGame();
 		
 //		Thread t = new Thread(new Runnable() {

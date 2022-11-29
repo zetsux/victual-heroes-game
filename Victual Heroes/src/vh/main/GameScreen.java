@@ -8,14 +8,31 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
 
+import vh.input.KeyboardInput;
+import vh.input.MouseInput;
+
 public class GameScreen extends JPanel{
 	private GameMain game;
 	private Dimension size;
+	
+	private MouseInput mouseListener;
+	private KeyboardInput keyboardListener;
 	
 	public GameScreen(GameMain game) {
 		this.game = game;
 
 		setPanelSize();
+	}
+	
+	public void initializeInput() {
+		mouseListener = new MouseInput(game);
+		keyboardListener = new KeyboardInput();
+		
+		addMouseListener(mouseListener);
+		addMouseMotionListener(mouseListener);
+		addKeyListener(keyboardListener);
+		
+		requestFocus();
 	}
 	
 	private void setPanelSize() {

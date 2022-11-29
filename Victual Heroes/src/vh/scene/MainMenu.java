@@ -10,6 +10,8 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import vh.main.GameMain;
+import vh.ui.Button;
+import static vh.main.GameStates.*;
 
 public class MainMenu extends GameScene implements SceneMethods {
 
@@ -18,6 +20,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 	private BufferedImage mapIMG;
 	private BufferedImage spriteIMG;
 	private Random rand;
+	private Button playingButton, settingButton, quitButton; 
 	
 	private ArrayList<BufferedImage> sprites = new ArrayList<>();
 	
@@ -28,10 +31,21 @@ public class MainMenu extends GameScene implements SceneMethods {
 		this.sprite = spriteIMG;
 		loadSprites();
 		this.rand = new Random();
+		initializeButton();
+	}
+
+	private void initializeButton() {
+		
+		playingButton = new Button("Play", 300, 100, 100, 30);
+		settingButton = new Button("Settings", 300, 200, 100, 30);
+		quitButton = new Button("Quit", 300, 300, 100, 30);
 	}
 
 	@Override
 	public void render(Graphics g) {
+		
+		drawButtons(g);
+		/*
 		g.drawImage(map, 0, 0, null);
 		g.drawImage(sprites.get(0), 0, 0, null);
 		for (int i = 0 ; i < 16 ; i++) {
@@ -39,8 +53,16 @@ public class MainMenu extends GameScene implements SceneMethods {
 				g.drawImage(sprites.get(getRX()), i*40, j*40, null);
 			}
 		}
+		*/
 	}
 	
+	private void drawButtons(Graphics g) {
+		
+		playingButton.draw(g);
+		settingButton.draw(g);
+		quitButton.draw(g);
+	}
+
 	private void importImg() {
 		InputStream is = getClass().getResourceAsStream("/croppedmap.jpeg");
 		try {
@@ -73,6 +95,37 @@ public class MainMenu extends GameScene implements SceneMethods {
 	
 	private int getRY() {
 		return rand.nextInt(5);
+	}
+
+	public void mouseClicked(int x, int y) {
+
+		if(playingButton.getBounds().contains(x, y)) {
+			setGameState(PLAYING);
+		}
+		
+	}
+
+	public void mouseMoved(int x, int y) {
+		// TODO Auto-generated method stub
+		playingButton.setMouseOverButton(false);
+		if(playingButton.getBounds().contains(x, y)) {
+			playingButton.setMouseOverButton(true);
+		}
+	}
+
+	public void mousePressed(int x, int y) {
+		
+		//playingButton.setMouseOverButton(false);
+		if(playingButton.getBounds().contains(x, y)) {
+			playingButton.setMousePressedButton(true);
+		}
+		
+	}
+
+	@Override
+	public void mouseReleased(int x, int y) {
+		// TODO Auto-generated method stub
+		playingButton.resetMouseState();;
 	}
 
 }
