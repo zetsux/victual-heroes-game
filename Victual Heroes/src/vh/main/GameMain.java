@@ -50,7 +50,16 @@ public class GameMain extends JFrame implements Runnable {
 	
 	private void updateGame()
 	{
-		//Nothing
+		switch (GameStates.gameState) {
+		case MENU :
+			break;
+		case PLAYING :
+			playing.update();
+		case SETTINGS :
+			break;
+		default :
+			break;
+		}
 	}
 	
 	private void startGame()

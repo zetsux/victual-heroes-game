@@ -1,0 +1,25 @@
+package vh.objectManagers;
+
+import java.awt.image.BufferedImage;
+
+import vh.scene.Playing;
+
+public class EnemyManager {
+	
+	private final int enemyCount = 4;
+	private Playing playing;
+	private BufferedImage[] enemyImages;
+	
+	public EnemyManager(Playing plyng) {
+		this.playing = plyng;
+		this.enemyImages = new BufferedImage[enemyCount];
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void draw(Graphics g) {
+		
+	}
+}

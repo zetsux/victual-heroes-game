@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
-    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
@@ -14,12 +11,19 @@
     <fullyQualifiedTypeName name="input.MouseInput"/>
     <fullyQualifiedTypeName name="input.KeyboardInput"/>
     <fullyQualifiedTypeName name="vh.main.GameMain"/>
-    <fullyQualifiedTypeName name="java.awt.Graphics"/>
     <fullyQualifiedTypeName name="java.awt.Menu"/>
-    <fullyQualifiedTypeName name="vh.scene.Playing"/>
     <fullyQualifiedTypeName name="vh.scene.Settings"/>
     <fullyQualifiedTypeName name="vh.scene.Menu"/>
     <fullyQualifiedTypeName name="vh.scene.MainMenu"/>
     <fullyQualifiedTypeName name="vh.main.GameStates"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="java.awt.Rectangle"/>
+    <fullyQualifiedTypeName name="vh.scene.Playing"/>
+    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+    <fullyQualifiedTypeName name="java.awt.Graphics"/>
+    <fullyQualifiedTypeName name="vh.enemy.Enemy"/>
+    <fullyQualifiedTypeName name="vh.helper.LoadSave"/>
+    <fullyQualifiedTypeName name="vh.objectManagers.EnemyManager"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

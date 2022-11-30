@@ -1,0 +1,41 @@
+package vh.objectManagers;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import vh.enemy.Enemy;
+import vh.helper.LoadSave;
+import vh.scene.Playing;
+
+public class EnemyManager {
+	
+	private final int ENEMYTOTAL = 4;
+	private Playing playing;
+	private BufferedImage[] enemyImages;
+	private Enemy testEnemy;
+	
+	public EnemyManager(Playing plyng) {
+		this.playing = plyng;
+		this.enemyImages = new BufferedImage[ENEMYTOTAL];
+		this.testEnemy = new Enemy(32*3, 32*9, 0, 0);
+		loadEnemyImages();
+	}
+	
+	private void loadEnemyImages() {
+		enemyImages[0] = LoadSave.getSpriteAtlas().getSubImage(0, 32, 32, 0);
+		
+	}
+
+	public void update() {
+		
+	}
+	
+	public void draw(Graphics g) {
+		drawEnemy(testEnemy, g);
+	}
+
+	private void drawEnemy(Enemy en, Graphics g) {
+		g.drawImage(enemyImages[0], (int)en.getX(), (int)en.getY(), null);
+		
+	}
+}
