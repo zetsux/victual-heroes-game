@@ -1,53 +1,56 @@
 package vh.main;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import vh.input.KeyboardInput;
+import vh.input.MouseInput;
+import vh.scene.MainMenu;
+import vh.scene.Playing;
+import vh.scene.Settings;
+
 public class GameMain extends JFrame implements Runnable {
 	private GameScreen screen;
-	private BufferedImage mapIMG;
-	private BufferedImage spriteIMG;
 	
 	private Thread gameThread;
 	
 	private final double SET_FPS = 120.0;
 	private final double SET_UPS = 60.0;
 	
+	//Classes
+	private GameRenders gameRenderer;
+	private MainMenu menu;
+	private Playing playing;
+	private Settings settings;
+	
 	public GameMain() {
-		
-		importImg();
-		
-//		setSize(800, 600);
-		setSize(730, 430);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		this.screen = new GameScreen(mapIMG, spriteIMG);
+		
+		initializeClasses();
+	
 		add(screen);
+		pack();
+		
+		setLocationRelativeTo(null);
+		setResizable(false);
 		setVisible(true);
 	}
 
-	private void importImg() {
-		InputStream is = getClass().getResourceAsStream("/croppedmap.jpeg");
-		try {
-			this.mapIMG = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		is = getClass().getResourceAsStream("/marioatlas.png");
-		try {
-			this.spriteIMG = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	private void initializeClasses() {
+		gameRenderer = new GameRenders(this);
+		screen = new GameScreen(this);
+		menu = new MainMenu(this);
+		playing = new Playing(this);
+		settings = new Settings(this);
 	}
 	
 	private void updateGame()
 	{
-		//IDK
+		//Nothing
 	}
 	
 	private void startGame()
@@ -60,6 +63,7 @@ public class GameMain extends JFrame implements Runnable {
 
 	public static void main(String[] args) {
 		GameMain game = new GameMain();
+		game.screen.initializeInput();
 		game.startGame();
 		
 //		Thread t = new Thread(new Runnable() {
@@ -85,24 +89,24 @@ public class GameMain extends JFrame implements Runnable {
 		int updates = 0;
 		
 		long lastTimeCheck = System.currentTimeMillis();
-		long nowTime;
+		long curNano;
 		
 		while(true)
 		{
-			nowTime = System.nanoTime();
+			curNano = System.nanoTime();
 			//Render
-			if (nowTime - lastFrame >= timePerFrame)
+			if (curNano - lastFrame >= timePerFrame)
 			{
-				lastFrame = nowTime;
+				lastFrame = curNano;
 				repaint();
 				frames++;
 			}
 			
 			//Update
-			if (nowTime - lastUpdate >= timePerUpdate)
+			if (curNano - lastUpdate >= timePerUpdate)
 			{
 				updateGame();
-				lastUpdate = nowTime;
+				lastUpdate = curNano;
 				updates++;
 			}
 			
@@ -115,7 +119,22 @@ public class GameMain extends JFrame implements Runnable {
 				lastTimeCheck = System.currentTimeMillis();
 			}
 		}
-		
+	}
+	
+	//Getters & Setters
+	public GameRenders getRenderer() {
+		return gameRenderer;
+	}
+	
+	public MainMenu getMenu() {
+		return menu;
+	}
+	
+	public Playing getPlaying() {
+		return playing;
 	}
 
+	public Settings getSettings() {
+		return settings;
+	}
 }
