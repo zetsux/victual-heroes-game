@@ -108,7 +108,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 		}
 
 		else if(quitButton.getBounds().contains(x, y)) {
-			System.exit(1);
+			System.exit(69);
 		}
 		
 	}

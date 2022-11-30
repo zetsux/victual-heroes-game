@@ -108,7 +108,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 		}
 
 		else if(quitButton.getBounds().contains(x, y)) {
-			System.exit(1);
+			System.exit(69);
 		}
 		
 	}
@@ -153,7 +153,6 @@ public class MainMenu extends GameScene implements SceneMethods {
 		// TODO Auto-generated method stub
 		playingButton.resetMouseState();
 		settingButton.resetMouseState();
-		quitButton.resetMouseState();
 	}
 
 }
