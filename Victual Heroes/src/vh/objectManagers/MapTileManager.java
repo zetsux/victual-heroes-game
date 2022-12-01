@@ -7,13 +7,12 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import vh.helper.LoadSave;
 import vh.object.MapTile;
 
 public class MapTileManager {
 	
 	// Pavement to be inserted later
-	public MapTile Block, Road;
+	//public MapTile Block, Road;
 	//public MapTile Pavement;
 	public BufferedImage mapAtlas;
 	public ArrayList<MapTile> tiles = new ArrayList<>();
@@ -29,9 +28,11 @@ public class MapTileManager {
 	
 	private void createTiles() {
 		
-		tiles.add(Road = new MapTile(getMap(23, 2)));
-		tiles.add(Block = new MapTile(getMap(27, 0)));
-		//tiles.add(Pavement = new MapTile(getMap(0, 0)));
+		for (int y = 0; y <= 25; y++) {
+			for (int x = 0; x <= 28; x++) {
+				tiles.add(new MapTile(getMap(x, y)));
+			}
+		}
 	}
 	
 	private void loadAtlas() {
@@ -39,8 +40,8 @@ public class MapTileManager {
 		InputStream is = getClass().getResourceAsStream("/outdoors.png");
 		try {
 			img = ImageIO.read(is);
-		} catch (Exception e) {
-			System.out.println("Error");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		this.mapAtlas = img;

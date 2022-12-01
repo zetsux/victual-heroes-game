@@ -35,10 +35,13 @@ public class MainMenu extends GameScene implements SceneMethods {
 	}
 
 	private void initializeButton() {
+		int x, y;
+		x = 1024;
+		y = 576;
 		
-		playingButton = new Button("Play", 300, 100, 100, 30);
-		settingButton = new Button("Settings", 300, 200, 100, 30);
-		quitButton = new Button("Quit", 300, 300, 100, 30);
+		playingButton = new Button("Play", (2 * (x / 5) + (1 * (x / 20))) , (2 * (y / 5)), 100, 30);
+		settingButton = new Button("Settings", (2 * (x / 5) + (1 * (x / 20))), (3 * (y / 5)), 100, 30);
+		quitButton = new Button("Quit", (2 * (x / 5) + (+ 1 * (x / 20))), (4 * (y / 5)), 100, 30);
 	}
 
 	@Override
