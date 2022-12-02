@@ -44,4 +44,10 @@ public class Settings extends GameScene implements SceneMethods {
 		
 	}
 
+	@Override
+	public void keyTyped(int n) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

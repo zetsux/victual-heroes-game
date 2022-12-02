@@ -14,7 +14,7 @@ public class LoadSave {
 		InputStream is;
 		
 		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("outdoors.png");
+			is = LoadSave.class.getClassLoader().getResourceAsStream("mapAtlas.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class LoadSave {
 		InputStream is;
 		
 		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("enemy1.png");
+			is = LoadSave.class.getClassLoader().getResourceAsStream("enemysprite.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();

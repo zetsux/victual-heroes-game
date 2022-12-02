@@ -14,4 +14,14 @@ public class Constants {
 		public static final int TOWERSPOT = 1;
 		public static final int ENEMYROAD = 2;
 	}
+	
+	public static class Enemies {
+		public static final int BALD = 0;
+		public static final int YELLOW = 1;
+		public static final int POLICE = 2;
+		public static final int ORANGE = 3;
+		public static final int PURPLE = 4;
+		public static final int MOHAWK = 5;
+		public static final int GREEN = 6;
+	}
 }

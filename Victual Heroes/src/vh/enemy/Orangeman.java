@@ -1,0 +1,12 @@
+package vh.enemy;
+
+import static vh.helper.Constants.Enemies.ORANGE;
+
+public class Orangeman extends Enemy {
+
+	public Orangeman(float x, float y, int id, int type) {
+		super(x, y, id, ORANGE);
+		
+	}
+
+}

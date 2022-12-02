@@ -25,8 +25,16 @@
     <fullyQualifiedTypeName name="vh.helper.LoadSave"/>
     <fullyQualifiedTypeName name="vh.objectManagers.EnemyManager"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="vh.helper.Constants.Direction"/>
-    <fullyQualifiedTypeName name="vh.helper.Constants"/>
     <fullyQualifiedTypeName name="vh.helper.Constants.Tiles"/>
+    <fullyQualifiedTypeName name="vh.helper.Constants"/>
+    <fullyQualifiedTypeName name="vh.helper.Constants.Enemies"/>
+    <fullyQualifiedTypeName name="vh.enemy.Baldman"/>
+    <fullyQualifiedTypeName name="vh.enemy.Yellowman"/>
+    <fullyQualifiedTypeName name="vh.enemy.Policeman"/>
+    <fullyQualifiedTypeName name="vh.enemy.Orangeman"/>
+    <fullyQualifiedTypeName name="vh.enemy.Purpleman"/>
+    <fullyQualifiedTypeName name="vh.enemy.Mohawkman"/>
+    <fullyQualifiedTypeName name="vh.enemy.Greenman"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

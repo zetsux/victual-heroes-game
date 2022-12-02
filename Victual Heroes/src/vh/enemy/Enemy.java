@@ -3,7 +3,7 @@ package vh.enemy;
 import java.awt.Rectangle;
 import static vh.helper.Constants.Direction.*;
 
-public class Enemy {
+public abstract class Enemy {
 	
 	private float x, y;
 	private Rectangle bounds;
@@ -17,7 +17,7 @@ public class Enemy {
 		this.y = y;
 		this.id = id;
 		this.type = type;
-		this.lastDir = RIGHT;
+		this.lastDir = -1;
 		
 		bounds = new Rectangle((int)x , (int)y , 16, 16);
 	}
