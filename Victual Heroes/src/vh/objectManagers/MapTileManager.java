@@ -32,10 +32,10 @@ public class MapTileManager {
 		for (int y = 0; y <= 25; y++) {
 			for (int x = 0; x <= 28; x++) {
 				// ???
-				int id = (y*28) + x - 1;
+				int id = (y*28) + x;
 				
-				if (id == 27) tiles.add(new MapTile(getMap(x, y), 1));
-				else if (id == 139 || id == 81 || id == 23) tiles.add(new MapTile(getMap(x, y), 2));
+				if (id == 28) tiles.add(new MapTile(getMap(x, y), 1));
+				else if (id == 80 ) tiles.add(new MapTile(getMap(x, y), 2));
 				else tiles.add(new MapTile(getMap(x, y), 0));
 			}
 		}

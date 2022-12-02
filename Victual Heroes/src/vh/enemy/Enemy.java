@@ -19,7 +19,7 @@ public class Enemy {
 		this.type = type;
 		this.lastDir = RIGHT;
 		
-		bounds = new Rectangle((int)x, (int)y, 40, 48);
+		bounds = new Rectangle((int)x , (int)y , 16, 16);
 	}
 
 	public void move(float speed, int direction) {

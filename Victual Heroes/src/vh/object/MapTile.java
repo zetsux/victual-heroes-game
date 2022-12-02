@@ -17,7 +17,7 @@ public class MapTile {
 	}
 
 	public int getTileType() {
-		return tileType;
+		return this.tileType;
 	}
 	
 }
