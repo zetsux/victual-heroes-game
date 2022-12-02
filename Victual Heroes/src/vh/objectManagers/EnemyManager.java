@@ -5,52 +5,119 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
+import vh.enemy.Baldman;
 import vh.enemy.Enemy;
+import vh.enemy.Greenman;
+import vh.enemy.Mohawkman;
+import vh.enemy.Orangeman;
+import vh.enemy.Policeman;
+import vh.enemy.Purpleman;
+import vh.enemy.Yellowman;
 import vh.helper.LoadSave;
 import vh.scene.Playing;
 import static vh.helper.Constants.Direction.*;
 import static vh.helper.Constants.Tiles.*;
+import static vh.helper.Constants.Enemies.*;
 
 public class EnemyManager {
 	
-	private final int ENEMYTOTAL = 4;
+	private final int ENEMYTOTAL = 7;
 	private Playing playing;
 	private BufferedImage[] enemyImages;
 	private ArrayList<Enemy> enemies = new ArrayList<>();
 	private Random rand;
-	private float speed = 0.5f;
+	private float speed = 2f;
+	
+	private int startX = 0;
+	private int startY = 10;
+	
+	private int endX = 58;
+	private int endY = 31;
+	
 	
 	public EnemyManager(Playing plyng) {
 		this.playing = plyng;
 		this.enemyImages = new BufferedImage[ENEMYTOTAL];
 		this.rand = new Random();
-		addEnemy(0, 10*16);
+//		addEnemy(0, 10*16);
 		loadEnemyImages();
 	}
 	
 	private void loadEnemyImages() {
 		BufferedImage enemyAtlas = LoadSave.getSpriteAtlas();
-		enemyImages[0] = enemyAtlas.getSubimage(0 + 9, 48*2, 16, 16);
-		enemyImages[1] = enemyAtlas.getSubimage(48*3 + 9, 48*2, 30, 48);
-		enemyImages[2] = enemyAtlas.getSubimage(48*6 + 9, 48*2, 30, 48);
-		enemyImages[3] = enemyAtlas.getSubimage(48*9 + 9, 48*2, 30, 48);
-		
+		enemyImages[0] = enemyAtlas.getSubimage(0, 16*4, 16, 16);
+		enemyImages[1] = enemyAtlas.getSubimage(16*4, 0, 16, 16);
+		enemyImages[2] = enemyAtlas.getSubimage(16*8, 0, 16, 16);
+		enemyImages[3] = enemyAtlas.getSubimage(0, 0, 16, 16);
+		enemyImages[4] = enemyAtlas.getSubimage(16*4, 16*4, 16, 16);
+		enemyImages[5] = enemyAtlas.getSubimage(16*8, 16*4, 16, 16);
+		enemyImages[6] = enemyAtlas.getSubimage(16*12, 16*4, 16, 16);
 	}
 	
-	public void addEnemy(int x, int y) {
-		int idx = rand.nextInt(0, 4);
-		enemies.add(new Enemy(x, y, 0, 0));
+	public void addEnemy(int x, int y, int enemyType) {
+		
+		switch (enemyType) {
+		case BALD :
+			enemies.add(new Baldman(x, y, 0, BALD));
+			break;
+		case YELLOW :
+			enemies.add(new Yellowman(x, y, 0, YELLOW));
+			break;
+		case POLICE :
+			enemies.add(new Policeman(x, y, 0, POLICE));
+			break;
+		case ORANGE :
+			enemies.add(new Orangeman(x, y, 0, ORANGE));
+			break;
+		case PURPLE :
+			enemies.add(new Purpleman(x, y, 0, PURPLE));
+			break;
+		case MOHAWK :
+			enemies.add(new Mohawkman(x, y, 0, MOHAWK));
+			break;
+		case GREEN :
+			enemies.add(new Greenman(x, y, 0, GREEN));
+			break;
+		}
+	}
+	
+	public void addEnemy(int enemyType) {
+		int x = startX*16, y = startY*16;
+		
+		switch (enemyType) {
+		case BALD :
+			enemies.add(new Baldman(x, y, 0, BALD));
+			break;
+		case YELLOW :
+			enemies.add(new Yellowman(x, y, 0, YELLOW));
+			break;
+		case POLICE :
+			enemies.add(new Policeman(x, y, 0, POLICE));
+			break;
+		case ORANGE :
+			enemies.add(new Orangeman(x, y, 0, ORANGE));
+			break;
+		case PURPLE :
+			enemies.add(new Purpleman(x, y, 0, PURPLE));
+			break;
+		case MOHAWK :
+			enemies.add(new Mohawkman(x, y, 0, MOHAWK));
+			break;
+		case GREEN :
+			enemies.add(new Greenman(x, y, 0, GREEN));
+			break;
+		}
 	}
 
 	public void update() {
 		for (Enemy e : enemies) {
-			if (stillRoad(e)) {
-				
-			}
+			enemyMove(e);
 		}
 	}
 	
-	public boolean stillRoad(Enemy e) {
+	public void enemyMove(Enemy e) {
+		if (e.getLastDir() == -1) moveNewDirection(e);
+		
 		int newX = (int) (e.getX() + getSpeedX(e.getLastDir()));
 		int newY = (int) (e.getY() + getSpeedY(e.getLastDir()));
 		
@@ -58,15 +125,13 @@ public class EnemyManager {
 			e.move(speed, e.getLastDir());
 		}
 		
-		else if (isAtEnd(e)) {
-			//UDAH SAMPE FINISH
+		else if (isEnd(e)) {
+			//Despawn Enemy
 		}
 		
 		else {
 			moveNewDirection(e);
 		}
-		
-		return false;
 	}
 
 	private void moveNewDirection(Enemy e) {
@@ -74,6 +139,11 @@ public class EnemyManager {
 		int xPos = (int) (e.getX()/16), yPos = (int) (e.getY()/16);
 		
 		fixEnemyOffset(e, direction, xPos, yPos);
+		
+		if (isEnd(e)) {
+			//Despawn Enemy
+			return;
+		}
 		
 		if (direction == LEFT || direction == RIGHT) {
 			int newY = (int) (e.getY() + getSpeedY(UP));
@@ -98,12 +168,6 @@ public class EnemyManager {
 	private void fixEnemyOffset(Enemy e, int direction, int xPos, int yPos) {
 		
 		switch(direction) {
-		case LEFT :
-			if (xPos > 0) xPos--;
-			break;
-		case UP :
-			if (yPos > 0) yPos--;
-			break;
 		case RIGHT :
 			if (xPos < 64) xPos++;
 			break;
@@ -116,8 +180,9 @@ public class EnemyManager {
 		
 	}
 
-	private boolean isAtEnd(Enemy e) {
-		// TODO Auto-generated method stub
+	private boolean isEnd(Enemy e) {
+		
+		if (e.getX() == endX * 16 && e.getY() == endY * 16) return true;
 		return false;
 	}
 

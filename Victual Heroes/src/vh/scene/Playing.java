@@ -1,6 +1,7 @@
 package vh.scene;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 import vh.objectManagers.EnemyManager;
 import vh.objectManagers.MapTileManager;
@@ -12,6 +13,7 @@ public class Playing extends GameScene implements SceneMethods {
 	private int[][] level, level2, level3;
 	private MapTileManager tileManager;
 	private EnemyManager enemyManager;
+	private Random rand;
 	
 	public Playing(GameMain game) {
 		super(game);
@@ -21,6 +23,7 @@ public class Playing extends GameScene implements SceneMethods {
 		level3 = LevelBuilder.getTowerPath();
 		tileManager = new MapTileManager();
 		enemyManager = new EnemyManager(this);
+		rand = new Random();
 	}
 
 	public void update() {
@@ -68,7 +71,7 @@ public class Playing extends GameScene implements SceneMethods {
 
 	@Override
 	public void mouseClicked(int x, int y) {
-		// TODO Auto-generated method stub
+		enemyManager.addEnemy(x, y, rand.nextInt(0, 7));
 		
 	}
 
@@ -89,5 +92,9 @@ public class Playing extends GameScene implements SceneMethods {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public void keyTyped(int n) {
+		enemyManager.addEnemy(n);
+	}
 }

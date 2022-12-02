@@ -35,7 +35,7 @@ public class MapTileManager {
 				int id = (y*28) + x;
 				
 				if (id == 28) tiles.add(new MapTile(getMap(x, y), 1));
-				else if (id == 80 ) tiles.add(new MapTile(getMap(x, y), 2));
+				else if (id == 80) tiles.add(new MapTile(getMap(x, y), 2));
 				else tiles.add(new MapTile(getMap(x, y), 0));
 			}
 		}

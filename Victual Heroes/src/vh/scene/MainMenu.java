@@ -162,4 +162,10 @@ public class MainMenu extends GameScene implements SceneMethods {
 		quitButton.resetMouseState();
 	}
 
+	@Override
+	public void keyTyped(int n) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
