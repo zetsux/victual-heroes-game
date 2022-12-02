@@ -24,13 +24,13 @@ public class EnemyManager {
 		this.playing = plyng;
 		this.enemyImages = new BufferedImage[ENEMYTOTAL];
 		this.rand = new Random();
-		addEnemy(0, 3*48);
+		addEnemy(0, 10*16);
 		loadEnemyImages();
 	}
 	
 	private void loadEnemyImages() {
 		BufferedImage enemyAtlas = LoadSave.getSpriteAtlas();
-		enemyImages[0] = enemyAtlas.getSubimage(0 + 9, 48*2, 30, 48);
+		enemyImages[0] = enemyAtlas.getSubimage(0 + 9, 48*2, 16, 16);
 		enemyImages[1] = enemyAtlas.getSubimage(48*3 + 9, 48*2, 30, 48);
 		enemyImages[2] = enemyAtlas.getSubimage(48*6 + 9, 48*2, 30, 48);
 		enemyImages[3] = enemyAtlas.getSubimage(48*9 + 9, 48*2, 30, 48);
@@ -39,7 +39,7 @@ public class EnemyManager {
 	
 	public void addEnemy(int x, int y) {
 		int idx = rand.nextInt(0, 4);
-		enemies.add(new Enemy(x, y, 0, idx));
+		enemies.add(new Enemy(x, y, 0, 0));
 	}
 
 	public void update() {
@@ -98,17 +98,17 @@ public class EnemyManager {
 	private void fixEnemyOffset(Enemy e, int direction, int xPos, int yPos) {
 		
 		switch(direction) {
-//		case LEFT :
-//			if (xPos > 0) xPos--;
-//			break;
-//		case UP :
-//			if (yPos > 0) yPos--;
-//			break;
+		case LEFT :
+			if (xPos > 0) xPos--;
+			break;
+		case UP :
+			if (yPos > 0) yPos--;
+			break;
 		case RIGHT :
-			if (xPos < 28) xPos++;
+			if (xPos < 64) xPos++;
 			break;
 		case DOWN :
-			if (yPos < 25) yPos++;
+			if (yPos < 36) yPos++;
 			break;
 		}
 		
@@ -131,7 +131,7 @@ public class EnemyManager {
 		}
 		
 		else if (direction == RIGHT) {
-			return speed + 30;
+			return speed + 16;
 		}
 		
 		else {
@@ -145,7 +145,7 @@ public class EnemyManager {
 		}
 		
 		else if (direction == DOWN) {
-			return speed + 48;
+			return speed + 16;
 		}
 		
 		else {

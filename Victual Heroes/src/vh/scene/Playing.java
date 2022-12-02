@@ -58,7 +58,7 @@ public class Playing extends GameScene implements SceneMethods {
 	public int getTileType(int x, int y) {
 		int xPos = x/16, yPos = y/16;
 		
-		if (xPos < 0 || xPos > 28 || yPos < 0 || yPos > 25) {
+		if (xPos < 0 || xPos > 63 || yPos < 0 || yPos > 35) {
 			return 0;
 		}
 		

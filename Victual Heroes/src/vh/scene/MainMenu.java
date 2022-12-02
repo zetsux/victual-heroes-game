@@ -15,39 +15,48 @@ import static vh.main.GameStates.*;
 
 public class MainMenu extends GameScene implements SceneMethods {
 
-	private BufferedImage map;
-	private BufferedImage sprite;
-	private BufferedImage mapIMG;
-	private BufferedImage spriteIMG;
+//	private BufferedImage map;
+//	private BufferedImage sprite;
+//	private BufferedImage mapIMG;
+//	private BufferedImage spriteIMG;
+	private BufferedImage mainMenu;
+	private BufferedImage mainMenuIMG;
 	private Random rand;
 	private Button playingButton, settingButton, quitButton; 
 	
-	private ArrayList<BufferedImage> sprites = new ArrayList<>();
+	//private ArrayList<BufferedImage> sprites = new ArrayList<>();
 	
 	public MainMenu(GameMain game) {
 		super(game);
 		importImg();
-		this.map = mapIMG;
-		this.sprite = spriteIMG;
-		loadSprites();
+		//this.map = mapIMG;
+		//this.sprite = spriteIMG;
+		this.mainMenu = mainMenuIMG;
+		//loadSprites();
 		this.rand = new Random();
 		initializeButton();
 	}
 
 	private void initializeButton() {
-		int x, y;
-		x = 1024;
-		y = 576;
+
+		int x = 1024;
+		int y = 576;
 		
-		playingButton = new Button("Play", (2 * (x / 5) + (1 * (x / 20))) , (2 * (y / 5)), 100, 30);
-		settingButton = new Button("Settings", (2 * (x / 5) + (1 * (x / 20))), (3 * (y / 5)), 100, 30);
-		quitButton = new Button("Quit", (2 * (x / 5) + (+ 1 * (x / 20))), (4 * (y / 5)), 100, 30);
+		int buttonWidth = 100;
+		int buttonHeight = 30;
+		
+		playingButton = new Button("Play", ((x / 2) - (2 *(buttonWidth / 5))) , (2 * (y / 5)), buttonWidth, buttonHeight);
+		settingButton = new Button("Settings", ((x / 2) - (2 *(buttonWidth / 5))), (3 * (y / 5)), buttonWidth, buttonHeight);
+		quitButton = new Button("Quit", ((x / 2) - (2 *(buttonWidth / 5))), (4 * (y / 5)), buttonWidth, buttonHeight);
 	}
 
 	@Override
 	public void render(Graphics g) {
 		
+		g.drawImage(mainMenu, 0, 0, null);
+		
 		drawButtons(g);
+		
 		/*
 		g.drawImage(map, 0, 0, null);
 		g.drawImage(sprites.get(0), 0, 0, null);
@@ -67,30 +76,24 @@ public class MainMenu extends GameScene implements SceneMethods {
 	}
 
 	private void importImg() {
-		InputStream is = getClass().getResourceAsStream("/croppedmap.jpeg");
+			
+		InputStream is = getClass().getResourceAsStream("/mainMenu.png");
 		try {
-			this.mapIMG = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		is = getClass().getResourceAsStream("/marioatlas.png");
-		try {
-			this.spriteIMG = ImageIO.read(is);
+			this.mainMenuIMG = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void loadSprites() {
-		for (int i = 0 ; i < 14 ; i++)
-		{
-			for (int j = 0 ; j < 5 ; j++)
-			{
-				sprites.add(sprite.getSubimage(i*17, j*29, 17, 29));
-			}
-		}
-	}
+//	private void loadSprites() {
+//		for (int i = 0 ; i < 14 ; i++)
+//		{
+//			for (int j = 0 ; j < 5 ; j++)
+//			{
+//				sprites.add(sprite.getSubimage(i*17, j*29, 17, 29));
+//			}
+//		}
+//	}
 	
 	private int getRX() {
 		return rand.nextInt(14);
