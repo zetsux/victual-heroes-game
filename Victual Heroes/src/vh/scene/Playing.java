@@ -24,6 +24,7 @@ public class Playing extends GameScene implements SceneMethods {
 	}
 
 	public void update() {
+		updateTick();
 		enemyManager.update();
 	}
 	
@@ -52,6 +53,17 @@ public class Playing extends GameScene implements SceneMethods {
 				g.drawImage(tileManager.getMap(id3-1), x * 16, y * 16, null);
 			}
 		}
+	}
+	
+	public int getTileType(int x, int y) {
+		int xPos = x/16, yPos = y/16;
+		
+		if (xPos < 0 || xPos > 28 || yPos < 0 || yPos > 25) {
+			return 0;
+		}
+		
+		int id = level2[yPos][xPos];
+		return tileManager.getTile(id).getTileType();
 	}
 
 	@Override

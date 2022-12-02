@@ -1,5 +1,0 @@
-package vh.main;
-
-public enum GameStates {
-
-}

@@ -26,4 +26,7 @@
     <fullyQualifiedTypeName name="vh.objectManagers.EnemyManager"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="vh.helper.Constants.Direction"/>
+    <fullyQualifiedTypeName name="vh.helper.Constants"/>
+    <fullyQualifiedTypeName name="vh.helper.Constants.Tiles"/>
 </qualifiedTypeNameHistroy>
