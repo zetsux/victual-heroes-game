@@ -30,7 +30,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				break;
 				
 			case SETTINGS :
-				//game.getSettings().render(g);
+				gameMain.getSettings().mouseMoved(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
@@ -51,7 +51,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				break;
 				
 			case SETTINGS :
-				//game.getSettings().render(g);
+				gameMain.getSettings().mouseClicked(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
@@ -73,7 +73,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				break;
 				
 			case SETTINGS :
-				//game.getSettings().render(g);
+				gameMain.getSettings().mousePressed(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
@@ -105,7 +105,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			break;
 			
 		case SETTINGS :
-			//game.getSettings().render(g);
+			gameMain.getSettings().mouseReleased(e.getX(), e.getY());
 			break;
 			
 		case PLAYING :

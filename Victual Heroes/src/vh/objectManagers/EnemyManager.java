@@ -26,7 +26,7 @@ public class EnemyManager {
 	private BufferedImage[] enemyImages;
 	private ArrayList<Enemy> enemies = new ArrayList<>();
 	private Random rand;
-	private float speed = 2f;
+//	private float speed = 2f;
 	
 	private int startX = 0;
 	private int startY = 10;
@@ -44,7 +44,7 @@ public class EnemyManager {
 	}
 	
 	private void loadEnemyImages() {
-		BufferedImage enemyAtlas = LoadSave.getSpriteAtlas();
+		BufferedImage enemyAtlas = LoadSave.getEnemyAtlas();
 		enemyImages[0] = enemyAtlas.getSubimage(0, 16*4, 16, 16);
 		enemyImages[1] = enemyAtlas.getSubimage(16*4, 0, 16, 16);
 		enemyImages[2] = enemyAtlas.getSubimage(16*8, 0, 16, 16);
@@ -117,9 +117,10 @@ public class EnemyManager {
 	
 	public void enemyMove(Enemy e) {
 		if (e.getLastDir() == -1) moveNewDirection(e);
+		float speed = getSpeed(e.getType());
 		
-		int newX = (int) (e.getX() + getSpeedX(e.getLastDir()));
-		int newY = (int) (e.getY() + getSpeedY(e.getLastDir()));
+		int newX = (int) (e.getX() + getSpeedX(e.getLastDir(), e.getType()));
+		int newY = (int) (e.getY() + getSpeedY(e.getLastDir(), e.getType()));
 		
 		if (getTileType(newX, newY) == ENEMYROAD) {
 			e.move(speed, e.getLastDir());
@@ -136,6 +137,7 @@ public class EnemyManager {
 
 	private void moveNewDirection(Enemy e) {
 		int direction = e.getLastDir();
+		float speed = getSpeed(e.getType());
 		int xPos = (int) (e.getX()/16), yPos = (int) (e.getY()/16);
 		
 		fixEnemyOffset(e, direction, xPos, yPos);
@@ -146,7 +148,7 @@ public class EnemyManager {
 		}
 		
 		if (direction == LEFT || direction == RIGHT) {
-			int newY = (int) (e.getY() + getSpeedY(UP));
+			int newY = (int) (e.getY() + getSpeedY(UP, e.getType()));
 			if (getTileType((int) e.getX(), newY) == ENEMYROAD) {
 				e.move(speed, UP);
 			} else {
@@ -155,7 +157,7 @@ public class EnemyManager {
 		}
 		
 		else {
-			int newX = (int) (e.getX() + getSpeedX(RIGHT));
+			int newX = (int) (e.getX() + getSpeedX(RIGHT, e.getType()));
 			if (getTileType(newX, (int) e.getY()) == ENEMYROAD) {
 				e.move(speed, RIGHT);
 			} else {
@@ -190,7 +192,8 @@ public class EnemyManager {
 		return playing.getTileType(newX, newY);
 	}
 
-	private float getSpeedX(int direction) {
+	private float getSpeedX(int direction, int eType) {
+		float speed = getSpeed(eType);
 		if (direction == LEFT) {
 			return -speed;
 		}
@@ -204,7 +207,8 @@ public class EnemyManager {
 		}
 	}
 	
-	private float getSpeedY(int direction) {
+	private float getSpeedY(int direction, int eType) {
+		float speed = getSpeed(eType);
 		if (direction == UP) {
 			return -speed;
 		}

@@ -1,0 +1,13 @@
+package vh.object;
+
+public class Tower {
+	
+	private int x, y, id, towerType;
+	
+	public Tower(int x, int y, int id, int type) {
+		this.x = x;
+		this.y = y;
+		this.id = id;
+		this.towerType = type;
+	}
+}

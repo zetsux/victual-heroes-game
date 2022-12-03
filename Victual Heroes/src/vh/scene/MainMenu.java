@@ -45,9 +45,9 @@ public class MainMenu extends GameScene implements SceneMethods {
 		int buttonWidth = 100;
 		int buttonHeight = 30;
 		
-		playingButton = new Button("Play", ((x / 2) - (2 *(buttonWidth / 5))) , (2 * (y / 5)), buttonWidth, buttonHeight);
-		settingButton = new Button("Settings", ((x / 2) - (2 *(buttonWidth / 5))), (3 * (y / 5)), buttonWidth, buttonHeight);
-		quitButton = new Button("Quit", ((x / 2) - (2 *(buttonWidth / 5))), (4 * (y / 5)), buttonWidth, buttonHeight);
+		playingButton = new Button("Play", ((x / 2) - (2 *(buttonWidth / 5))) , (2 * (y / 5)), buttonWidth, buttonHeight, 0);
+		settingButton = new Button("Settings", ((x / 2) - (2 *(buttonWidth / 5))), (3 * (y / 5)), buttonWidth, buttonHeight, 1);
+		quitButton = new Button("Quit", ((x / 2) - (2 *(buttonWidth / 5))), (4 * (y / 5)), buttonWidth, buttonHeight, 2);
 	}
 
 	@Override
