@@ -16,18 +16,10 @@
     <fullyQualifiedTypeName name="vh.scene.Menu"/>
     <fullyQualifiedTypeName name="vh.scene.MainMenu"/>
     <fullyQualifiedTypeName name="vh.main.GameStates"/>
-    <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
-    <fullyQualifiedTypeName name="vh.scene.Playing"/>
-    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
-    <fullyQualifiedTypeName name="java.awt.Graphics"/>
     <fullyQualifiedTypeName name="vh.enemy.Enemy"/>
-    <fullyQualifiedTypeName name="vh.helper.LoadSave"/>
     <fullyQualifiedTypeName name="vh.objectManagers.EnemyManager"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="vh.helper.Constants.Direction"/>
-    <fullyQualifiedTypeName name="vh.helper.Constants.Tiles"/>
-    <fullyQualifiedTypeName name="vh.helper.Constants"/>
     <fullyQualifiedTypeName name="vh.helper.Constants.Enemies"/>
     <fullyQualifiedTypeName name="vh.enemy.Baldman"/>
     <fullyQualifiedTypeName name="vh.enemy.Yellowman"/>
@@ -37,4 +29,18 @@
     <fullyQualifiedTypeName name="vh.enemy.Mohawkman"/>
     <fullyQualifiedTypeName name="vh.enemy.Greenman"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+    <fullyQualifiedTypeName name="vh.helper.LoadSave"/>
+    <fullyQualifiedTypeName name="vh.objectManagers.TowerManager"/>
+    <fullyQualifiedTypeName name="java.awt.Graphics"/>
+    <fullyQualifiedTypeName name="vh.ui.ButtonBar"/>
+    <fullyQualifiedTypeName name="java.awt.Button"/>
+    <fullyQualifiedTypeName name="vh.scene.Playing"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="vh.object.Tower"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="vh.helper.Constants"/>
+    <fullyQualifiedTypeName name="vh.helper.Constants.Tiles"/>
+    <fullyQualifiedTypeName name="vh.helper.Constants.Towers"/>
+    <fullyQualifiedTypeName name="java.awt.Font"/>
 </qualifiedTypeNameHistroy>

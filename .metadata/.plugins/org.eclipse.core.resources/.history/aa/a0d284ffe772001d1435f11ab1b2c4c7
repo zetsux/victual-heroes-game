@@ -1,0 +1,41 @@
+package vh.objectManagers;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import vh.helper.LoadSave;
+import vh.object.Tower;
+import vh.scene.Playing;
+import static vh.helper.Constants.Towers.*;
+
+public class TowerManager {
+	
+	private Playing playing;
+	private BufferedImage[] towerImages;
+	private Tower tower;
+	
+	public TowerManager(Playing playing) {
+		this.playing = playing;
+		
+		loadTowerImages();
+		initializeTowers();
+	}
+
+	private void initializeTowers() {
+		tower = new Tower(7*16, 10*16, 0, WOOD)
+		
+	}
+
+	private void loadTowerImages() {
+		BufferedImage towerAtlas = LoadSave.getTowerAtlas();
+		this.towerImages = new BufferedImage[4];
+		
+		for (int i = 0 ; i < 4 ; i++) {
+			towerImages[i] = towerAtlas.getSubimage(16*13, 16*2 + 16*i, 16, 16);
+		}
+	}
+	
+	public void draw(Graphics g) {
+		
+	}
+}

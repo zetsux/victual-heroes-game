@@ -1,0 +1,67 @@
+package vh.scene;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import vh.main.GameMain;
+import vh.ui.Button;
+
+public class Settings extends GameScene implements SceneMethods {
+	
+	private Button backButton;
+
+	public Settings(GameMain game) {
+		super(game);
+		// TODO Auto-generated constructor stub
+	}
+	
+	private void initializeButton() {
+
+		int x = 1024;
+		int y = 576;
+		
+		int buttonWidth = 100;
+		int buttonHeight = 30;
+		
+		backButton = new Button("Play", 0, 0, buttonWidth, buttonHeight);
+	}
+
+	@Override
+	public void render(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 0, 640, 640);
+		g.setColor(Color.BLACK);
+		g.drawString("SETTINGS TAB", 320, 320);
+	}
+
+	@Override
+	public void mouseClicked(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(int n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

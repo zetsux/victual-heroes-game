@@ -6,20 +6,22 @@ import java.awt.Rectangle;
 
 public class Button {
 
-	private int x, y, width, height;
+	protected int x, y, width, height, id;
 	private String name;
 	private Rectangle buttonBound;
 	
 	private boolean mouseOverButton = false;
 	private boolean mousePressedButton = false;
 	
-	public Button (String name, int x, int y, int width, int height) {
+	public Button (String name, int x, int y, int width, int height, int id) {
 		
 		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.id = id;
+		
 		initializeBound();
 	}
 	
@@ -60,20 +62,17 @@ public class Button {
 	private void drawButton(Graphics g) {
 		// TODO Auto-generated method stub
 		if (mouseOverButton) {
-			
-			g.setColor(Color.black);
+			g.setColor(Color.BLACK);
 			g.fillRect(x, y, width, height);
 			
-			g.setColor(Color.gray);
+			g.setColor(Color.GRAY);
 			g.fillRect(x , y , width, height-3);
-		}else {
+		} else {
 			
 			g.setColor(Color.WHITE);
 			g.fillRect(x, y, width, height);
 		}
 	}
-	
-	
 
 	public Rectangle getBounds() {
 		return buttonBound;
@@ -90,5 +89,17 @@ public class Button {
 	public void resetMouseState () {
 		this.mouseOverButton = false;
 		this.mousePressedButton = false;
+	}
+	
+	public Boolean isOver() {
+		return mouseOverButton;
+	}
+	
+	public Boolean isPressed() {
+		return mousePressedButton;
+	}
+	
+	public int getId() {
+		return id;
 	}
 }
