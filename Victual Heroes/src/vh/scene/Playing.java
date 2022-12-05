@@ -1,6 +1,7 @@
 package vh.scene;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
 
 import vh.objectManagers.EnemyManager;
@@ -96,6 +97,22 @@ public class Playing extends GameScene implements SceneMethods {
 		
 	}
 
+	private Tower getTowerIntersect(int x, int y) {
+		return towerManager.getTowerIntersect(new Rectangle(x, y, 48, 48));
+	}
+	
+	private boolean notForTower(int x, int y) {
+		for (int i = 0 ; i < 3 ; i++) {
+			for (int j = 0 ; j < 3 ; j++) {
+				if (cannotPutTower(x+(i*16), y+(j*16))) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	private Tower getTowerOn(int x, int y) {
 		return towerManager.getTowerOn(x, y);
 	}
@@ -107,18 +124,28 @@ public class Playing extends GameScene implements SceneMethods {
 		return tileType == TOWERSPOT;
 	}
 	
+	private boolean cannotPutTower(int x, int y) {
+//		if ((x == 29*16 && y == 26*16) || (x == 28*16 && y == 25*16)) return false;
+//		else if (x > 29*16 || y > 26*16) return true;
+		
+		int tileId = level2[y/16][x/16];
+		int tileType = tileManager.getTile(tileId).getTileType();
+		
+		return tileType == ENEMYROAD || tileType == BLOCKED;
+	}
+	
 	@Override
 	public void mouseClicked(int x, int y) {
 		if (y >= 576) {
+			buttonBar.displayTower(null);
 			buttonBar.mouseClicked(x, y);
-		} else if (curTower != null && isTowerSpot(xMouse, yMouse) && getTowerOn(xMouse, yMouse) == null) {
+		} else if (curTower != null && isTowerSpot(xMouse, yMouse) && getTowerIntersect(xMouse, yMouse) == null && !notForTower(xMouse, yMouse)) {
 			towerManager.addTower(curTower, xMouse, yMouse);
 			curTower = null;
-		} else {
+		} else if (curTower == null) {
 			Tower t = getTowerOn(xMouse, yMouse);
 			buttonBar.displayTower(t);
 		}
-		
 	}
 
 	@Override
