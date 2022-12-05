@@ -1,6 +1,7 @@
 package vh.objectManagers;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class TowerManager {
 	
 	private Playing playing;
 	private BufferedImage[] towerImages;
-	private ArrayList<Tower> towers = new ArrayList<>();
+	public ArrayList<Tower> towers = new ArrayList<>();
 	private int towerCount = 0;
 	
 	public TowerManager(Playing playing) {
@@ -52,10 +53,32 @@ public class TowerManager {
 		
 	}
 	
+	public Tower getTowerIntersect(Rectangle r) {
+		
+		for (Tower t : towers) {
+			if (t.getBound().intersects(r)) {
+				return t;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Tower getPathIntersect(Rectangle r) {
+		
+		for (Tower t : towers) {
+			if (t.getBound().intersects(r)) {
+				return t;
+			}
+		}
+		
+		return null;
+	}
+	
 	public Tower getTowerOn(int x, int y) {
 		
 		for (Tower t : towers) {
-			if (t.getX() == x && t.getY() == y) {
+			if (t.getBound().contains(x, y)) {
 				return t;
 			}
 		}

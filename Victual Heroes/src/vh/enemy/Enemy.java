@@ -6,7 +6,7 @@ import static vh.helper.Constants.Direction.*;
 public abstract class Enemy {
 	
 	private float x, y;
-	private Rectangle bounds;
+	private Rectangle enemyBound;
 	private int hp;
 	private int id;
 	private int type;
@@ -19,7 +19,7 @@ public abstract class Enemy {
 		this.type = type;
 		this.lastDir = -1;
 		
-		bounds = new Rectangle((int)x , (int)y , 16, 16);
+		enemyBound = new Rectangle((int)x , (int)y , 16, 16);
 	}
 
 	public void move(float speed, int direction) {
@@ -50,8 +50,8 @@ public abstract class Enemy {
 		return y;
 	}
 
-	public Rectangle getBounds() {
-		return bounds;
+	public Rectangle getBound() {
+		return enemyBound;
 	}
 
 	public int getHp() {
