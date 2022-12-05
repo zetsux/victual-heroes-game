@@ -1,14 +1,12 @@
 package vh.main;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -56,8 +54,6 @@ public class GameMain extends JFrame implements Runnable {
 		pack();
 		
 		setTitle("Victual Heroes");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/tempicon.jpeg")));
-		
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);

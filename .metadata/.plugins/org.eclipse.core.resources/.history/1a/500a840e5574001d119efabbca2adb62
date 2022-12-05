@@ -56,7 +56,10 @@ public class GameMain extends JFrame implements Runnable {
 		pack();
 		
 		setTitle("Victual Heroes");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/tempicon.jpeg")));
+		ImageIcon img = new ImageIcon("tempicon.jpeg");
+		System.out.println(img.getImage());
+		setIconImage(img.getImage());
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("tempicon.jpeg")));
 		
 		setLocationRelativeTo(null);
 		setResizable(false);
