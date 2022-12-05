@@ -25,7 +25,6 @@ public class Playing extends GameScene implements SceneMethods {
 	private Random rand;
 	
 	private Tower curTower;
-	private Tower dispTower;
 	
 	private int xMouse, yMouse;
 	
