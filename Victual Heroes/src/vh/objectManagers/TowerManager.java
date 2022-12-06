@@ -5,6 +5,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
+
+import vh.enemy.Enemy;
 import vh.helper.LoadSave;
 import vh.object.Tower;
 import vh.scene.Playing;
@@ -45,9 +48,33 @@ public class TowerManager {
 	}
 	
 	public void update() {
-		// TODO Auto-generated method stub
+		for (Tower t : towers) {
+			t.update();
+			attackEnemyIfClose(t);
+		}
 	}
 	
+	private void attackEnemyIfClose(Tower t) {
+		for (Enemy e : playing.getEnemyManager().getEnemies()) {
+			// breakdown is Alive from this if, if necessary for further development
+			if (e.isAlive() && isEnemyInRange(t,e) && t.isCooldown()) {
+				e.attacked(t.getTowerDamage());
+				playing.shootProjectileToEnemy(t, e);
+				t.resetCooldown();
+				break;
+			}else {
+				// do nothing for now
+			}
+		}		
+	}
+	
+	private boolean isEnemyInRange(Tower t, Enemy e) {
+		
+		int range = vh.helper.Utility.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
+				
+		return range < t.getTowerRange()/2;
+	}
+
 	public void addTower(Tower curTower, int x, int y) {
 		towers.add(new Tower(x, y, towerCount++ + 1, curTower.getTowerType()));
 		

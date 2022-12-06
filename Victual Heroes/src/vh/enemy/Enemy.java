@@ -7,10 +7,12 @@ public abstract class Enemy {
 	
 	private float x, y;
 	private Rectangle enemyBound;
-	private int hp;
+	private int HP;
+	private int maxHP;
 	private int id;
 	private int type;
 	private int lastDir;
+	private boolean alive;
 	
 	public Enemy(float x, float y, int id, int type) {
 		this.x = x;
@@ -18,8 +20,15 @@ public abstract class Enemy {
 		this.id = id;
 		this.type = type;
 		this.lastDir = -1;
+		this.alive = true;
 		
-		enemyBound = new Rectangle((int)x , (int)y , 16, 16);
+		enemyBound = new Rectangle((int)x - 16 , (int)y - 16, 48, 48);
+		setEnemyHP();
+	}
+	
+	private void setEnemyHP() {
+		HP = vh.helper.Constants.Enemies.getEnemyHP(id);
+		maxHP = HP;
 	}
 
 	public void move(float speed, int direction) {
@@ -38,8 +47,18 @@ public abstract class Enemy {
 		case DOWN :
 			this.y += speed;
 			break;
-			
 		}
+		
+		updateEnemyHitBox();
+	}
+	
+	private void updateEnemyHitBox() {
+		enemyBound.x = (int) x - 16;
+		enemyBound.y = (int) y - 16;
+	}
+
+	public float getHealthBar() {
+		return HP/(float)maxHP;
 	}
 	
 	public float getX() {
@@ -55,7 +74,7 @@ public abstract class Enemy {
 	}
 
 	public int getHp() {
-		return hp;
+		return HP;
 	}
 
 	public int getId() {
@@ -74,4 +93,14 @@ public abstract class Enemy {
 		this.x = x;
 		this.y = y;
 	}
+
+	public void attacked(float hurtDamage) {
+		this.HP -= 1;
+		if (this.HP <= 0) this.alive = false;
+	}
+	
+	public boolean isAlive() {
+		return alive;
+	}
+	
 }

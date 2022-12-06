@@ -1,13 +1,18 @@
 package vh.scene;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 import vh.objectManagers.EnemyManager;
 import vh.objectManagers.MapTileManager;
+import vh.objectManagers.TowerProjectileManager;
 import vh.objectManagers.TowerManager;
+import vh.objectManagers.TowerProjectileManager;
 import vh.ui.ButtonBar;
+import vh.enemy.Enemy;
 import vh.helper.LevelBuilder;
 import vh.main.GameMain;
 import vh.object.Tower;
@@ -23,6 +28,7 @@ public class Playing extends GameScene implements SceneMethods {
 	private MapTileManager tileManager;
 	private EnemyManager enemyManager;
 	private TowerManager towerManager;
+	private TowerProjectileManager towerProjectileManager;
 	private Random rand;
 	
 	private Tower curTower;
@@ -38,6 +44,7 @@ public class Playing extends GameScene implements SceneMethods {
 		tileManager = new MapTileManager();
 		enemyManager = new EnemyManager(this);
 		towerManager = new TowerManager(this);
+		towerProjectileManager = new TowerProjectileManager(this);
 		rand = new Random();
 		buttonBar = new ButtonBar(0, 576, 1024, 100, this);
 	}
@@ -46,6 +53,7 @@ public class Playing extends GameScene implements SceneMethods {
 		updateTick();
 		enemyManager.update();
 		towerManager.update();
+		towerProjectileManager.update();
 	}
 	
 	@Override
@@ -54,7 +62,15 @@ public class Playing extends GameScene implements SceneMethods {
 		buttonBar.draw(g);
 		enemyManager.draw(g);
 		towerManager.draw(g);
+		towerProjectileManager.draw(g);
+		
 		drawCurTower(g);
+		if (curTower != null) drawTowerTileMarker(g);
+	}
+
+	private void drawTowerTileMarker(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.drawRect(xMouse, yMouse, 48, 48);
 	}
 
 	private void drawCurTower(Graphics g) {
@@ -134,9 +150,15 @@ public class Playing extends GameScene implements SceneMethods {
 		return tileType == ENEMYROAD || tileType == BLOCKED;
 	}
 	
+	public void mouseClicked(MouseEvent event) {
+		if(event.getButton() == MouseEvent.BUTTON3) {
+			curTower = null;
+		}
+	}
+	
 	@Override
 	public void mouseClicked(int x, int y) {
-		if (y >= 576) {
+		if (y >= 576 - 36) {
 			buttonBar.displayTower(null);
 			buttonBar.mouseClicked(x, y);
 		} else if (curTower != null && isTowerSpot(xMouse, yMouse) && getTowerIntersect(xMouse, yMouse) == null && !notForTower(xMouse, yMouse)) {
@@ -150,7 +172,7 @@ public class Playing extends GameScene implements SceneMethods {
 
 	@Override
 	public void mouseMoved(int x, int y) {
-		if (y >= 576) {
+		if (y >= 576 - 36) {
 			buttonBar.mouseMoved(x, y);
 		} else {
 			xMouse = (x/16) * 16;
@@ -161,7 +183,7 @@ public class Playing extends GameScene implements SceneMethods {
 
 	@Override
 	public void mousePressed(int x, int y) {
-		if (y >= 576) {
+		if (y >= 576 - 36) {
 			buttonBar.mousePressed(x, y);
 		}
 		
@@ -169,7 +191,7 @@ public class Playing extends GameScene implements SceneMethods {
 
 	@Override
 	public void mouseReleased(int x, int y) {
-		if (y >= 576) {
+		if (y >= 576 - 36) {
 			buttonBar.mouseReleased(x, y);
 		}
 		
@@ -182,5 +204,14 @@ public class Playing extends GameScene implements SceneMethods {
 	
 	public TowerManager getTowerManager() {
 		return towerManager;
+	}
+	
+	public EnemyManager getEnemyManager() {
+		return enemyManager;
+	}
+
+	public void shootProjectileToEnemy(Tower t, Enemy e) {
+		towerProjectileManager.newProjectile(t, e);
+		
 	}
 }
