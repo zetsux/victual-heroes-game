@@ -16,7 +16,6 @@
     <fullyQualifiedTypeName name="vh.scene.Menu"/>
     <fullyQualifiedTypeName name="vh.scene.MainMenu"/>
     <fullyQualifiedTypeName name="vh.main.GameStates"/>
-    <fullyQualifiedTypeName name="java.awt.Rectangle"/>
     <fullyQualifiedTypeName name="vh.enemy.Enemy"/>
     <fullyQualifiedTypeName name="vh.objectManagers.EnemyManager"/>
     <fullyQualifiedTypeName name="vh.helper.Constants.Direction"/>
@@ -48,4 +47,5 @@
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="java.awt.Toolkit"/>
+    <fullyQualifiedTypeName name="java.awt.Rectangle"/>
 </qualifiedTypeNameHistroy>

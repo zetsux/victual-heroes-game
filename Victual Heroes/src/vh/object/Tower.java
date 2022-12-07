@@ -15,7 +15,7 @@ public class Tower {
 		this.id = id;
 		this.towerType = type;
 		this.towerSize = 48;
-		this.towerBound = new Rectangle(x, y, 48, 48);
+		this.towerBound = new Rectangle(x, y, (int)towerSize, (int)towerSize);
 		setDefaultDmg();
 		setDefaultRange();
 		setDefaultCooldown();

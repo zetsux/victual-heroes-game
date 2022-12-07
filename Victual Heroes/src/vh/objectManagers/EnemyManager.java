@@ -130,7 +130,7 @@ public class EnemyManager {
 		}
 		
 		else if (isEnd(e)) {
-			//Despawn Enemy
+			e.setDead();
 		}
 		
 		else {
@@ -146,7 +146,7 @@ public class EnemyManager {
 		fixEnemyOffset(e, direction, xPos, yPos);
 		
 		if (isEnd(e)) {
-			//Despawn Enemy
+			e.setDead();
 			return;
 		}
 		
