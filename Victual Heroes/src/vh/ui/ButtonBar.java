@@ -59,10 +59,19 @@ public class ButtonBar {
 			g.drawString(Towers.getName(dispTower.getTowerType()) + " Tower", 865, 621);
 			g.drawString("( Tower " + dispTower.getId() + " )", 865, 641);
 			
-			g.setColor(Color.YELLOW);
-			g.drawRect(dispTower.getX(), dispTower.getY(), 50, 50);
+			drawDispTowerAtr(g);
 		}
 		
+	}
+	
+	private void drawDispTowerAtr(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.drawOval((int)(dispTower.getX() + (dispTower.getTowerSize()/2) - (dispTower.getTowerRange()/2)),
+				   (int)(dispTower.getY() + (dispTower.getTowerSize()/2) - (dispTower.getTowerRange()/2)),
+				   (int)(dispTower.getTowerRange()), (int)(dispTower.getTowerRange()));
+		
+		g.setColor(Color.YELLOW);
+		g.drawRect(dispTower.getX(), dispTower.getY(), 50, 50);
 	}
 
 	private void drawButtons(Graphics g) {

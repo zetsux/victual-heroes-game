@@ -59,6 +59,8 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				break;
 		
 			}
+		}else if (GameStates.gameState == GameStates.PLAYING) {
+			gameMain.getPlaying().mouseClicked(e);
 		}
 		
 	}

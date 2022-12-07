@@ -1,5 +1,6 @@
 package vh.objectManagers;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class EnemyManager {
 	private int endX = 58;
 	private int endY = 31;
 	
+	private int HPBarWidth = 32;
 	
 	public EnemyManager(Playing plyng) {
 		this.playing = plyng;
@@ -111,7 +113,8 @@ public class EnemyManager {
 
 	public void update() {
 		for (Enemy e : enemies) {
-			enemyMove(e);
+			if (e.isAlive()) 
+				enemyMove(e);
 		}
 	}
 	
@@ -224,11 +227,34 @@ public class EnemyManager {
 
 	public void draw(Graphics g) {
 		for (Enemy e : enemies) {
-			drawEnemy(e, g);
+			if (e.isAlive()) {
+				drawEnemy(e, g);
+				drawHPBar(e, g);
+			}
 		}
+	}
+
+	private void drawHPBar(Enemy e, Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect((int)e.getX() - ((HPBarWidth-16)/2) - 1, (int) e.getY() - 4, HPBarWidth + 2, 5);
+		g.setColor(Color.RED);
+		g.fillRect((int)e.getX() - ((HPBarWidth-16)/2), (int) e.getY() - 3, getHPBarWidth(e), 3);
+		
+	}
+	
+	private int getHPBarWidth (Enemy e) {
+		return (int) (HPBarWidth * e.getHealthBar());
 	}
 
 	private void drawEnemy(Enemy e, Graphics g) {
 		g.drawImage(enemyImages[e.getType()], (int)e.getX(), (int)e.getY(), null);
+	}
+	
+	public ArrayList<Enemy> getEnemies(){
+		return enemies;
+	}
+	
+	public Enemy getEnemy(Enemy e) {
+		return e;
 	}
 }

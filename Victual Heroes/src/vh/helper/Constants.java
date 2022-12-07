@@ -26,23 +26,44 @@ public class Constants {
 		
 		public static float getSpeed(int eType) {
 			switch (eType) {
-			case BALD :
-				return 1.4f;
-			case YELLOW :
-				return 2f;
-			case POLICE :
-				return 1.6f;
-			case ORANGE :
-				return 2.2f;
-			case PURPLE :
-				return 1.2f;
-			case MOHAWK :
-				return 1.8f;
-			case GREEN :
-				return 1f;
+				case BALD :
+					return 1.4f;
+				case YELLOW :
+					return 2f;
+				case POLICE :
+					return 1.6f;
+				case ORANGE :
+					return 2.2f;
+				case PURPLE :
+					return 1.2f;
+				case MOHAWK :
+					return 1.8f;
+				case GREEN :
+					return 1f;
 			}
 			
 			return 0;
+		}
+
+		public static int getEnemyHP(int eType) {
+			switch (eType) {
+				case BALD :
+					return 100;
+				case YELLOW :
+					return 80;
+				case POLICE :
+					return 90;
+				case ORANGE :
+					return 60;
+				case PURPLE :
+					return 120;
+				case MOHAWK :
+					return 140;
+				case GREEN :
+					return 160;
+			}
+			return 0;
+			
 		}
 	}
 	
@@ -65,6 +86,69 @@ public class Constants {
 			}
 			
 			return "";
+		}
+		
+		public static int getDefaultDamage(int tType) {
+			switch (tType) {
+				case METAL :
+					return 25;
+				case JADE :
+					return 25;
+				case SNOW :
+					return 10;
+				case WOOD :
+					return 15;
+			}
+			return 0;
+		}
+		
+		public static float getDefaultRange(int tType) {
+			switch (tType) {
+				case METAL :
+					return 200;
+				case JADE :
+					return 200;
+				case SNOW :
+					return 350;
+				case WOOD :
+					return 400;
+			}
+			return 0;
+		}
+		
+		public static float getDefaultCooldown(int tType) {
+			switch (tType) {
+				case METAL :
+					return 8;
+				case JADE :
+					return 8;
+				case SNOW :
+					return 2;
+				case WOOD :
+					return 5;
+			}
+			return 0;
+		}
+	}
+	
+	public static class TowerProjectiles {
+		public static final int METALS = 0;
+		public static final int JADES = 1;
+		public static final int SNOWS = 2;
+		public static final int WOODS = 3;
+		
+		public static float getSpeed (int pType) {
+			switch(pType) {
+				case METALS :
+					return 5f;
+				case JADES :
+					return 5f;
+				case SNOWS :
+					return 15f;
+				case WOODS :
+					return 10f;
+			}
+			return 0f;
 		}
 	}
 }
