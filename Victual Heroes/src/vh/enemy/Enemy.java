@@ -95,7 +95,7 @@ public abstract class Enemy {
 	}
 
 	public void attacked(float hurtDamage) {
-		this.HP -= 1;
+		this.HP--;
 		if (this.HP <= 0) this.alive = false;
 	}
 	
@@ -103,4 +103,7 @@ public abstract class Enemy {
 		return alive;
 	}
 	
+	public void setDead() {
+		alive = false;
+	}
 }

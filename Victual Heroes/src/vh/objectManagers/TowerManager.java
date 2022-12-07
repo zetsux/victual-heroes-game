@@ -26,18 +26,12 @@ public class TowerManager {
 		loadTowerImages();
 	}
 
-//	private void initializeTowers() {
-//		tower = new Tower(5*16, 5*16, 0, SNOW);
-//		
-//	}
-
 	private void loadTowerImages() {
 		BufferedImage towerAtlas = LoadSave.getTowerAtlas();
 		this.towerImages = new BufferedImage[4];
 		
 		for (int i = 0 ; i < 4 ; i++) {
 			towerImages[i] = towerAtlas.getSubimage(48*i + 48*2, 48*12, 48, 48);
-//			towerImages[i] = towerAtlas.getSubimage(32*i + 32*7, 32*3, 32, 32);
 		}
 	}
 	
@@ -71,7 +65,6 @@ public class TowerManager {
 	private boolean isEnemyInRange(Tower t, Enemy e) {
 		
 		int range = vh.helper.Utility.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
-				
 		return range < t.getTowerRange()/2;
 	}
 

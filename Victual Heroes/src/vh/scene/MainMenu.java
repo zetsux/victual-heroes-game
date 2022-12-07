@@ -77,7 +77,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 
 	private void importImg() {
 			
-		InputStream is = getClass().getResourceAsStream("/mainMenu.png");
+		InputStream is = getClass().getResourceAsStream("/MainMenu.png");
 		try {
 			this.mainMenuIMG = ImageIO.read(is);
 		} catch (IOException e) {
