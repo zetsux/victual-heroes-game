@@ -37,17 +37,15 @@ public class TowerManager {
 			towerImages[i] = towerAtlas.getSubimage(48*i + 48*2, 48*12, 48, 48);
 		}
 		
-//		BufferedImage esCampurTemp = null;
-//		InputStream is;
-//		
-//		try {
-//			is = LoadSave.class.getClassLoader().getResourceAsStream("es campur tower.png");
-//			esCampurTemp = ImageIO.read(is);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		towerImages[ESCAMPUR] = esCampurTemp;
+		BufferedImage esCampurTemp = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("es campur tower.png");
+			esCampurTemp = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

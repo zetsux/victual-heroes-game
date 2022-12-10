@@ -38,17 +38,17 @@ public class TowerProjectileManager {
 			projectile_Images[i] = projectileAtlas.getSubimage(48*i + 48*3, 48*6, 16, 16);
 		}
 		
-//		BufferedImage esCampurTemp = null;
-//		InputStream is;
-//		
-//		try {
-//			is = LoadSave.class.getClassLoader().getResourceAsStream("es campur projectile.png");
-//			esCampurTemp = ImageIO.read(is);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		projectile_Images[ESCAMPUR] = esCampurTemp;
+		BufferedImage esCampurTemp = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("es campur tower.png");
+			esCampurTemp = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		projectile_Images[ESCAMPUR] = esCampurTemp;
 	}
 	
 	public void newProjectile(Tower t, Enemy e) {

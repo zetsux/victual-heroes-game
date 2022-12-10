@@ -80,7 +80,7 @@ public class Constants {
 			case JADE :
 				return "Jade";
 			case ESCAMPUR :
-				return "Stan Es Campur";
+				return "Gerobak Es Campur";
 			case WOOD :
 				return "Wood";
 			}
@@ -93,11 +93,11 @@ public class Constants {
 				case METAL :
 					return 5;
 				case JADE :
-					return 8;
+					return 10;
 				case ESCAMPUR :
-					return 15;
+					return 30;
 				case WOOD :
-					return 12;
+					return 15;
 			}
 			return 0;
 		}
@@ -119,13 +119,13 @@ public class Constants {
 		public static float getDefaultCooldown(int tType) {
 			switch (tType) {
 				case METAL :
-					return 25;
+					return 8;
 				case JADE :
-					return 20;
+					return 8;
 				case ESCAMPUR :
-					return 50;
+					return 30;
 				case WOOD :
-					return 40;
+					return 5;
 			}
 			return 0;
 		}
@@ -144,7 +144,7 @@ public class Constants {
 				case JADES :
 					return 5f;
 				case ESCAMPURS :
-					return 10f;
+					return 15f;
 				case WOODS :
 					return 10f;
 			}

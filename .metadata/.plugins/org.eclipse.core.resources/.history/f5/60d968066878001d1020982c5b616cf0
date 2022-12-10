@@ -237,7 +237,7 @@ public class EnemyManager {
 	private void drawHPBar(Enemy e, Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect((int)e.getX() - ((HPBarWidth-16)/2) - 1, (int) e.getY() - 4, HPBarWidth + 2, 5);
-		g.setColor(Color.GREEN);
+		g.setColor(Color.RED);
 		g.fillRect((int)e.getX() - ((HPBarWidth-16)/2), (int) e.getY() - 3, getHPBarWidth(e), 3);
 		
 	}

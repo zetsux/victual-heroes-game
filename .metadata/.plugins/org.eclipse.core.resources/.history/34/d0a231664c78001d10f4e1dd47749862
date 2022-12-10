@@ -3,11 +3,8 @@ package vh.objectManagers;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 
 import vh.enemy.Enemy;
@@ -36,19 +33,6 @@ public class TowerManager {
 		for (int i = 0 ; i < 4 ; i++) {
 			towerImages[i] = towerAtlas.getSubimage(48*i + 48*2, 48*12, 48, 48);
 		}
-		
-//		BufferedImage esCampurTemp = null;
-//		InputStream is;
-//		
-//		try {
-//			is = LoadSave.class.getClassLoader().getResourceAsStream("es campur tower.png");
-//			esCampurTemp = ImageIO.read(is);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		towerImages[ESCAMPUR] = esCampurTemp;
-		
 	}
 	
 	public void draw(Graphics g) {
