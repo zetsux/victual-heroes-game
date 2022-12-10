@@ -144,7 +144,7 @@ public class Constants {
 				case JADES :
 					return 5f;
 				case ESCAMPURS :
-					return 10f;
+					return 15f;
 				case WOODS :
 					return 10f;
 			}

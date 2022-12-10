@@ -95,7 +95,7 @@ public abstract class Enemy {
 	}
 
 	public void attacked(float hurtDamage) {
-		this.HP -= hurtDamage;
+		this.HP--;
 		if (this.HP <= 0) this.alive = false;
 	}
 	

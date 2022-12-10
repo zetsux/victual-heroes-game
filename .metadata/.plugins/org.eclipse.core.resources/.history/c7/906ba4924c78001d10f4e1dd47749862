@@ -2,11 +2,7 @@ package vh.objectManagers;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import vh.helper.Constants.Enemies;
 import vh.helper.LoadSave;
@@ -37,18 +33,6 @@ public class TowerProjectileManager {
 		for (int i = 0; i < 4; i++) {
 			projectile_Images[i] = projectileAtlas.getSubimage(48*i + 48*3, 48*6, 16, 16);
 		}
-		
-//		BufferedImage esCampurTemp = null;
-//		InputStream is;
-//		
-//		try {
-//			is = LoadSave.class.getClassLoader().getResourceAsStream("es campur projectile.png");
-//			esCampurTemp = ImageIO.read(is);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		projectile_Images[ESCAMPUR] = esCampurTemp;
 	}
 	
 	public void newProjectile(Tower t, Enemy e) {
@@ -82,8 +66,8 @@ public class TowerProjectileManager {
 				return METALS;
 			case JADE :
 				return JADES;
-			case ESCAMPUR :
-				return ESCAMPURS;
+			case SNOW :
+				return SNOWS;
 			case WOOD :
 				return WOODS;
 		}

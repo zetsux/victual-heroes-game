@@ -56,7 +56,7 @@ public class ButtonBar {
 			g.drawRect(790, 596, 220, 65);
 			g.drawRect(800, 601, 50, 50);
 			g.drawImage(playing.getTowerManager().getTowerImages()[dispTower.getTowerType()], 800, 601, 50, 50, null);
-			g.drawString(Towers.getName(dispTower.getTowerType()), 865, 621);
+			g.drawString(Towers.getName(dispTower.getTowerType()) + " Tower", 865, 621);
 			g.drawString("( Tower " + dispTower.getId() + " )", 865, 641);
 			
 			drawDispTowerAtr(g);
