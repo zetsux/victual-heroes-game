@@ -6,16 +6,16 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-import vh.objectManagers.EnemyManager;
+import vh.objectManagers.HungriesManager;
 import vh.objectManagers.MapTileManager;
-import vh.objectManagers.TowerProjectileManager;
-import vh.objectManagers.TowerManager;
-import vh.objectManagers.TowerProjectileManager;
+import vh.objectManagers.StallFoodManager;
+import vh.objectManagers.StallManager;
+import vh.objectManagers.StallFoodManager;
 import vh.ui.ButtonBar;
-import vh.enemy.Enemy;
 import vh.helper.LevelBuilder;
+import vh.hungries.Hungries;
 import vh.main.GameMain;
-import vh.object.Tower;
+import vh.object.Stall;
 
 import static vh.helper.Constants.Tiles.*;
 
@@ -26,12 +26,12 @@ public class Playing extends GameScene implements SceneMethods {
 	private ButtonBar buttonBar;
 	
 	private MapTileManager tileManager;
-	private EnemyManager enemyManager;
-	private TowerManager towerManager;
-	private TowerProjectileManager towerProjectileManager;
+	private HungriesManager hungriesManager;
+	private StallManager stallManager;
+	private StallFoodManager foodManager;
 	private Random rand;
 	
-	private Tower curTower;
+	private Stall curStall;
 	
 	private int xMouse, yMouse;
 	
@@ -42,39 +42,39 @@ public class Playing extends GameScene implements SceneMethods {
 		level2 = LevelBuilder.getEnemyPath();
 		level3 = LevelBuilder.getTowerPath();
 		tileManager = new MapTileManager();
-		enemyManager = new EnemyManager(this);
-		towerManager = new TowerManager(this);
-		towerProjectileManager = new TowerProjectileManager(this);
+		hungriesManager = new HungriesManager(this);
+		stallManager = new StallManager(this);
+		foodManager = new StallFoodManager(this);
 		rand = new Random();
 		buttonBar = new ButtonBar(0, 576, 1024, 100, this);
 	}
 
 	public void update() {
 		updateTick();
-		enemyManager.update();
-		towerManager.update();
-		towerProjectileManager.update();
+		hungriesManager.update();
+		stallManager.update();
+		foodManager.update();
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		drawMap(g);
 		buttonBar.draw(g);
-		enemyManager.draw(g);
-		towerManager.draw(g);
-		towerProjectileManager.draw(g);
+		hungriesManager.draw(g);
+		stallManager.draw(g);
+		foodManager.draw(g);
 		
-		drawCurTower(g);
-		if (curTower != null) drawTowerTileMarker(g);
+		drawCurStall(g);
+		if (curStall != null) drawStallTileMarker(g);
 	}
 
-	private void drawTowerTileMarker(Graphics g) {
+	private void drawStallTileMarker(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.drawRect(xMouse, yMouse, 48, 48);
 	}
 
-	private void drawCurTower(Graphics g) {
-		if (curTower != null) g.drawImage(towerManager.getTowerImages()[curTower.getTowerType()], xMouse, yMouse, null);
+	private void drawCurStall(Graphics g) {
+		if (curStall != null) g.drawImage(stallManager.getStallImages()[curStall.getStallType()], xMouse, yMouse, null);
 		
 	}
 
@@ -108,19 +108,19 @@ public class Playing extends GameScene implements SceneMethods {
 		return tileManager.getTile(id).getTileType();
 	}
 	
-	public void setCurTower(Tower curTower) {
-		this.curTower = curTower;
+	public void setCurStall(Stall curStall) {
+		this.curStall = curStall;
 		
 	}
 
-	private Tower getTowerIntersect(int x, int y) {
-		return towerManager.getTowerIntersect(new Rectangle(x, y, 48, 48));
+	private Stall getStallIntersect(int x, int y) {
+		return stallManager.getStallIntersect(new Rectangle(x, y, 48, 48));
 	}
 	
-	private boolean notForTower(int x, int y) {
+	private boolean notForStall(int x, int y) {
 		for (int i = 0 ; i < 3 ; i++) {
 			for (int j = 0 ; j < 3 ; j++) {
-				if (cannotPutTower(x+(i*16), y+(j*16))) {
+				if (cannotPutStall(x+(i*16), y+(j*16))) {
 					return true;
 				}
 			}
@@ -129,21 +129,18 @@ public class Playing extends GameScene implements SceneMethods {
 		return false;
 	}
 	
-	private Tower getTowerOn(int x, int y) {
-		return towerManager.getTowerOn(x, y);
+	private Stall getStallOn(int x, int y) {
+		return stallManager.getStallOn(x, y);
 	}
 
-	private boolean isTowerSpot(int x, int y) {
+	private boolean isStallSpot(int x, int y) {
 		int tileId = level3[y/16][x/16];
 		int tileType = tileManager.getTile(tileId).getTileType();
 		
 		return tileType == TOWERSPOT;
 	}
 	
-	private boolean cannotPutTower(int x, int y) {
-//		if ((x == 29*16 && y == 26*16) || (x == 28*16 && y == 25*16)) return false;
-//		else if (x > 29*16 || y > 26*16) return true;
-		
+	private boolean cannotPutStall(int x, int y) {
 		int tileId = level2[y/16][x/16];
 		int tileType = tileManager.getTile(tileId).getTileType();
 		
@@ -152,7 +149,7 @@ public class Playing extends GameScene implements SceneMethods {
 	
 	public void mouseClicked(MouseEvent event) {
 		if(event.getButton() == MouseEvent.BUTTON3) {
-			curTower = null;
+			curStall = null;
 		}
 	}
 	
@@ -161,12 +158,12 @@ public class Playing extends GameScene implements SceneMethods {
 		if (y >= 576) {
 			buttonBar.displayTower(null);
 			buttonBar.mouseClicked(x, y);
-		} else if (curTower != null && isTowerSpot(xMouse, yMouse) && getTowerIntersect(xMouse, yMouse) == null && !notForTower(xMouse, yMouse)) {
-			towerManager.addTower(curTower, xMouse, yMouse);
-			curTower = null;
-		} else if (curTower == null) {
-			Tower t = getTowerOn(xMouse, yMouse);
-			buttonBar.displayTower(t);
+		} else if (curStall != null && isStallSpot(xMouse, yMouse) && getStallIntersect(xMouse, yMouse) == null && !notForStall(xMouse, yMouse)) {
+			stallManager.addStall(curStall, xMouse, yMouse);
+			curStall = null;
+		} else if (curStall == null) {
+			Stall s = getStallOn(xMouse, yMouse);
+			buttonBar.displayTower(s);
 		}
 	}
 
@@ -198,19 +195,19 @@ public class Playing extends GameScene implements SceneMethods {
 	
 	@Override
 	public void keyTyped(int n) {
-		enemyManager.addEnemy(n);
+		hungriesManager.addHungries(n);
 	}
 	
-	public TowerManager getTowerManager() {
-		return towerManager;
+	public StallManager getStallManager() {
+		return stallManager;
 	}
 	
-	public EnemyManager getEnemyManager() {
-		return enemyManager;
+	public HungriesManager getHungriesManager() {
+		return hungriesManager;
 	}
 
-	public void shootProjectileToEnemy(Tower t, Enemy e) {
-		towerProjectileManager.newProjectile(t, e);
+	public void feedEnemy(Stall s, Hungries h) {
+		foodManager.newFood(s, h);
 		
 	}
 }

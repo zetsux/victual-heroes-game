@@ -40,7 +40,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 	private void initializeButton() {
 
 		int x = 1024;
-		int y = 576;
+		int y = 676;
 		
 		int buttonWidth = 100;
 		int buttonHeight = 30;

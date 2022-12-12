@@ -45,7 +45,7 @@ public class Constants {
 			return 0;
 		}
 
-		public static int getEnemyHP(int eType) {
+		public static int getHunger(int eType) {
 			switch (eType) {
 				case BALD :
 					return 100;
@@ -68,19 +68,19 @@ public class Constants {
 	}
 	
 	public static class Towers {
-		public static final int METAL = 0;
-		public static final int JADE = 1;
+		public static final int PUKIS = 0;
+		public static final int BAKSO = 1;
 		public static final int ESCAMPUR = 2;
 		public static final int WOOD = 3;
 		
 		public static String getName(int tType) {
 			switch (tType) {
-			case METAL :
-				return "Metal";
-			case JADE :
-				return "Jade";
+			case PUKIS :
+				return "Stall Pukis";
+			case BAKSO :
+				return "Stall Bakso";
 			case ESCAMPUR :
-				return "Stan Es Campur";
+				return "Stall Es Campur";
 			case WOOD :
 				return "Wood";
 			}
@@ -90,10 +90,10 @@ public class Constants {
 		
 		public static int getDefaultDamage(int tType) {
 			switch (tType) {
-				case METAL :
-					return 5;
-				case JADE :
-					return 8;
+				case PUKIS :
+					return 10;
+				case BAKSO :
+					return 20;
 				case ESCAMPUR :
 					return 15;
 				case WOOD :
@@ -104,9 +104,9 @@ public class Constants {
 		
 		public static float getDefaultRange(int tType) {
 			switch (tType) {
-				case METAL :
+				case PUKIS :
 					return 200;
-				case JADE :
+				case BAKSO :
 					return 200;
 				case ESCAMPUR :
 					return 350;
@@ -118,12 +118,12 @@ public class Constants {
 		
 		public static float getDefaultCooldown(int tType) {
 			switch (tType) {
-				case METAL :
+				case PUKIS :
 					return 25;
-				case JADE :
-					return 20;
-				case ESCAMPUR :
+				case BAKSO :
 					return 50;
+				case ESCAMPUR :
+					return 40;
 				case WOOD :
 					return 40;
 			}
@@ -132,21 +132,21 @@ public class Constants {
 	}
 	
 	public static class TowerProjectiles {
-		public static final int METALS = 0;
-		public static final int JADES = 1;
-		public static final int ESCAMPURS = 2;
+		public static final int P_PUKIS = 0;
+		public static final int P_BAKSO = 1;
+		public static final int P_ESCAMPUR = 2;
 		public static final int WOODS = 3;
 		
 		public static float getSpeed (int pType) {
 			switch(pType) {
-				case METALS :
+				case P_PUKIS :
 					return 5f;
-				case JADES :
+				case P_BAKSO :
 					return 5f;
-				case ESCAMPURS :
-					return 10f;
+				case P_ESCAMPUR :
+					return 5f;
 				case WOODS :
-					return 10f;
+					return 5f;
 			}
 			return 0f;
 		}
