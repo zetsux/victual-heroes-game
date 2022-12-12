@@ -1,0 +1,276 @@
+package vh.objectManagers;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
+
+import vh.helper.LoadSave;
+import vh.hungries.Baldman;
+import vh.hungries.Hungries;
+import vh.hungries.Greenman;
+import vh.hungries.Mohawkman;
+import vh.hungries.Orangeman;
+import vh.hungries.Policeman;
+import vh.hungries.Purpleman;
+import vh.hungries.Yellowman;
+import vh.scene.Playing;
+import static vh.helper.Constants.Direction.*;
+import static vh.helper.Constants.Tiles.*;
+import static vh.helper.Constants.Enemies.*;
+
+public class HungriesManager {
+	
+	private final int HUNGRIESTOTAL = 7;
+	private Playing playing;
+	private BufferedImage[] hungriesImages, slowedImages;
+	private ArrayList<Hungries> hungries = new ArrayList<>();
+	private Random rand;
+	private int slowedTick, slowedIndex;
+	
+	private int startX = 0;
+	private int startY = 10;
+	
+	private int endX = 58;
+	private int endY = 31;
+	
+	private int HPBarWidth = 32;
+	
+	public HungriesManager(Playing plyng) {
+		this.playing = plyng;
+		this.hungriesImages = new BufferedImage[HUNGRIESTOTAL];
+		this.slowedImages = new BufferedImage[4];
+		this.rand = new Random();
+
+		loadEnemyImages();
+		loadEffectImages();
+	}
+	
+	private void loadEffectImages() {
+		BufferedImage slowedAtlas = LoadSave.getSlowedImage();
+		for (int i = 0 ; i < 4 ; i++) {
+			slowedImages[0] = slowedAtlas.getSubimage(i*16, 0, 16, 16);
+		}
+	}
+
+	private void loadEnemyImages() {
+		BufferedImage enemyAtlas = LoadSave.getHungriesAtlas();
+		hungriesImages[0] = enemyAtlas.getSubimage(0, 16*4, 16, 16);
+		hungriesImages[1] = enemyAtlas.getSubimage(16*4, 0, 16, 16);
+		hungriesImages[2] = enemyAtlas.getSubimage(16*8, 0, 16, 16);
+		hungriesImages[3] = enemyAtlas.getSubimage(0, 0, 16, 16);
+		hungriesImages[4] = enemyAtlas.getSubimage(16*4, 16*4, 16, 16);
+		hungriesImages[5] = enemyAtlas.getSubimage(16*8, 16*4, 16, 16);
+		hungriesImages[6] = enemyAtlas.getSubimage(16*12, 16*4, 16, 16);
+	}
+	
+	public void addEnemy(int x, int y, int enemyType) {
+		
+		switch (enemyType) {
+		case BALD :
+			hungries.add(new Baldman(x, y, 0, BALD));
+			break;
+		case YELLOW :
+			hungries.add(new Yellowman(x, y, 0, YELLOW));
+			break;
+		case POLICE :
+			hungries.add(new Policeman(x, y, 0, POLICE));
+			break;
+		case ORANGE :
+			hungries.add(new Orangeman(x, y, 0, ORANGE));
+			break;
+		case PURPLE :
+			hungries.add(new Purpleman(x, y, 0, PURPLE));
+			break;
+		case MOHAWK :
+			hungries.add(new Mohawkman(x, y, 0, MOHAWK));
+			break;
+		case GREEN :
+			hungries.add(new Greenman(x, y, 0, GREEN));
+			break;
+		}
+	}
+	
+	public void addHungries(int enemyType) {
+		int x = startX*16, y = startY*16;
+		
+		switch (enemyType) {
+		case BALD :
+			hungries.add(new Baldman(x, y, 0, BALD));
+			break;
+		case YELLOW :
+			hungries.add(new Yellowman(x, y, 0, YELLOW));
+			break;
+		case POLICE :
+			hungries.add(new Policeman(x, y, 0, POLICE));
+			break;
+		case ORANGE :
+			hungries.add(new Orangeman(x, y, 0, ORANGE));
+			break;
+		case PURPLE :
+			hungries.add(new Purpleman(x, y, 0, PURPLE));
+			break;
+		case MOHAWK :
+			hungries.add(new Mohawkman(x, y, 0, MOHAWK));
+			break;
+		case GREEN :
+			hungries.add(new Greenman(x, y, 0, GREEN));
+			break;
+		}
+	}
+
+	public void update() {
+		for (Hungries h : hungries) {
+			if (h.isHungry()) 
+				enemyMove(h);
+		}
+	}
+	
+	public void enemyMove(Hungries h) {
+		if (h.getLastDir() == -1) moveNewDirection(h);
+		float speed = getSpeed(h.getType());
+		
+		int newX = (int) (h.getX() + getSpeedX(h.getLastDir(), h.getType()));
+		int newY = (int) (h.getY() + getSpeedY(h.getLastDir(), h.getType()));
+		
+		if (getTileType(newX, newY) == ENEMYROAD) {
+			h.move(speed, h.getLastDir());
+		}
+		
+		else if (isEnd(h)) {
+			h.setSatisfied();
+		}
+		
+		else {
+			moveNewDirection(h);
+		}
+	}
+
+	private void moveNewDirection(Hungries h) {
+		int direction = h.getLastDir();
+		float speed = getSpeed(h.getType());
+		int xPos = (int) (h.getX()/16), yPos = (int) (h.getY()/16);
+		
+		fixEnemyOffset(h, direction, xPos, yPos);
+		
+		if (isEnd(h)) {
+			h.setSatisfied();
+			return;
+		}
+		
+		if (direction == LEFT || direction == RIGHT) {
+			int newY = (int) (h.getY() + getSpeedY(UP, h.getType()));
+			if (getTileType((int) h.getX(), newY) == ENEMYROAD) {
+				h.move(speed, UP);
+			} else {
+				h.move(speed, DOWN);
+			}
+		}
+		
+		else {
+			int newX = (int) (h.getX() + getSpeedX(RIGHT, h.getType()));
+			if (getTileType(newX, (int) h.getY()) == ENEMYROAD) {
+				h.move(speed, RIGHT);
+			} else {
+				h.move(speed, LEFT);
+			}
+		}
+		
+	}
+
+	private void fixEnemyOffset(Hungries h, int direction, int xPos, int yPos) {
+		
+		switch(direction) {
+		case RIGHT :
+			if (xPos < 64) xPos++;
+			break;
+		case DOWN :
+			if (yPos < 36) yPos++;
+			break;
+		}
+		
+		h.setPos(xPos * 16, yPos * 16);
+		
+	}
+
+	private boolean isEnd(Hungries h) {
+		
+		if (h.getX() == endX * 16 && h.getY() == endY * 16) return true;
+		return false;
+	}
+
+	private int getTileType(int newX, int newY) {
+		return playing.getTileType(newX, newY);
+	}
+
+	private float getSpeedX(int direction, int eType) {
+		float speed = getSpeed(eType);
+		if (direction == LEFT) {
+			return -speed;
+		}
+		
+		else if (direction == RIGHT) {
+			return speed + 16;
+		}
+		
+		else {
+			return 0;
+		}
+	}
+	
+	private float getSpeedY(int direction, int eType) {
+		float speed = getSpeed(eType);
+		if (direction == UP) {
+			return -speed;
+		}
+		
+		else if (direction == DOWN) {
+			return speed + 16;
+		}
+		
+		else {
+			return 0;
+		}
+	}
+
+	public void draw(Graphics g) {
+		for (Hungries h : hungries) {
+			if (h.isHungry()) {
+				drawEnemy(h, g);
+				drawHPBar(h, g);
+				drawEffects(h, g);
+			}
+		}
+	}
+
+	private void drawEffects(Hungries h, Graphics g) {
+		if (h.isSlowed()) {
+			g.drawImage(slowedImages[h.getSlowedIndex()], (int) h.getX(), (int) h.getY(), null);
+		}
+	}
+
+	private void drawHPBar(Hungries h, Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect((int)h.getX() - ((HPBarWidth-16)/2) - 1, (int) h.getY() - 4, HPBarWidth + 2, 5);
+		g.setColor(Color.YELLOW);
+		g.fillRect((int)h.getX() - ((HPBarWidth-16)/2), (int) h.getY() - 3, getHPBarWidth(h), 3);
+		
+	}
+	
+	private int getHPBarWidth (Hungries h) {
+		return (int) (HPBarWidth * h.getHungerBar());
+	}
+
+	private void drawEnemy(Hungries h, Graphics g) {
+		g.drawImage(hungriesImages[h.getType()], (int)h.getX(), (int)h.getY(), null);
+	}
+	
+	public ArrayList<Hungries> getAllHungries(){
+		return hungries;
+	}
+	
+	public Hungries getHungries(Hungries h) {
+		return h;
+	}
+}

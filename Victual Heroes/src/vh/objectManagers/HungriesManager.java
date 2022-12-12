@@ -24,10 +24,10 @@ public class HungriesManager {
 	
 	private final int HUNGRIESTOTAL = 7;
 	private Playing playing;
-	private BufferedImage[] hungriesImages;
+	private BufferedImage[] hungriesImages, slowedImages;
 	private ArrayList<Hungries> hungries = new ArrayList<>();
 	private Random rand;
-//	private float speed = 2f;
+	private int slowedTick, slowedIndex;
 	
 	private int startX = 0;
 	private int startY = 10;
@@ -40,11 +40,20 @@ public class HungriesManager {
 	public HungriesManager(Playing plyng) {
 		this.playing = plyng;
 		this.hungriesImages = new BufferedImage[HUNGRIESTOTAL];
+		this.slowedImages = new BufferedImage[4];
 		this.rand = new Random();
-//		addEnemy(0, 10*16);
+
 		loadEnemyImages();
+		loadEffectImages();
 	}
 	
+	private void loadEffectImages() {
+		BufferedImage slowedAtlas = LoadSave.getSlowedImage();
+		for (int i = 0 ; i < 4 ; i++) {
+			slowedImages[i] = slowedAtlas.getSubimage(i*16, 0, 16, 16);
+		}
+	}
+
 	private void loadEnemyImages() {
 		BufferedImage enemyAtlas = LoadSave.getHungriesAtlas();
 		hungriesImages[0] = enemyAtlas.getSubimage(0, 16*4, 16, 16);
@@ -113,7 +122,7 @@ public class HungriesManager {
 
 	public void update() {
 		for (Hungries h : hungries) {
-			if (h.isAlive()) 
+			if (h.isHungry()) 
 				enemyMove(h);
 		}
 	}
@@ -130,7 +139,7 @@ public class HungriesManager {
 		}
 		
 		else if (isEnd(h)) {
-			h.setDead();
+			h.setSatisfied();
 		}
 		
 		else {
@@ -146,7 +155,7 @@ public class HungriesManager {
 		fixEnemyOffset(h, direction, xPos, yPos);
 		
 		if (isEnd(h)) {
-			h.setDead();
+			h.setSatisfied();
 			return;
 		}
 		
@@ -227,10 +236,17 @@ public class HungriesManager {
 
 	public void draw(Graphics g) {
 		for (Hungries h : hungries) {
-			if (h.isAlive()) {
+			if (h.isHungry()) {
 				drawEnemy(h, g);
 				drawHPBar(h, g);
+				drawEffects(h, g);
 			}
+		}
+	}
+
+	private void drawEffects(Hungries h, Graphics g) {
+		if (h.isSlowed()) {
+			g.drawImage(slowedImages[h.getSlowedIndex()], (int) h.getX(), (int) h.getY(), null);
 		}
 	}
 

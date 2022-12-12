@@ -12,3 +12,7 @@
 1670830108451	Rename type 'EnemyManager'
 1670830312865	Rename type 'Tower'
 1670830322715	Rename type 'TowerProjectile'
+1670843436741	Delete element
+1670854036556	Delete element
+1670854041660	Rename resource 'slowedAtlas.png'
+1670854628728	Rename method 'setDead'

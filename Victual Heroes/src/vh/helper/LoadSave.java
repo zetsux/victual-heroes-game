@@ -21,14 +21,6 @@ public class LoadSave {
 		}
 		
 		return img;
-		/*
-		is = getClass().getResourceAsStream("/marioatlas.png");
-		try {
-			this.spriteIMG = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
 	}
 	
 	public static BufferedImage getHungriesAtlas() {
@@ -44,14 +36,6 @@ public class LoadSave {
 		}
 		
 		return img;
-		/*
-		is = getClass().getResourceAsStream("/marioatlas.png");
-		try {
-			this.spriteIMG = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
 	}
 	
 	public static BufferedImage getStallAtlas() {
@@ -67,37 +51,51 @@ public class LoadSave {
 		}
 		
 		return img;
-		/*
-		is = getClass().getResourceAsStream("/marioatlas.png");
-		try {
-			this.spriteIMG = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
 	}
 
 	public static BufferedImage getFoodAtlas() {
 	
-	BufferedImage img = null;
-	InputStream is;
-	
-	try {
-		is = LoadSave.class.getClassLoader().getResourceAsStream("projectileatlas.png");
-		img = ImageIO.read(is);
-	} catch (IOException e) {
-		e.printStackTrace();
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("projectileatlas.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
 	}
 	
-	return img;
-	/*
-	is = getClass().getResourceAsStream("/marioatlas.png");
-	try {
-		this.spriteIMG = ImageIO.read(is);
-	} catch (IOException e) {
-		e.printStackTrace();
+	public static BufferedImage getTempAtlas() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("tempatlas.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
 	}
-	*/
-}
+	
+	public static BufferedImage getSlowedImage() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("slowedatlas.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
 	
 }
