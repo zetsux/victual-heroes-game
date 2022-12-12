@@ -31,7 +31,7 @@ public class LoadSave {
 		*/
 	}
 	
-	public static BufferedImage getEnemyAtlas() {
+	public static BufferedImage getHungriesAtlas() {
 		
 		BufferedImage img = null;
 		InputStream is;
@@ -54,13 +54,13 @@ public class LoadSave {
 		*/
 	}
 	
-public static BufferedImage getTowerAtlas() {
+	public static BufferedImage getStallAtlas() {
 		
 		BufferedImage img = null;
 		InputStream is;
 		
 		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("towertemp.png");
+			is = LoadSave.class.getClassLoader().getResourceAsStream("toweratlas.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -76,5 +76,28 @@ public static BufferedImage getTowerAtlas() {
 		}
 		*/
 	}
+
+	public static BufferedImage getFoodAtlas() {
+	
+	BufferedImage img = null;
+	InputStream is;
+	
+	try {
+		is = LoadSave.class.getClassLoader().getResourceAsStream("projectileatlas.png");
+		img = ImageIO.read(is);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	
+	return img;
+	/*
+	is = getClass().getResourceAsStream("/marioatlas.png");
+	try {
+		this.spriteIMG = ImageIO.read(is);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	*/
+}
 	
 }

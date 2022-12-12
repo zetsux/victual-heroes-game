@@ -1,0 +1,120 @@
+package vh.objectManagers;
+
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
+
+import vh.helper.LoadSave;
+import vh.hungries.Hungries;
+import vh.object.Stall;
+import vh.scene.Playing;
+import static vh.helper.Constants.Towers.*;
+
+public class StallManager {
+	
+	private Playing playing;
+	private BufferedImage[] stallImages;
+	public ArrayList<Stall> stalls = new ArrayList<>();
+	private int stallCount = 0;
+	
+	public StallManager(Playing playing) {
+		this.playing = playing;
+		
+		loadstallImages();
+	}
+
+	private void loadstallImages() {
+		BufferedImage stallAtlas = LoadSave.getStallAtlas();
+		this.stallImages = new BufferedImage[3];
+		
+		System.out.println(stallAtlas);
+		
+		for (int i = 0 ; i < 3 ; i++) {
+			stallImages[i] = stallAtlas.getSubimage(48*i, 0, 48, 48);
+		}
+		
+		System.out.println(stallImages[0]);
+	}
+	
+	public void draw(Graphics g) {
+		for (Stall t : stalls) {
+			g.drawImage(stallImages[t.getStallType()], t.getX(), t.getY(), null);
+		}
+	}
+	
+	public void update() {
+		for (Stall t : stalls) {
+			t.update();
+			attackEnemyIfClose(t);
+		}
+	}
+	
+	private void attackEnemyIfClose(Stall t) {
+		for (Hungries h : playing.getHungriesManager().getAllHungries()) {
+			// breakdown is Alive from this if, if necessary for further development
+			if (h.isAlive() && isHungriesInRange(t, h) && t.isCooldown()) {
+				h.attacked(t.getStallDamage());
+				playing.feedEnemy(t, h);
+				t.resetCooldown();
+				break;
+			}else {
+				// do nothing for now
+			}
+		}		
+	}
+	
+	private boolean isHungriesInRange(Stall t, Hungries e) {
+		
+		int range = vh.helper.Utility.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
+		return range < t.getStallRange()/2;
+	}
+
+	public void addStall(Stall curstall, int x, int y) {
+		stalls.add(new Stall(x, y, stallCount++ + 1, curstall.getStallType()));
+		
+	}
+	
+	public Stall getStallIntersect(Rectangle r) {
+		
+		for (Stall s : stalls) {
+			if (s.getBound().intersects(r)) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Stall getPathIntersect(Rectangle r) {
+		
+		for (Stall s : stalls) {
+			if (s.getBound().intersects(r)) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Stall getStallOn(int x, int y) {
+		
+		for (Stall t : stalls) {
+			if (t.getBound().contains(x, y)) {
+				return t;
+			}
+		}
+		
+		return null;
+	}
+
+
+	public BufferedImage[] getStallImages() {
+		return stallImages;
+	}
+}
