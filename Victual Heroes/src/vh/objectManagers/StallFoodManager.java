@@ -1,6 +1,8 @@
 package vh.objectManagers;
 
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Float;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,8 +23,9 @@ public class StallFoodManager {
 	
 	private Playing playing;
 	private ArrayList<StallFood> foods = new ArrayList<>();
-	private BufferedImage[] foodImages;
+	private BufferedImage[] foodImages, explosionImages;
 	private int foodId = 0;
+	private ArrayList<Explosion> explosions = new ArrayList<>();
 	
 	public StallFoodManager (Playing playing) {
 		this.playing = playing;
@@ -38,25 +41,24 @@ public class StallFoodManager {
 			foodImages[i] = foodAtlas.getSubimage(16*i, 0, 16, 16);
 		}
 		
-//		BufferedImage esCampurTemp = null;
-//		InputStream is;
-//		
-//		try {
-//			is = LoadSave.class.getClassLoader().getResourceAsStream("es campur projectile.png");
-//			esCampurTemp = ImageIO.read(is);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		projectile_Images[ESCAMPUR] = esCampurTemp;
+		importAnimation();
 	}
 	
-	public void newFood(Stall s, Hungries e) {
+	public void importAnimation() {
+		BufferedImage tempAtlas = LoadSave.getTempAtlas();
+		explosionImages = new BufferedImage[7];
+		
+		for (int i = 0 ; i < 7 ; i++) {
+			explosionImages[i] = tempAtlas.getSubimage(i*32, 32*2, 32, 32);
+		}
+	}
+	
+	public void newFood(Stall s, Hungries h) {
 		int type = getFoodType(s);
 		int damage = getDefaultDamage(type);
 		
-		int xDistance = (int) Math.abs(s.getX() - e.getX());
-		int yDistance = (int) Math.abs(s.getY() - e.getY());
+		int xDistance = (int) Math.abs(s.getX() - h.getX());
+		int yDistance = (int) Math.abs(s.getY() - h.getY());
 		int totalDistance = xDistance + yDistance;
 		
 		float xProportion = (float) xDistance/ totalDistance;
@@ -65,10 +67,10 @@ public class StallFoodManager {
 		float xSpeed = xProportion * vh.helper.Constants.TowerProjectiles.getSpeed(s.getStallType());
 		float ySpeed = vh.helper.Constants.TowerProjectiles.getSpeed(s.getStallType()) - xSpeed;
 	
-		if (s.getX() > e.getX()) {
+		if (s.getX() > h.getX()) {
 			xSpeed = -xSpeed;
 		}
-		if (s.getY() > e.getY()) {
+		if (s.getY() > h.getY()) {
 			ySpeed = -ySpeed;
 		}
 		
@@ -91,33 +93,97 @@ public class StallFoodManager {
 	}
 
 	public void update() {
-		for (StallFood p : foods) {
-			if (p.isActive()) {
-				p.move();
-				if (isFoodHitEnemy(p)) {
-					p.setActive(false);
+		for (StallFood f : foods) {
+			if (f.isActive()) {
+				f.move();
+				if (isFoodHitEnemy(f)) {
+					f.setActive(false);
+					if(f.getFoodType() == P_BAKSO) {
+						explosions.add(new Explosion(f.getPosition()));
+						explodeAOE(f);
+					}
 				}else {
 					// nothing for now
 				}
 			}
 		}
+		
+		for (Explosion ex : explosions) {
+			if (ex.getIndex() < 7) ex.update();
+		}
 	}
 	
-	private boolean isFoodHitEnemy(StallFood p) {
-		for (Hungries e : playing.getHungriesManager().getAllHungries()) {
-			if (e.getBound().contains(p.getPosition())) {
-					e.attacked(p.getFoodDamage());
-					return true;
+	private void explodeAOE(StallFood f) {
+		for (Hungries h : playing.getHungriesManager().getAllHungries()) {
+			if (h.isHungry()) {
+				float radius = 40.0f;
+				float xDist = Math.abs(f.getPosition().x - h.getX());
+				float yDist = Math.abs(f.getPosition().y - h.getY());
+				float rDist = (float) Math.hypot(xDist, yDist);
+				
+				if (rDist <= radius) {
+					h.fed(f.getFoodDamage());
+				}
+			}
+		}
+		
+	}
+
+	private boolean isFoodHitEnemy(StallFood f) {
+		for (Hungries h : playing.getHungriesManager().getAllHungries()) {
+			if (h.isHungry() && h.getBound().contains(f.getPosition())) {
+				h.fed(f.getFoodDamage());
+				if (f.getFoodType() == P_ESCAMPUR) {
+					h.slowed();
+				}
+				
+				return true;
 			}
 		}
 		return false;
 	}
 
 	public void draw(Graphics g) {
-		for (StallFood p : foods) {
-			if (p.isActive())
-				g.drawImage(foodImages[p.getFoodType()], (int) p.getPosition().getX(), (int) p.getPosition().getY(), null);
+		
+		for (StallFood f : foods) {
+			if (f.isActive())
+				g.drawImage(foodImages[f.getFoodType()], (int) f.getPosition().getX() - 16, (int) f.getPosition().getY() - 16, null);
+		}
+		
+		drawExplosions(g);
+	}
+	
+	public class Explosion {
+		
+		private Point2D.Float explosionPos;
+		private int explosionTick = 0, explosionIndex = 0;
+		
+		public Explosion(Point2D.Float pos) {
+			this.explosionPos = pos;
+		}
+		
+		public void update() {
+			explosionTick++;
+			if (explosionTick >= 5) {
+				explosionTick = 0;
+				explosionIndex++;
+			}
+		}
+		
+		public Point2D.Float getPosition(){
+			return explosionPos;
+		}
+		
+		public int getIndex(){
+			return explosionIndex;
 		}
 	}
 
+	private void drawExplosions(Graphics g) {
+		for (Explosion ex : explosions) {
+			if (ex.getIndex() < 7) {
+				g.drawImage(explosionImages[ex.getIndex()], (int) ex.getPosition().x - 32, (int) ex.getPosition().y - 32, null);
+			}
+		}
+	}
 }

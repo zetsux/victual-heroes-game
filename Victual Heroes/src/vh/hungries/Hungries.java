@@ -1,6 +1,7 @@
 package vh.hungries;
 
 import java.awt.Rectangle;
+import java.util.Random;
 import static vh.helper.Constants.Direction.*;
 
 public abstract class Hungries {
@@ -13,6 +14,10 @@ public abstract class Hungries {
 	private int type;
 	private int lastDir;
 	private boolean hungry;
+	protected int slowedTickLimit = 120;
+	protected int slowedTick = slowedTickLimit;
+	private Random rand;
+	private int slowedIndex, slowedIndexTick = 0;
 	
 	public Hungries(float x, float y, int id, int type) {
 		this.x = x;
@@ -21,6 +26,9 @@ public abstract class Hungries {
 		this.type = type;
 		this.lastDir = -1;
 		this.hungry = true;
+		this.rand = new Random();
+		
+		slowedIndex = rand.nextInt(0, 4);
 		
 		hungriesBound = new Rectangle((int)x - 16 , (int)y - 16, 48, 48);
 		setHungriesHP();
@@ -34,6 +42,19 @@ public abstract class Hungries {
 	public void move(float speed, int direction) {
 		
 		lastDir = direction;
+		
+		// move is updated every update, so 60 UPS
+		if (slowedTick < slowedTickLimit) {
+			slowedTick++;
+			slowedIndexTick++;
+			if (slowedIndexTick >= 30) {
+				slowedIndexTick = 0;
+				if (slowedIndex >= 3) slowedIndex = 0;
+				else slowedIndex++;
+			}
+			speed *= 0.33f;
+		}
+		
 		switch (direction) {
 		case LEFT :
 			this.x -= speed;
@@ -94,16 +115,28 @@ public abstract class Hungries {
 		this.y = y;
 	}
 
-	public void attacked(float feedEffect) {
+	public void fed(float feedEffect) {
 		this.hunger -= feedEffect;
 		if (this.hunger <= 0) this.hungry = false;
 	}
 	
-	public boolean isAlive() {
+	public boolean isHungry() {
 		return hungry;
 	}
 	
-	public void setDead() {
+	public void setSatisfied() {
 		hungry = false;
+	}
+
+	public void slowed() {
+		slowedTick = 0;
+	}
+	
+	public boolean isSlowed() {
+		return slowedTick < slowedTickLimit;
+	}
+	
+	public int getSlowedIndex() {
+		return slowedIndex;
 	}
 }

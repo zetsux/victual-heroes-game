@@ -1,0 +1,154 @@
+package vh.helper;
+
+public class Constants {
+	
+	public static class Direction {
+		public static final int LEFT = 0;
+		public static final int UP = 1;
+		public static final int RIGHT = 2;
+		public static final int DOWN = 3;
+	}
+	
+	public static class Tiles {
+		public static final int BLOCKED = 0;
+		public static final int TOWERSPOT = 1;
+		public static final int ENEMYROAD = 2;
+	}
+	
+	public static class Enemies {
+		public static final int BALD = 0;
+		public static final int YELLOW = 1;
+		public static final int POLICE = 2;
+		public static final int ORANGE = 3;
+		public static final int PURPLE = 4;
+		public static final int MOHAWK = 5;
+		public static final int GREEN = 6;
+		
+		public static float getSpeed(int eType) {
+			switch (eType) {
+				case BALD :
+					return 1.4f;
+				case YELLOW :
+					return 2f;
+				case POLICE :
+					return 1.6f;
+				case ORANGE :
+					return 2.2f;
+				case PURPLE :
+					return 1.2f;
+				case MOHAWK :
+					return 1.8f;
+				case GREEN :
+					return 1f;
+			}
+			
+			return 0;
+		}
+
+		public static int getHunger(int eType) {
+			switch (eType) {
+				case BALD :
+					return 100;
+				case YELLOW :
+					return 80;
+				case POLICE :
+					return 90;
+				case ORANGE :
+					return 60;
+				case PURPLE :
+					return 120;
+				case MOHAWK :
+					return 140;
+				case GREEN :
+					return 160;
+			}
+			return 0;
+			
+		}
+	}
+	
+	public static class Towers {
+		public static final int PUKIS = 0;
+		public static final int BAKSO = 1;
+		public static final int ESCAMPUR = 2;
+		public static final int WOOD = 3;
+		
+		public static String getName(int tType) {
+			switch (tType) {
+			case PUKIS :
+				return "Stall Pukis";
+			case BAKSO :
+				return "Stall Bakso";
+			case ESCAMPUR :
+				return "Stall Es Campur";
+			case WOOD :
+				return "Wood";
+			}
+			
+			return "";
+		}
+		
+		public static int getDefaultDamage(int tType) {
+			switch (tType) {
+				case PUKIS :
+					return 7;
+				case BAKSO :
+					return 15;
+				case ESCAMPUR :
+					return 3;
+				case WOOD :
+					return 12;
+			}
+			return 0;
+		}
+		
+		public static float getDefaultRange(int tType) {
+			switch (tType) {
+				case PUKIS :
+					return 200;
+				case BAKSO :
+					return 200;
+				case ESCAMPUR :
+					return 350;
+				case WOOD :
+					return 400;
+			}
+			return 0;
+		}
+		
+		public static float getDefaultCooldown(int tType) {
+			switch (tType) {
+				case PUKIS :
+					return 25;
+				case BAKSO :
+					return 50;
+				case ESCAMPUR :
+					return 40;
+				case WOOD :
+					return 40;
+			}
+			return 0;
+		}
+	}
+	
+	public static class TowerProjectiles {
+		public static final int P_PUKIS = 0;
+		public static final int P_BAKSO = 1;
+		public static final int P_ESCAMPUR = 2;
+		public static final int WOODS = 3;
+		
+		public static float getSpeed (int pType) {
+			switch(pType) {
+				case P_PUKIS :
+					return 7.5f;
+				case P_BAKSO :
+					return 4.5f;
+				case P_ESCAMPUR :
+					return 6f;
+				case WOODS :
+					return 5f;
+			}
+			return 0f;
+		}
+	}
+}

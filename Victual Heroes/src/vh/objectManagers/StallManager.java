@@ -54,8 +54,8 @@ public class StallManager {
 	private void feedHungriesIfClose(Stall s) {
 		for (Hungries h : playing.getHungriesManager().getAllHungries()) {
 			// breakdown is Alive from this if, if necessary for further development
-			if (h.isAlive() && isHungriesInRange(s, h) && s.isCooldown()) {
-				h.attacked(s.getStallDamage());
+			if (h.isHungry() && isHungriesInRange(s, h) && s.isCooldown()) {
+				h.fed(s.getStallDamage());
 				playing.feedEnemy(s, h);
 				s.resetCooldown();
 				break;

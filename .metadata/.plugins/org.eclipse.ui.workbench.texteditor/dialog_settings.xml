@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="getSubimage"/>
+		<item key="selection" value="slow"/>
 		<item key="wrap" value="true"/>
-		<item key="casesensitive" value="false"/>
+		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="slow"/>
+			<item value="isSlowed"/>
+			<item value="Explosion"/>
+			<item value="explosion"/>
+			<item value="Hungries e"/>
+			<item value="StallFood p"/>
+			<item value="Stall t"/>
+			<item value="GREEN"/>
+			<item value="t."/>
+			<item value="e."/>
+			<item value="tower"/>
 			<item value="getSubImage"/>
 			<item value="dispTower ="/>
 			<item value="dispTower = null"/>
 			<item value="(int)"/>
-			<item value="(int_"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Slowed"/>
+			<item value="slowed"/>
+			<item value="Hungries h"/>
+			<item value="StallFood f"/>
+			<item value="Stall s"/>
+			<item value="s."/>
+			<item value="h."/>
+			<item value="stall"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
