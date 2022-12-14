@@ -35,9 +35,9 @@ public class StallFoodManager {
 	private void importing() {
 		
 		BufferedImage foodAtlas = LoadSave.getFoodAtlas();
-		this.foodImages = new BufferedImage[3];
+		this.foodImages = new BufferedImage[4];
 		
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			foodImages[i] = foodAtlas.getSubimage(16*i, 0, 16, 16);
 		}
 		
@@ -86,8 +86,8 @@ public class StallFoodManager {
 				return P_BAKSO;
 			case ESCAMPUR :
 				return P_ESCAMPUR;
-			case WOOD :
-				return WOODS;
+			case GEPREK :
+				return P_GEPREK;
 		}
 		return 0;
 	}
@@ -135,6 +135,8 @@ public class StallFoodManager {
 				h.fed(f.getFoodDamage());
 				if (f.getFoodType() == P_ESCAMPUR) {
 					h.slowed();
+				} else if (f.getFoodType() == P_GEPREK) {
+					h.burned();
 				}
 				
 				return true;

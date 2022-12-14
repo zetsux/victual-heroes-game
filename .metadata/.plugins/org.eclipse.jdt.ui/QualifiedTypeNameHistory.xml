@@ -41,7 +41,6 @@
     <fullyQualifiedTypeName name="vh.helper.Constants"/>
     <fullyQualifiedTypeName name="vh.helper.Constants.Tiles"/>
     <fullyQualifiedTypeName name="vh.helper.Constants.Towers"/>
-    <fullyQualifiedTypeName name="java.awt.Font"/>
     <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
     <fullyQualifiedTypeName name="java.awt.event.WindowEvent"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
@@ -50,4 +49,5 @@
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
     <fullyQualifiedTypeName name="java.awt.geom.Point2D"/>
     <fullyQualifiedTypeName name="java.awt.geom.Point2D.Float"/>
+    <fullyQualifiedTypeName name="java.awt.Font"/>
 </qualifiedTypeNameHistroy>

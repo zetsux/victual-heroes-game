@@ -71,7 +71,7 @@ public class Constants {
 		public static final int PUKIS = 0;
 		public static final int BAKSO = 1;
 		public static final int ESCAMPUR = 2;
-		public static final int WOOD = 3;
+		public static final int GEPREK = 3;
 		
 		public static String getName(int tType) {
 			switch (tType) {
@@ -81,8 +81,8 @@ public class Constants {
 				return "Stall Bakso";
 			case ESCAMPUR :
 				return "Stall Es Campur";
-			case WOOD :
-				return "Wood";
+			case GEPREK :
+				return "Stall Ayam Geprek";
 			}
 			
 			return "";
@@ -96,8 +96,8 @@ public class Constants {
 					return 20;
 				case ESCAMPUR :
 					return 3;
-				case WOOD :
-					return 12;
+				case GEPREK :
+					return 7;
 			}
 			return 0;
 		}
@@ -110,8 +110,8 @@ public class Constants {
 					return 150;
 				case ESCAMPUR :
 					return 250;
-				case WOOD :
-					return 400;
+				case GEPREK :
+					return 200;
 			}
 			return 0;
 		}
@@ -124,8 +124,8 @@ public class Constants {
 					return 100;
 				case ESCAMPUR :
 					return 75;
-				case WOOD :
-					return 40;
+				case GEPREK :
+					return 60;
 			}
 			return 0;
 		}
@@ -135,7 +135,7 @@ public class Constants {
 		public static final int P_PUKIS = 0;
 		public static final int P_BAKSO = 1;
 		public static final int P_ESCAMPUR = 2;
-		public static final int WOODS = 3;
+		public static final int P_GEPREK = 3;
 		
 		public static float getSpeed (int pType) {
 			switch(pType) {
@@ -145,7 +145,7 @@ public class Constants {
 					return 4.5f;
 				case P_ESCAMPUR :
 					return 6f;
-				case WOODS :
+				case P_GEPREK :
 					return 5f;
 			}
 			return 0f;

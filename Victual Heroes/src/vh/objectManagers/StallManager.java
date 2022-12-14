@@ -31,11 +31,13 @@ public class StallManager {
 
 	private void loadstallImages() {
 		BufferedImage stallAtlas = LoadSave.getStallAtlas();
-		this.stallImages = new BufferedImage[3];
+		this.stallImages = new BufferedImage[4];
 		
 		for (int i = 0 ; i < 3 ; i++) {
 			stallImages[i] = stallAtlas.getSubimage(48*i, 0, 48, 48);
 		}
+		
+		stallImages[3] = LoadSave.getMapAtlas().getSubimage(0, 0, 48, 48);
 	}
 	
 	public void draw(Graphics g) {
