@@ -27,7 +27,7 @@ public class ButtonBar {
 	}
 	
 	private void initializeButtons() {
-		stallButtons = new Button[3];
+		stallButtons = new Button[4];
 		int width = 60;
 		int height = 60;
 		int xStart = 120;

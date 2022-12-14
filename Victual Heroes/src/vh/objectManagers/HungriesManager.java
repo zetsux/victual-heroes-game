@@ -24,10 +24,9 @@ public class HungriesManager {
 	
 	private final int HUNGRIESTOTAL = 7;
 	private Playing playing;
-	private BufferedImage[] hungriesImages, slowedImages;
+	private BufferedImage[] hungriesImages, slowedImages, burnedImages;
 	private ArrayList<Hungries> hungries = new ArrayList<>();
 	private Random rand;
-	private int slowedTick, slowedIndex;
 	
 	private int startX = 0;
 	private int startY = 10;
@@ -52,6 +51,11 @@ public class HungriesManager {
 		for (int i = 0 ; i < 4 ; i++) {
 			slowedImages[i] = slowedAtlas.getSubimage(i*16, 0, 16, 16);
 		}
+		
+//		BufferedImage burnedAtlas = LoadSave.getSlowedImage();
+//		for (int i = 0 ; i < 4 ; i++) {
+//			burnedImages[i] = burnedAtlas.getSubimage(i*16, 0, 16, 16);
+//		}
 	}
 
 	private void loadEnemyImages() {
@@ -247,6 +251,10 @@ public class HungriesManager {
 	private void drawEffects(Hungries h, Graphics g) {
 		if (h.isSlowed()) {
 			g.drawImage(slowedImages[h.getSlowedIndex()], (int) h.getX(), (int) h.getY(), null);
+		}
+		
+		if (h.isBurned()) {
+			//Draw Burned Image
 		}
 	}
 

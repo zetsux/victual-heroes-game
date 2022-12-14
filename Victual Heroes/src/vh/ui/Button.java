@@ -1,6 +1,7 @@
 package vh.ui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -45,13 +46,14 @@ public class Button {
 	private void drawName(Graphics g) {
 
 		g.setColor(Color.BLACK);
+		g.setFont(new Font("Helvetica", Font.BOLD, 12)); 
 		if (name == "Settings") g.drawString(name, x + (2*(width/7)), y + (2 * (height/3)));
 		else g.drawString(name, x + (2*width/5), y + (2 * (height/3)));	
 	}
 
 	private void drawBorder(Graphics g) {
 
-		g.setColor(Color.black);
+		g.setColor(Color.BLACK);
 		g.drawRect(x, y, width, height);
 		if(mousePressedButton) {
 			g.drawRect(x + 1, y + 1, width - 2, height - 2);
@@ -65,7 +67,7 @@ public class Button {
 			g.setColor(Color.BLACK);
 			g.fillRect(x, y, width, height);
 			
-			g.setColor(Color.GRAY);
+			g.setColor(Color.ORANGE);
 			g.fillRect(x , y , width, height-3);
 		} else {
 			

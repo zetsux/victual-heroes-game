@@ -16,8 +16,12 @@ public abstract class Hungries {
 	private boolean hungry;
 	protected int slowedTickLimit = 120;
 	protected int slowedTick = slowedTickLimit;
+	protected int burnedTickLimit = 240;
+	protected int burnedTick = burnedTickLimit;
 	private Random rand;
 	private int slowedIndex, slowedIndexTick = 0;
+	private int burnedIndex, burnedIndexTick = 0;
+	private final int burnDmg = 3;
 	
 	public Hungries(float x, float y, int id, int type) {
 		this.x = x;
@@ -29,6 +33,7 @@ public abstract class Hungries {
 		this.rand = new Random();
 		
 		slowedIndex = rand.nextInt(0, 4);
+		burnedIndex = rand.nextInt(0, 4);
 		
 		hungriesBound = new Rectangle((int)x - 16 , (int)y - 16, 48, 48);
 		setHungriesHP();
@@ -53,6 +58,17 @@ public abstract class Hungries {
 				else slowedIndex++;
 			}
 			speed *= 0.33f;
+		}
+		
+		if (burnedTick < burnedTickLimit) {
+			burnedTick++;
+			burnedIndexTick++;
+			if (burnedIndexTick >= 30) {
+				burnedIndexTick = 0;
+				this.fed((float) this.maxhunger*burnDmg/100);
+				if (burnedIndex >= 3) burnedIndex = 0;
+				else burnedIndex++;
+			}
 		}
 		
 		switch (direction) {
@@ -132,11 +148,24 @@ public abstract class Hungries {
 		slowedTick = 0;
 	}
 	
+	public void burned() {
+		burnedTick = 0;
+		burnedIndexTick = 0;
+	}
+	
 	public boolean isSlowed() {
 		return slowedTick < slowedTickLimit;
 	}
 	
+	public boolean isBurned() {
+		return burnedTick < burnedTickLimit;
+	}
+	
 	public int getSlowedIndex() {
 		return slowedIndex;
+	}
+	
+	public int getBurnedIndex() {
+		return burnedIndex;
 	}
 }
