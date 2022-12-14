@@ -125,12 +125,36 @@ public class HungriesManager {
 	}
 
 	public void update() {
+		
+		updateWaveManager();
+		
+		if (isTimeToSpawn()) {
+			spawnHungry();
+		}
+		
 		for (Hungries h : hungries) {
 			if (h.isHungry()) 
 				enemyMove(h);
 		}
 	}
 	
+	private void updateWaveManager() {
+		playing.getWaveManager().update();
+	}
+
+	private void spawnHungry() {
+		addHungries(playing.getWaveManager().getNextHungry());
+	}
+
+	private boolean isTimeToSpawn() {
+		if(playing.getWaveManager().isTimeForSpawn()) {
+			if (!(playing.getWaveManager().isWaveEnd())) 
+				return true;
+		}
+		
+		return false;
+	}
+
 	public void enemyMove(Hungries h) {
 		if (h.getLastDir() == -1) moveNewDirection(h);
 		float speed = getSpeed(h.getType());
