@@ -10,6 +10,7 @@ import vh.objectManagers.HungriesManager;
 import vh.objectManagers.MapTileManager;
 import vh.objectManagers.StallFoodManager;
 import vh.objectManagers.StallManager;
+import vh.objectManagers.WaveManager;
 import vh.objectManagers.StallFoodManager;
 import vh.ui.ButtonBar;
 import vh.helper.LevelBuilder;
@@ -29,6 +30,7 @@ public class Playing extends GameScene implements SceneMethods {
 	private HungriesManager hungriesManager;
 	private StallManager stallManager;
 	private StallFoodManager foodManager;
+	private WaveManager waveManager;
 	private Random rand;
 	
 	private Stall curStall;
@@ -45,6 +47,7 @@ public class Playing extends GameScene implements SceneMethods {
 		hungriesManager = new HungriesManager(this);
 		stallManager = new StallManager(this);
 		foodManager = new StallFoodManager(this);
+		waveManager = new WaveManager(this);
 		rand = new Random();
 		buttonBar = new ButtonBar(0, 576, 1024, 100, this);
 	}
@@ -147,6 +150,11 @@ public class Playing extends GameScene implements SceneMethods {
 		return tileType == ENEMYROAD || tileType == BLOCKED;
 	}
 	
+	public void feedEnemy(Stall s, Hungries h) {
+		foodManager.newFood(s, h);
+		
+	}
+	
 	public void mouseClicked(MouseEvent event) {
 		if(event.getButton() == MouseEvent.BUTTON3) {
 			curStall = null;
@@ -206,8 +214,11 @@ public class Playing extends GameScene implements SceneMethods {
 		return hungriesManager;
 	}
 
-	public void feedEnemy(Stall s, Hungries h) {
-		foodManager.newFood(s, h);
-		
+	public WaveManager getWaveManager() {
+		return waveManager;
+	}
+
+	public void setWaveManager(WaveManager waveManager) {
+		this.waveManager = waveManager;
 	}
 }
