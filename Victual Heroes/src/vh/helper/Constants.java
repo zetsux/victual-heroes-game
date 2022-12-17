@@ -134,7 +134,7 @@ public class Constants {
 				case ESCAMPUR :
 					return 3;
 				case GEPREK :
-					return 7;
+					return 10;
 			}
 			return 0;
 		}

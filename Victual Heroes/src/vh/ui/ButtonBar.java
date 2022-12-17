@@ -3,9 +3,11 @@ package vh.ui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.Currency;
 
 import vh.helper.Constants.Towers;
+import vh.helper.LoadSave;
 import vh.hungries.Hungries;
 import vh.object.Stall;
 import vh.scene.Playing;
@@ -63,19 +65,18 @@ public class ButtonBar {
 	
 	private void drawStallCost(Graphics g) {
 		if (isMoneyEnough()) 
-			g.setColor(Color.GRAY);
+			g.setColor(new Color(26, 208, 28));
 		else 
-			g.setColor(Color.RED);
+			g.setColor(new Color(255, 76, 48));
 		
-			g.fillRect(620, 595, 150, 68);
+			g.fillRect(620, 602, 150, 47);
 		
+			g.setFont(new Font("LucidaSans", Font.BOLD, 15));
 			g.setColor(Color.BLACK);
-		g.drawRect(620, 595, 150, 68);
-		
-		if (curStall != null) {
-			g.drawString(getStallName(), 625, 610);
-			g.drawString("Price : " + getStallPrice(), 625, 630);
-		}
+			g.drawRect(620, 602, 150, 47);
+			
+			g.drawString(getStallName(), 625, 620);
+			g.drawString("Price : " + getStallPrice(), 625, 640);
 	}
 
 	private boolean isMoneyEnough() {
@@ -90,18 +91,43 @@ public class ButtonBar {
 		return vh.helper.Constants.Towers.getStallPrice(stallCostType);	}
 
 	private void drawMoneyInfo(Graphics g) {
+		g.setColor(new Color(180, 175, 170));
+		g.fillRect(7, 602, 90, 47);
 		g.setColor(Color.BLACK);
-		g.drawString(("Money : " + money), 470, 610);
+		g.drawRect(7, 602, 90, 47);
 		
+		BufferedImage coinSprite = LoadSave.getCoinSprite();
+		g.drawImage(coinSprite, 12, 609, null);
+		
+		g.setColor(Color.WHITE);
+		if (money < 10) {
+			g.setFont(new Font("LucidaSans", Font.BOLD, 26));
+			g.drawString(" " + money, 52, 634);
+		} else if (money < 100) {
+			g.setFont(new Font("LucidaSans", Font.BOLD, 24));
+			g.drawString(" " + money, 48, 633);
+		} else if (money < 1000) {
+			g.setFont(new Font("LucidaSans", Font.BOLD, 24));
+			g.drawString(" " + money, 44, 633);
+		} else if (money < 10000) {
+			g.setFont(new Font("LucidaSans", Font.BOLD, 20));
+			g.drawString(" " + money, 42, 632);
+		} else if (money < 100000) {
+			g.setFont(new Font("LucidaSans", Font.BOLD, 16));
+			g.drawString(" " + money, 45, 631);
+		} else {
+			g.setFont(new Font("LucidaSans", Font.BOLD, 20));
+			g.drawString(" MAX", 43, 632);
+		}		
 	}
 
 	private void drawWaveInfo(Graphics g) {
-		int xWInfo = 850;
+		int xWInfo = 860;
 		int yWInfo = 20;
 		g.setColor(Color.ORANGE);
-		g.fillRect(xWInfo, yWInfo, 170, 100);
+		g.fillRect(xWInfo, yWInfo, 150, 80);
 		g.setColor(Color.BLACK);
-		g.drawRect(xWInfo, yWInfo, 170, 100);
+		g.drawRect(xWInfo, yWInfo, 150, 80);
 		g.setFont(new Font("LucidaSans", Font.BOLD, 15));
 		drawHInfo(g, xWInfo, yWInfo);
 		drawWInfo(g, xWInfo, yWInfo);
@@ -110,7 +136,7 @@ public class ButtonBar {
 
 	private void drawHInfo(Graphics g, int x, int y) {
 		int remaining = playing.getHungriesManager().getRemainingHungry();
-		g.drawString("Hungries Left: " + remaining , x+10, y+30);
+		g.drawString("Hungries Left : " + remaining , x+10, y+30);
 	}
 
 	private void drawWInfo(Graphics g, int x, int y) {
@@ -121,13 +147,14 @@ public class ButtonBar {
 	private void drawDispStall(Graphics g) {
 		if (dispStall != null) {
 			g.setColor(new Color(212, 175, 55));
-			g.fillRect(790, 596, 220, 65);
+			g.fillRect(790, 592, 220, 65);
 			g.setColor(Color.BLACK);
-			g.drawRect(790, 596, 220, 65);
-			g.drawRect(800, 601, 50, 50);
-			g.drawImage(playing.getStallManager().getStallImages()[dispStall.getStallType()], 800, 601, 50, 50, null);
-			g.drawString(Towers.getName(dispStall.getStallType()), 865, 621);
-			g.drawString("( Stall " + dispStall.getId() + " )", 865, 641);
+			g.drawRect(790, 592, 220, 65);
+			g.drawRect(800, 599, 51, 51);
+			g.drawImage(playing.getStallManager().getStallImages()[dispStall.getStallType()], 802, 601, 48, 48, null);
+			g.setFont(new Font("LucidaSans", Font.PLAIN, 15));
+			g.drawString(Towers.getName(dispStall.getStallType()), 865, 619);
+			g.drawString("( Stall " + dispStall.getId() + " )", 865, 639);
 			
 			drawDispStallAtr(g);
 		}
@@ -141,7 +168,7 @@ public class ButtonBar {
 				   (int)(dispStall.getStallRange()), (int)(dispStall.getStallRange()));
 		
 		g.setColor(Color.YELLOW);
-		g.drawRect(dispStall.getX(), dispStall.getY(), 50, 50);
+		g.drawRect(dispStall.getX() - 1, dispStall.getY() - 1, 50, 50);
 	}
 
 	private void drawButtons(Graphics g) {

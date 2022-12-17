@@ -24,7 +24,7 @@ public abstract class Hungries {
 	private Random rand;
 	private int slowedIndex, slowedIndexTick = 0;
 	private int burnedIndex, burnedIndexTick = 0;
-	private final int burnDmg = 3;
+	private final int burnDmg = 5;
 	
 	public Hungries(float x, float y, int id, int type, HungriesManager hungriesManager) {
 		this.x = x;

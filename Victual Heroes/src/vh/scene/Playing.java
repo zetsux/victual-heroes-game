@@ -202,7 +202,7 @@ public class Playing extends GameScene implements SceneMethods {
 	}
 	
 	private boolean cannotPutStall(int x, int y) {
-		int tileId = level2[y/16][x/16];
+		int tileId = level3[y/16][x/16];
 		int tileType = tileManager.getTile(tileId).getTileType();
 		
 		return tileType == ENEMYROAD || tileType == BLOCKED;
