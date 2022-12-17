@@ -98,4 +98,18 @@ public class LoadSave {
 		return img;
 	}
 	
+public static BufferedImage getBombAtlas() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("bombAtlas.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
 }

@@ -2,10 +2,13 @@ package vh.hungries;
 
 import java.awt.Rectangle;
 import java.util.Random;
+
+import vh.objectManagers.HungriesManager;
+
 import static vh.helper.Constants.Direction.*;
 
 public abstract class Hungries {
-	
+	protected HungriesManager hungriesManager;
 	private float x, y;
 	private Rectangle hungriesBound;
 	private int hunger;
@@ -23,13 +26,14 @@ public abstract class Hungries {
 	private int burnedIndex, burnedIndexTick = 0;
 	private final int burnDmg = 3;
 	
-	public Hungries(float x, float y, int id, int type) {
+	public Hungries(float x, float y, int id, int type, HungriesManager hungriesManager) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
 		this.type = type;
 		this.lastDir = -1;
 		this.hungry = true;
+		this.hungriesManager = hungriesManager;
 		this.rand = new Random();
 		
 		slowedIndex = rand.nextInt(0, 4);
@@ -133,7 +137,10 @@ public abstract class Hungries {
 
 	public void fed(float feedEffect) {
 		this.hunger -= feedEffect;
-		if (this.hunger <= 0) this.hungry = false;
+		if (this.hunger <= 0) {
+			this.hungry = false;
+			hungriesManager.giveMoney(type);
+		}
 	}
 	
 	public boolean isHungry() {

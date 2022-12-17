@@ -73,25 +73,25 @@ public class HungriesManager {
 		
 		switch (enemyType) {
 		case BALD :
-			hungries.add(new Baldman(x, y, 0, BALD));
+			hungries.add(new Baldman(x, y, 0, BALD, this));
 			break;
 		case YELLOW :
-			hungries.add(new Yellowman(x, y, 0, YELLOW));
+			hungries.add(new Yellowman(x, y, 0, YELLOW, this));
 			break;
 		case POLICE :
-			hungries.add(new Policeman(x, y, 0, POLICE));
+			hungries.add(new Policeman(x, y, 0, POLICE, this));
 			break;
 		case ORANGE :
-			hungries.add(new Orangeman(x, y, 0, ORANGE));
+			hungries.add(new Orangeman(x, y, 0, ORANGE, this));
 			break;
 		case PURPLE :
-			hungries.add(new Purpleman(x, y, 0, PURPLE));
+			hungries.add(new Purpleman(x, y, 0, PURPLE, this));
 			break;
 		case MOHAWK :
-			hungries.add(new Mohawkman(x, y, 0, MOHAWK));
+			hungries.add(new Mohawkman(x, y, 0, MOHAWK, this));
 			break;
 		case GREEN :
-			hungries.add(new Greenman(x, y, 0, GREEN));
+			hungries.add(new Greenman(x, y, 0, GREEN, this));
 			break;
 		}
 	}
@@ -101,58 +101,35 @@ public class HungriesManager {
 		
 		switch (enemyType) {
 		case BALD :
-			hungries.add(new Baldman(x, y, 0, BALD));
+			hungries.add(new Baldman(x, y, 0, BALD, this));
 			break;
 		case YELLOW :
-			hungries.add(new Yellowman(x, y, 0, YELLOW));
+			hungries.add(new Yellowman(x, y, 0, YELLOW, this));
 			break;
 		case POLICE :
-			hungries.add(new Policeman(x, y, 0, POLICE));
+			hungries.add(new Policeman(x, y, 0, POLICE, this));
 			break;
 		case ORANGE :
-			hungries.add(new Orangeman(x, y, 0, ORANGE));
+			hungries.add(new Orangeman(x, y, 0, ORANGE, this));
 			break;
 		case PURPLE :
-			hungries.add(new Purpleman(x, y, 0, PURPLE));
+			hungries.add(new Purpleman(x, y, 0, PURPLE, this));
 			break;
 		case MOHAWK :
-			hungries.add(new Mohawkman(x, y, 0, MOHAWK));
+			hungries.add(new Mohawkman(x, y, 0, MOHAWK, this));
 			break;
 		case GREEN :
-			hungries.add(new Greenman(x, y, 0, GREEN));
+			hungries.add(new Greenman(x, y, 0, GREEN, this));
 			break;
 		}
 	}
 
 	public void update() {
 		
-		updateWaveManager();
-		
-		if (isTimeToSpawn()) {
-			spawnHungry();
-		}
-		
 		for (Hungries h : hungries) {
 			if (h.isHungry()) 
 				enemyMove(h);
 		}
-	}
-	
-	private void updateWaveManager() {
-		playing.getWaveManager().update();
-	}
-
-	private void spawnHungry() {
-		addHungries(playing.getWaveManager().getNextHungry());
-	}
-
-	private boolean isTimeToSpawn() {
-		if(playing.getWaveManager().isTimeForSpawn()) {
-			if (!(playing.getWaveManager().isWaveEnd())) 
-				return true;
-		}
-		
-		return false;
 	}
 
 	public void enemyMove(Hungries h) {
@@ -304,5 +281,17 @@ public class HungriesManager {
 	
 	public Hungries getHungries(Hungries h) {
 		return h;
+	}
+
+	public int getRemainingHungry() {
+		int hungry = 0;
+		for (Hungries h : hungries)
+			if (h.isHungry())
+				hungry++;
+		return hungry;
+	}
+
+	public void giveMoney(int type) {
+		playing.giveGold(type);
 	}
 }

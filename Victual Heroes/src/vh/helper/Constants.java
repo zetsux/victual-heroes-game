@@ -1,5 +1,7 @@
 package vh.helper;
 
+import java.util.function.IntToDoubleFunction;
+
 public class Constants {
 	
 	public static class Direction {
@@ -23,6 +25,27 @@ public class Constants {
 		public static final int PURPLE = 4;
 		public static final int MOHAWK = 5;
 		public static final int GREEN = 6;
+		
+		public static int getMoney(int eType) {
+			switch (eType) {	
+				case BALD :
+					return 5;
+				case YELLOW :
+					return 7;
+				case POLICE :
+					return 8;
+				case ORANGE :
+					return 10;
+				case PURPLE :
+					return 5;
+				case MOHAWK :
+					return 13;
+				case GREEN :
+					return 15;
+			}
+			
+			return 0;
+		}
 		
 		public static float getSpeed(int eType) {
 			switch (eType) {
@@ -73,6 +96,20 @@ public class Constants {
 		public static final int ESCAMPUR = 2;
 		public static final int GEPREK = 3;
 		
+		public static int getStallPrice(int tType) {
+			switch (tType) {
+			case PUKIS :
+				return 30;
+			case BAKSO :
+				return 70;
+			case ESCAMPUR :
+				return 50;
+			case GEPREK :
+				return 50;
+			}
+			return 0;
+		}
+		
 		public static String getName(int tType) {
 			switch (tType) {
 			case PUKIS :
@@ -119,13 +156,13 @@ public class Constants {
 		public static float getDefaultCooldown(int tType) {
 			switch (tType) {
 				case PUKIS :
-					return 40;
+					return 15;
 				case BAKSO :
-					return 100;
+					return 65;
 				case ESCAMPUR :
-					return 75;
+					return 50;
 				case GEPREK :
-					return 60;
+					return 35;
 			}
 			return 0;
 		}
