@@ -119,7 +119,7 @@ public class LoadSave {
 		InputStream is;
 		
 		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("explosionatlas.png");
+			is = LoadSave.class.getClassLoader().getResourceAsStream("explosionimg.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();

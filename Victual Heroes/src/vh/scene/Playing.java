@@ -208,6 +208,15 @@ public class Playing extends GameScene implements SceneMethods {
 		return tileType == ENEMYROAD || tileType == BLOCKED;
 	}
 	
+	public void upgradeStall(Stall dispStall) {
+		stallManager.upgradeStall(dispStall);
+		
+	}
+	
+	public void removeStall(Stall dispStall) {
+		stallManager.removeStall(dispStall);
+	}
+	
 	public void feedEnemy(Stall s, Hungries h) {
 		foodManager.newFood(s, h);
 		
@@ -222,7 +231,6 @@ public class Playing extends GameScene implements SceneMethods {
 	@Override
 	public void mouseClicked(int x, int y) {
 		if (y >= 576) {
-			buttonBar.displayTower(null);
 			buttonBar.mouseClicked(x, y);
 		} else if (curStall != null && isStallSpot(xMouse, yMouse) && getStallIntersect(xMouse, yMouse) == null && !notForStall(xMouse, yMouse)) {
 			stallManager.addStall(curStall, xMouse, yMouse);
@@ -230,7 +238,7 @@ public class Playing extends GameScene implements SceneMethods {
 			curStall = null;
 		} else if (curStall == null) {
 			Stall s = getStallOn(xMouse, yMouse);
-			buttonBar.displayTower(s);
+			buttonBar.displayStall(s);
 		}
 	}
 

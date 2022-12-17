@@ -48,6 +48,8 @@ public class Button {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Helvetica", Font.BOLD, 12)); 
 		if (name == "Settings") g.drawString(name, x + (2*(width/7)), y + (2 * (height/3)));
+		else if (name == "Upgrade") g.drawString(name, x + (2*(width/11)), y + (2*(height/3)));
+		else if (name == "Sell") g.drawString(name, x + (2*(width/6)), y + (2*(height/3)));
 		else g.drawString(name, x + (2*width/5), y + (2 * (height/3)));	
 	}
 

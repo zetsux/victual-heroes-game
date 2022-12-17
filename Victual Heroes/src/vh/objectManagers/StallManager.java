@@ -108,7 +108,21 @@ public class StallManager {
 		
 		return null;
 	}
-
+	
+	public void upgradeStall(Stall dispStall) {
+		for (Stall s : stalls) {
+			if (s.getId() == dispStall.getId()) s.upgradeStall();
+		}
+	}
+	
+	public void removeStall(Stall dispStall) {
+		for (int i = 0 ; i < stalls.size() ; i++) {
+			if (stalls.get(i).getId() == dispStall.getId()) {
+				stalls.remove(i);
+			}
+		}
+		
+	}
 
 	public BufferedImage[] getStallImages() {
 		return stallImages;
