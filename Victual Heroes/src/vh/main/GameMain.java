@@ -43,7 +43,7 @@ public class GameMain extends JFrame implements Runnable {
 				JOptionPane.INFORMATION_MESSAGE);
 				if (choose == JOptionPane.YES_OPTION) {
 					e.getWindow().dispose();
-				System.out.println("close");
+					System.exit(1);
 				} else {
 					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				}

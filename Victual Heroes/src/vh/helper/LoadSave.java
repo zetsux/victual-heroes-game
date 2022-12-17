@@ -98,13 +98,28 @@ public class LoadSave {
 		return img;
 	}
 	
-public static BufferedImage getBombAtlas() {
+	public static BufferedImage getBombAtlas() {
 		
 		BufferedImage img = null;
 		InputStream is;
 		
 		try {
 			is = LoadSave.class.getClassLoader().getResourceAsStream("bombAtlas.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
+	
+	public static BufferedImage getCoinSprite() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("coinsprite.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
