@@ -77,6 +77,9 @@ public class ButtonBar {
 			
 			g.drawString(getStallName(), 625, 620);
 			g.drawString("Price : " + getStallPrice(), 625, 640);
+			
+			BufferedImage miniCoin = LoadSave.getMiniCoin();
+			g.drawImage(miniCoin, 693, 627, null);
 	}
 
 	private boolean isMoneyEnough() {

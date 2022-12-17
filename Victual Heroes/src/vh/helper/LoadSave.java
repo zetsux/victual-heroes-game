@@ -98,13 +98,28 @@ public class LoadSave {
 		return img;
 	}
 	
-	public static BufferedImage getBombAtlas() {
+	public static BufferedImage getBurnedImage() {
 		
 		BufferedImage img = null;
 		InputStream is;
 		
 		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("bombAtlas.png");
+			is = LoadSave.class.getClassLoader().getResourceAsStream("burnedatlas.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
+	
+	public static BufferedImage getExplosionAtlas() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("explosionatlas.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -120,6 +135,21 @@ public class LoadSave {
 		
 		try {
 			is = LoadSave.class.getClassLoader().getResourceAsStream("coinsprite.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
+	
+	public static BufferedImage getMiniCoin() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("coinimg.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -40,6 +40,7 @@ public class HungriesManager {
 		this.playing = plyng;
 		this.hungriesImages = new BufferedImage[HUNGRIESTOTAL];
 		this.slowedImages = new BufferedImage[4];
+		this.burnedImages = new BufferedImage[4];
 		this.rand = new Random();
 
 		loadEnemyImages();
@@ -52,10 +53,10 @@ public class HungriesManager {
 			slowedImages[i] = slowedAtlas.getSubimage(i*16, 0, 16, 16);
 		}
 		
-//		BufferedImage burnedAtlas = LoadSave.getSlowedImage();
-//		for (int i = 0 ; i < 4 ; i++) {
-//			burnedImages[i] = burnedAtlas.getSubimage(i*16, 0, 16, 16);
-//		}
+		BufferedImage burnedAtlas = LoadSave.getBurnedImage();
+		for (int i = 0 ; i < 4 ; i++) {
+			burnedImages[i] = burnedAtlas.getSubimage(i*16, 0, 16, 16);
+		}
 	}
 
 	private void loadEnemyImages() {
@@ -255,7 +256,7 @@ public class HungriesManager {
 		}
 		
 		if (h.isBurned()) {
-			//Draw Burned Image
+			g.drawImage(burnedImages[h.getBurnedIndex()], (int) h.getX(), (int) h.getY(), null);
 		}
 	}
 
