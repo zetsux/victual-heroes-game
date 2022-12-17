@@ -56,7 +56,7 @@ public class GameMain extends JFrame implements Runnable {
 		pack();
 		
 		setTitle("Victual Heroes");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/tempicon.jpeg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/iconimg.png")));
 		
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -97,15 +97,6 @@ public class GameMain extends JFrame implements Runnable {
 		GameMain game = new GameMain();
 		game.screen.initializeInput();
 		game.startGame();
-		
-//		Thread t = new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
 	}
 
 	@Override
