@@ -49,7 +49,7 @@ public class StallFoodManager {
 		explosionImages = new BufferedImage[10];
 		
 		for (int i = 0 ; i < 10; i++) {
-			explosionImages[i] = bombAtlas.getSubimage(i*16, 0, 16, 16);
+			explosionImages[i] = bombAtlas.getSubimage(i*32, 0, 32, 32);
 		}
 	}
 	
