@@ -36,6 +36,7 @@ public class Playing extends GameScene implements SceneMethods {
 	private Stall curStall;
 	
 	private int xMouse, yMouse;
+	private int moneyTick;
 	
 	public Playing(GameMain game) {
 		super(game);
@@ -54,9 +55,66 @@ public class Playing extends GameScene implements SceneMethods {
 
 	public void update() {
 		updateTick();
+		waveManager.update();
+		
+		moneyTick++;
+		if(moneyTick % (60 * 3) == 0)
+			buttonBar.addGold(1);
+			
+		if (isHungriesSatisfied()) {
+			if (!(isItEnd())) {
+				waveManager.setWaveTimer();
+				if (isWaveIntervalOver()) {
+					waveManager.isNextWave();
+					hungriesManager.getAllHungries().clear();
+				}
+			}
+		}
+		
+		if (isTimeToSpawn()) {
+			spawnHungry();
+		}
+		
 		hungriesManager.update();
 		stallManager.update();
 		foodManager.update();
+	}
+	
+	private boolean isWaveIntervalOver() {
+		
+		return waveManager.isWaveIntervalOver();
+	}
+
+	private boolean isItEnd() {
+		
+		return waveManager.isItEnd();
+	}
+
+	private boolean isHungriesSatisfied() {
+		
+//		if (waveManager.isWaveEnd()) 
+//			return true;
+		
+		for (Hungries h : hungriesManager.getAllHungries()) {
+			if (h.isHungry()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private void spawnHungry() {
+		
+		hungriesManager.addHungries(waveManager.getNextHungry());
+	}
+
+	private boolean isTimeToSpawn() {
+		if(waveManager.isTimeForSpawn()) {
+			if (!(waveManager.isWaveEnd())) 
+				return true;
+		}
+		
+		return false;
 	}
 	
 	@Override
@@ -168,11 +226,24 @@ public class Playing extends GameScene implements SceneMethods {
 			buttonBar.mouseClicked(x, y);
 		} else if (curStall != null && isStallSpot(xMouse, yMouse) && getStallIntersect(xMouse, yMouse) == null && !notForStall(xMouse, yMouse)) {
 			stallManager.addStall(curStall, xMouse, yMouse);
+			reduceMoney(curStall.getStallType());
 			curStall = null;
 		} else if (curStall == null) {
 			Stall s = getStallOn(xMouse, yMouse);
 			buttonBar.displayTower(s);
 		}
+	}
+
+	public ButtonBar getButtonBar() {
+		return buttonBar;
+	}
+
+	private void reduceMoney(int stallType) {
+		buttonBar.stallDeployed(stallType);
+	}
+	
+	public void giveGold(int hType) {
+		buttonBar.addGold(vh.helper.Constants.Enemies.getMoney(hType));
 	}
 
 	@Override

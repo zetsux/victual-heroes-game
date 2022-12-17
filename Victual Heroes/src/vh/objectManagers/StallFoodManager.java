@@ -45,13 +45,14 @@ public class StallFoodManager {
 	}
 	
 	public void importAnimation() {
-		BufferedImage tempAtlas = LoadSave.getTempAtlas();
-		explosionImages = new BufferedImage[7];
+		BufferedImage bombAtlas = LoadSave.getBombAtlas();
+		explosionImages = new BufferedImage[10];
 		
-		for (int i = 0 ; i < 7 ; i++) {
-			explosionImages[i] = tempAtlas.getSubimage(i*32, 32*2, 32, 32);
+		for (int i = 0 ; i < 10; i++) {
+			explosionImages[i] = bombAtlas.getSubimage(i*16, 0, 16, 16);
 		}
 	}
+	
 	
 	public void newFood(Stall s, Hungries h) {
 		int type = getFoodType(s);
