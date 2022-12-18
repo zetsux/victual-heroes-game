@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import vh.object.MapTile;
-import static vh.helper.Constants.Tiles.*;
+import static vh.helper.Constants.TilesClass.*;
 
 public class MapTileManager {
 	

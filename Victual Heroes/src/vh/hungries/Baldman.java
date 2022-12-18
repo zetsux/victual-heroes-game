@@ -1,6 +1,6 @@
 package vh.hungries;
 
-import static vh.helper.Constants.Enemies.BALD;
+import static vh.helper.Constants.HungriesClass.BALD;
 
 import vh.objectManagers.HungriesManager;
 

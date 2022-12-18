@@ -14,7 +14,7 @@ import vh.helper.LoadSave;
 import vh.hungries.Hungries;
 import vh.object.Stall;
 import vh.scene.Playing;
-import static vh.helper.Constants.Towers.*;
+import static vh.helper.Constants.StallsClass.*;
 
 public class StallManager {
 	

@@ -5,7 +5,7 @@ import java.util.Random;
 
 import vh.objectManagers.HungriesManager;
 
-import static vh.helper.Constants.Direction.*;
+import static vh.helper.Constants.DirectionClass.*;
 
 public abstract class Hungries {
 	protected HungriesManager hungriesManager;
@@ -45,9 +45,9 @@ public abstract class Hungries {
 	}
 	
 	private void setHungriesAttr() {
-		hunger = vh.helper.Constants.Enemies.getHunger(type);
+		hunger = vh.helper.Constants.HungriesClass.getHunger(type);
 		maxhunger = hunger;
-		capCount = vh.helper.Constants.Enemies.getCapacityCount(type);
+		capCount = vh.helper.Constants.HungriesClass.getCapacityCount(type);
 	}
 
 	public void move(float speed, int direction) {

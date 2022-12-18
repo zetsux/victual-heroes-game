@@ -16,9 +16,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseDragged(MouseEvent e) {	
 	}
 
 	@Override
@@ -29,7 +27,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				gameMain.getMenu().mouseMoved(e.getX(), e.getY());
 				break;
 				
-			case SETTINGS :
+			case ABOUT :
 				gameMain.getSettings().mouseMoved(e.getX(), e.getY());
 				break;
 				
@@ -54,7 +52,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				gameMain.getMenu().mouseClicked(e.getX(), e.getY());
 				break;
 				
-			case SETTINGS :
+			case ABOUT :
 				gameMain.getSettings().mouseClicked(e.getX(), e.getY());
 				break;
 				
@@ -82,7 +80,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				gameMain.getMenu().mousePressed(e.getX(), e.getY());
 				break;
 				
-			case SETTINGS :
+			case ABOUT :
 				gameMain.getSettings().mousePressed(e.getX(), e.getY());
 				break;
 				
@@ -106,7 +104,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			gameMain.getMenu().mouseReleased(e.getX(), e.getY());
 			break;
 			
-		case SETTINGS :
+		case ABOUT :
 			gameMain.getSettings().mouseReleased(e.getX(), e.getY());
 			break;
 			
@@ -123,14 +121,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

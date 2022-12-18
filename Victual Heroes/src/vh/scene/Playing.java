@@ -18,7 +18,7 @@ import vh.hungries.Hungries;
 import vh.main.GameMain;
 import vh.object.Stall;
 
-import static vh.helper.Constants.Tiles.*;
+import static vh.helper.Constants.TilesClass.*;
 
 public class Playing extends GameScene implements SceneMethods {
 
@@ -31,7 +31,6 @@ public class Playing extends GameScene implements SceneMethods {
 	private StallManager stallManager;
 	private StallFoodManager foodManager;
 	private WaveManager waveManager;
-	private Random rand;
 	
 	private Stall curStall;
 	
@@ -51,7 +50,6 @@ public class Playing extends GameScene implements SceneMethods {
 		stallManager = new StallManager(this);
 		foodManager = new StallFoodManager(this);
 		waveManager = new WaveManager(this);
-		rand = new Random();
 		buttonBar = new ButtonBar(0, 576, 1024, 100, this);
 	}
 
@@ -95,9 +93,6 @@ public class Playing extends GameScene implements SceneMethods {
 	}
 
 	private boolean isHungriesSatisfied() {
-		
-//		if (waveManager.isWaveEnd()) 
-//			return true;
 		
 		for (Hungries h : hungriesManager.getAllHungries()) {
 			if (h.isHungry()) {
@@ -255,7 +250,7 @@ public class Playing extends GameScene implements SceneMethods {
 	}
 	
 	public void giveGold(int hType) {
-		buttonBar.addGold(vh.helper.Constants.Enemies.getMoney(hType));
+		buttonBar.addGold(vh.helper.Constants.HungriesClass.getMoney(hType));
 	}
 	
 	public void resetGame() {

@@ -26,7 +26,7 @@ public class GameRenders {
 				game.getMenu().render(g);
 				break;
 				
-			case SETTINGS :
+			case ABOUT :
 				game.getSettings().render(g);
 				break;
 				

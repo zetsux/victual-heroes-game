@@ -17,7 +17,7 @@ import vh.input.MouseInput;
 import vh.scene.GameOver;
 import vh.scene.MainMenu;
 import vh.scene.Playing;
-import vh.scene.Settings;
+import vh.scene.About;
 
 public class GameMain extends JFrame implements Runnable {
 	private GameScreen screen;
@@ -31,7 +31,7 @@ public class GameMain extends JFrame implements Runnable {
 	private GameRenders gameRenderer;
 	private MainMenu menu;
 	private Playing playing;
-	private Settings settings;
+	private About settings;
 	private GameOver gameOver;
 	
 	public GameMain() {
@@ -70,7 +70,7 @@ public class GameMain extends JFrame implements Runnable {
 		screen = new GameScreen(this);
 		menu = new MainMenu(this);
 		playing = new Playing(this);
-		settings = new Settings(this);
+		settings = new About(this);
 		gameOver = new GameOver(this);
 	}
 	
@@ -81,7 +81,7 @@ public class GameMain extends JFrame implements Runnable {
 			break;
 		case PLAYING :
 			playing.update();
-		case SETTINGS :
+		case ABOUT :
 			break;
 		default :
 			break;
@@ -160,7 +160,7 @@ public class GameMain extends JFrame implements Runnable {
 		return playing;
 	}
 
-	public Settings getSettings() {
+	public About getSettings() {
 		return settings;
 	}
 	

@@ -3,18 +3,24 @@ package vh.scene;
 import static vh.main.GameStates.*;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
+import vh.helper.LoadSave;
 import vh.main.GameMain;
 import vh.ui.Button;
 
-public class Settings extends GameScene implements SceneMethods {
+public class About extends GameScene implements SceneMethods {
 	
 	private Button backButton;
+	private BufferedImage bgImage;
 
-	public Settings(GameMain game) {
+	public About(GameMain game) {
 		super(game);
 		initializeButton();
+		
+		this.bgImage = LoadSave.getAboutBackground();
 	}
 	
 	private void initializeButton() {
@@ -30,10 +36,17 @@ public class Settings extends GameScene implements SceneMethods {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, 1024, 676);
+		g.drawImage(bgImage, 0, 0, null);
+		
 		g.setColor(Color.WHITE);
-		g.drawString("SETTINGS TAB", 512, 338);
+		g.setFont(new Font("Helvetica", Font.BOLD, 20));
+		g.drawString("About Game : ", 467, 200);
+		g.drawString("A Tower Defense based game with Indonesian Cuisine as the main theme.", 167, 230);
+		g.drawString("With Cuisine Heroes as the bla bla bla bla anjir bingung gatau la..", 167, 260);
+		g.drawString("Mohon bantuannya fred, aku bingung hehe, semangat :))", 167, 290);
+		g.drawString("Created By : ", 467, 500);
+		g.drawString("- Kevin Nathanael H. / 5025211140", 367, 530);
+		g.drawString("- Frederick Hidayat / 5025211152", 367, 560);
 		drawButtons(g);
 	}
 

@@ -1,6 +1,6 @@
 package vh.hungries;
 
-import static vh.helper.Constants.Enemies.MOHAWK;
+import static vh.helper.Constants.HungriesClass.MOHAWK;
 
 import vh.objectManagers.HungriesManager;
 
