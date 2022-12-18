@@ -2,6 +2,7 @@ package vh.objectManagers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import vh.events.GameWave;
 import vh.scene.Playing;
@@ -19,9 +20,11 @@ public class WaveManager {
 	private int wTimeTick = 0;
 	private boolean wTimer = false;
 	private boolean wIntervalOver = false;
+	private Random rand;
 	
 	public WaveManager(Playing playing) {
 		this.playing = playing;
+		this.rand = new Random();
 		createWave();
 	}
 	
@@ -55,9 +58,22 @@ public class WaveManager {
 	}
 	
 	private void createWave() {
-		
-		gWave.add(new GameWave(new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0, 0, 1))));
-		gWave.add(new GameWave(new ArrayList<Integer>(Arrays.asList(1, 0, 0, 0, 0, 0, 2))));
+		for (int i = 0 ; i < 1000 ; i++) {
+			ArrayList<Integer> wave = new ArrayList<Integer>();
+			
+			int count = 0, upperBound, lowerBound;
+			
+			if (i > 6) upperBound = 7;
+			else upperBound = i+1;
+			
+			while (count <= (6 + (i*4))) {
+				if (i == 0) wave.add(0);
+				else wave.add(rand.nextInt(0, upperBound));
+				count++;
+			}
+			
+			gWave.add(new GameWave(wave));
+		}
 	}
 
 	public ArrayList<GameWave> getWave(){

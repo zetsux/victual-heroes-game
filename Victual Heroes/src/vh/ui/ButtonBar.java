@@ -16,6 +16,7 @@ import vh.helper.Constants.StallsClass;
 import vh.helper.LoadSave;
 import vh.hungries.Hungries;
 import vh.object.Stall;
+import vh.scene.GameOver;
 import vh.scene.Playing;
 import vh.sound.Sound;
 
@@ -34,7 +35,7 @@ public class ButtonBar {
 	private boolean showStallPrice = false;
 	private int stallCostType;
 	
-	private final int unhealthyMax = 25;
+	private final int unhealthyMax = 1;
 	private int unhealthyCap = unhealthyMax;
 	
 	public ButtonBar(int x, int y, int w, int h, Playing playing) {
@@ -86,8 +87,8 @@ public class ButtonBar {
 	}
 	
 	private void drawUnhealthyCap(Graphics g) {
-		if (unhealthyCap < (unhealthyMax/5)) g.setColor(new Color(255, 76, 48));
-		else if (unhealthyCap < (unhealthyMax/2)) g.setColor(new Color(255, 204, 0));
+		if (unhealthyCap < (unhealthyMax*66/100)) g.setColor(new Color(255, 76, 48));
+		else if (unhealthyCap < (unhealthyMax*33/100)) g.setColor(new Color(255, 204, 0));
 		else g.setColor(new Color(26, 208, 28));
 		g.fillRect(950, 547, 70, 25);
 		
@@ -214,7 +215,7 @@ public class ButtonBar {
 	}
 	
 	private int getUpPrice(Stall dispStall) {
-		return (int) (vh.helper.Constants.StallsClass.getStallPrice(dispStall.getStallType())*dispStall.getGrade()*0.4f);
+		return (int) (vh.helper.Constants.StallsClass.getStallPrice(dispStall.getStallType())*dispStall.getGrade()*0.9f);
 	}
 
 	private int getSellPrice(Stall dispStall) {
@@ -302,10 +303,8 @@ public class ButtonBar {
 			JOptionPane.INFORMATION_MESSAGE);
 			if (choose == JOptionPane.YES_OPTION) {
 				playing.resetGame();
-				//Buat Sound di playing 
-				//playing.stop();
-				//playing.playMusic(0);
-				
+				playing.getGame().stopMusic();
+				playing.getGame().playMusic(0);
 				setGameState(MENU);
 			}
 		}
@@ -434,7 +433,23 @@ public class ButtonBar {
 	
 	public void unhealthyPass(Hungries h) {
 		unhealthyCap -= h.getCapacityCount();
-		if (unhealthyCap <= 0) setGameState(OVER);
+		if (unhealthyCap <= 0) {
+			GameOver gameOver = playing.getGame().getGameOver();
+			gameOver.setScore();
+			gameOver.setHighScore();
+			gameOver.setOffsets();
+			
+			playing.getGame().stopMusic();
+			if (gameOver.getScore() > gameOver.getHighScore()) {
+				playing.getGame().playMusic(2);
+				gameOver.writeHighScore(gameOver.getScore());
+			} else {
+				playing.getGame().playMusic(3);
+			}
+			
+			setGameState(OVER);
+		
+		}
 	}
 	
 	public void resetAll() {
@@ -444,6 +459,10 @@ public class ButtonBar {
 		money = 100;
 		curStall = null;
 		dispStall = null;
+	}
+
+	public int getMoney() {
+		return money;
 	}
 
 }

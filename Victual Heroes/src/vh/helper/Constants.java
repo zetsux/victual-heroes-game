@@ -48,17 +48,17 @@ public class Constants {
 		public static float getSpeed(int eType) {
 			switch (eType) {
 				case BALD :
-					return 1.2f;
+					return 1f;
 				case YELLOW :
-					return 1.8f;
+					return 1.6f;
 				case POLICE :
-					return 1.4f;
+					return 1.2f;
 				case ORANGE :
-					return 2f;
+					return 1.8f;
 				case PURPLE :
 					return 1f;
 				case MOHAWK :
-					return 1.6f;
+					return 2.4f;
 				case GREEN :
 					return 0.8f;
 			}
@@ -71,17 +71,17 @@ public class Constants {
 				case BALD :
 					return 100;
 				case YELLOW :
-					return 80;
+					return 70;
 				case POLICE :
-					return 90;
-				case ORANGE :
-					return 60;
-				case PURPLE :
-					return 120;
-				case MOHAWK :
-					return 140;
-				case GREEN :
 					return 160;
+				case ORANGE :
+					return 130;
+				case PURPLE :
+					return 200;
+				case MOHAWK :
+					return 100;
+				case GREEN :
+					return 400;
 			}
 			return 0;
 			
@@ -96,7 +96,7 @@ public class Constants {
 				case POLICE :
 					return 2;
 				case ORANGE :
-					return 1;
+					return 2;
 				case PURPLE :
 					return 1;
 				case MOHAWK :
@@ -149,9 +149,9 @@ public class Constants {
 				case PUKIS :
 					return 5;
 				case BAKSO :
-					return 20;
+					return 50;
 				case ESCAMPUR :
-					return 3;
+					return 10;
 				case GEPREK :
 					return 10;
 			}
@@ -163,11 +163,11 @@ public class Constants {
 				case PUKIS :
 					return 300;
 				case BAKSO :
-					return 150;
+					return 180;
 				case ESCAMPUR :
 					return 250;
 				case GEPREK :
-					return 200;
+					return 250;
 			}
 			return 0;
 		}
@@ -175,13 +175,13 @@ public class Constants {
 		public static float getDefaultCooldown(int tType) {
 			switch (tType) {
 				case PUKIS :
-					return 15;
+					return 25;
 				case BAKSO :
-					return 65;
+					return 60;
 				case ESCAMPUR :
-					return 50;
+					return 40;
 				case GEPREK :
-					return 35;
+					return 40;
 			}
 			return 0;
 		}

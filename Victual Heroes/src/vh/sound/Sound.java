@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 public class Sound {
 	
@@ -15,6 +16,9 @@ public class Sound {
 		
 		sound[0] = getClass().getResource("/sound/mainmenuMusic.wav");
 		sound[1] = getClass().getResource("/sound/playingMusic.wav");
+		sound[2] = getClass().getResource("/sound/highMusic.wav");
+		sound[3] = getClass().getResource("/sound/lowMusic.wav");
+		sound[4] = getClass().getResource("/sound/aboutMusic.wav");
 	}
 	
 	public void setMusic (int i) {
@@ -23,8 +27,9 @@ public class Sound {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(sound[i]);
 			clip = AudioSystem.getClip();
 			clip.open(ais);
-			
-		}catch (Exception e) {
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(-25.0f);
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		

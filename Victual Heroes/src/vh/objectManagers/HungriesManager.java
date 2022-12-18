@@ -36,6 +36,8 @@ public class HungriesManager {
 	
 	private int HPBarWidth = 32;
 	
+	private int satisfiedCount = 0;
+	
 	public HungriesManager(Playing plyng) {
 		this.playing = plyng;
 		this.hungriesImages = new BufferedImage[HUNGRIESTOTAL];
@@ -300,5 +302,10 @@ public class HungriesManager {
 	
 	public void resetHungries() {
 		hungries.clear();
+		satisfiedCount = 0;
+	}
+
+	public int getSatisfiedCount() {
+		return satisfiedCount;
 	}
 }

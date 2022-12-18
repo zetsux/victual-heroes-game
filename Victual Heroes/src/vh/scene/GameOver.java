@@ -3,6 +3,8 @@ package vh.scene;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import vh.main.GameMain;
 import vh.ui.Button;
@@ -13,6 +15,7 @@ public class GameOver extends GameScene implements SceneMethods {
 	
 	private Button retryButton, menuButton;
 	private GameMain game;
+	private int score, highScore, scoreOffset, highScoreOffset;
 
 	public GameOver(GameMain game) {
 		super(game);
@@ -42,21 +45,78 @@ public class GameOver extends GameScene implements SceneMethods {
 		menuButton.draw(g);
 		
 		g.setColor(new Color(255, 76, 48));
-		g.fillRect(200, 50, 640, 230);
+		g.fillRect(200, 50, 640, 280);
 		
 		g.setColor(Color.BLACK);
-		g.drawRect(199, 49, 641, 231);
+		g.drawRect(199, 49, 641, 281);
 		
 		g.setFont(new Font("Helvetica", Font.BOLD, 100));
 		g.drawString("Game Over", 252, 160);
 		
 		g.setFont(new Font("Helvetica", Font.BOLD, 50));
 		g.setColor(Color.CYAN);
-		g.drawString("Score : 100", 382, 245);
+		
+		g.drawString("Score : " + score, 412 - (12*scoreOffset), 245);
+		
+		if (score > highScore) {
+			g.setColor(Color.GREEN);
+			g.drawString("(New High Score!!)", 302, 305);
+			
+		} else {
+			g.setColor(Color.YELLOW);
+			g.drawString("High Score : " + highScore, 352 - (13*highScoreOffset), 305);
+		}
+	}
+	
+	public void setScore() {
+		this.score = (game.getPlaying().getHungriesManager().getSatisfiedCount()*100) + 
+				(game.getPlaying().getButtonBar().getMoney());
+	}
+	
+	public void setHighScore() {
+		this.highScore = game.readHighScore();
+	}
+	
+	public void setOffsets() {
+		scoreOffset = -1;
+		highScoreOffset = -1;
+		
+		int tmp = score;
+		while (tmp > 0) {
+			tmp /= 10;
+			scoreOffset++;
+		}
+		
+		tmp = highScore;
+		while (tmp > 0) {
+			tmp /= 10;
+			highScoreOffset++;
+		}
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public int getHighScore() {
+		return highScore;
+	}
+	
+	public void writeHighScore(int newScore) {
+		try {
+			FileWriter myWriter;
+			myWriter = new FileWriter("userData.txt");
+			myWriter.write(Integer.toString(newScore));
+	        myWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void retryGame() {
 		game.getPlaying().resetGame();
+		game.stopMusic();
+		game.playMusic(1);
 		setGameState(PLAYING);
 	}
 
@@ -66,6 +126,8 @@ public class GameOver extends GameScene implements SceneMethods {
 			retryGame();
 		} else if (menuButton.getBounds().contains(x, y)) {
 			game.getPlaying().resetGame();
+			game.stopMusic();
+			game.playMusic(0);
 			setGameState(MENU);
 		}
 	}
