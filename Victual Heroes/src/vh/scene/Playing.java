@@ -234,7 +234,7 @@ public class Playing extends GameScene implements SceneMethods {
 	
 	@Override
 	public void mouseClicked(int x, int y) {
-		if (y >= 576 || y<= 70 ) {
+		if (y >= 576 || y <= 70 ) {
 			buttonBar.mouseClicked(x, y);
 		} else if (curStall != null && isStallSpot(xMouse, yMouse) && getStallIntersect(xMouse, yMouse) == null && !notForStall(xMouse, yMouse)) {
 			stallManager.addStall(curStall, xMouse, yMouse);
@@ -260,13 +260,9 @@ public class Playing extends GameScene implements SceneMethods {
 
 	@Override
 	public void mouseMoved(int x, int y) {
-		if (y >= 576 || y >= 20 && y<= 70 && !gamePaused && x >= 20 && x<=70) {
-			buttonBar.mouseMoved(x, y);
-		} else {
-			xMouse = (x/16) * 16;
-			yMouse = (y/16) * 16;
-		}
-		
+		buttonBar.mouseMoved(x, y);
+		xMouse = (x/16) * 16;
+		yMouse = (y/16) * 16;
 	}
 
 	@Override

@@ -1,11 +1,17 @@
 package vh.ui;
 
+import static vh.main.GameStates.MENU;
+import static vh.main.GameStates.setGameState;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Currency;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import vh.helper.Constants.Towers;
 import vh.helper.LoadSave;
@@ -19,7 +25,7 @@ public class ButtonBar {
 	private Playing playing;
 	
 	private Button[] stallButtons;
-	private Button pauseButton;
+	private Button pauseButton, menuButton;
 	private Stall curStall, dispStall;
 	private Button stallSell, stallUp;
 	private BufferedImage miniCoin;
@@ -54,7 +60,8 @@ public class ButtonBar {
 		
 		stallUp = new Button("Upgrade", 800, 645, 70, 21, 0);
 		stallSell = new Button("Sell", 950, 645, 50, 21, 0);
-		pauseButton = new Button("Pause", 20, 20, 50, 50, 0);
+		pauseButton = new Button("Pause", 110, 20, 50, 50, 0);
+		menuButton = new Button("Back", 20, 20, 80, 50, 0);
 	}
 
 	public void draw(Graphics g) {
@@ -74,21 +81,19 @@ public class ButtonBar {
 	}
 	
 	private void drawStallCost(Graphics g) {
-		if (isMoneyEnough()) 
-			g.setColor(new Color(26, 208, 28));
-		else 
-			g.setColor(new Color(255, 76, 48));
+		if (isMoneyEnough()) g.setColor(new Color(26, 208, 28));
+		else g.setColor(new Color(255, 76, 48));
 		
-			g.fillRect(620, 602, 150, 47);
+		g.fillRect(620, 602, 150, 47);
+	
+		g.setFont(new Font("LucidaSans", Font.PLAIN, 15));
+		g.setColor(Color.BLACK);
+		g.drawRect(620, 602, 150, 47);
 		
-			g.setFont(new Font("LucidaSans", Font.PLAIN, 15));
-			g.setColor(Color.BLACK);
-			g.drawRect(620, 602, 150, 47);
-			
-			g.drawString(getStallName(), 625, 620);
-			g.drawString("Price : " + getStallPrice(), 625, 640);
-			
-			g.drawImage(miniCoin, 693, 627, null);
+		g.drawString(getStallName(), 625, 620);
+		g.drawString("Price : " + getStallPrice(), 625, 640);
+		
+		g.drawImage(miniCoin, 693, 627, null);
 	}
 
 	private boolean isMoneyEnough() {
@@ -143,7 +148,6 @@ public class ButtonBar {
 		g.setFont(new Font("LucidaSans", Font.BOLD, 15));
 		drawHInfo(g, xWInfo, yWInfo);
 		drawWInfo(g, xWInfo, yWInfo);
-		
 	}
 
 	private void drawHInfo(Graphics g, int x, int y) {
@@ -216,6 +220,7 @@ public class ButtonBar {
 
 	private void drawButtons(Graphics g) {
 		pauseButton.draw(g);
+		menuButton.draw(g);
 		
 		for (Button b : stallButtons) {
 			g.setColor(new Color(212, 175, 55));
@@ -266,32 +271,42 @@ public class ButtonBar {
 	
 	
 	public void mouseClicked(int x, int y) {
-	
 		if (pauseButton.getBounds().contains(x,y)) {
 			pauseGame();
+			pauseButton.setPaused();
+			return;
 		}
-		else { 
-			if (dispStall != null) {
-				if (stallUp.getBounds().contains(x, y) && dispStall.getGrade() < 3) {
-					upgradeStall();
-					return;
-				} else if (stallSell.getBounds().contains(x, y)) {
-					sellStall();
-					return;
-				}
+		
+		if (menuButton.getBounds().contains(x,y)) {
+			int choose = JOptionPane.showConfirmDialog(null,
+			"Do you really want to exit and abandon your current progress?", "Exiting Game", 
+			JOptionPane.YES_NO_OPTION,
+			JOptionPane.INFORMATION_MESSAGE);
+			if (choose == JOptionPane.YES_OPTION) {
+				setGameState(MENU);
 			}
-			
-			displayStall(null);
-			for (Button b : stallButtons) {
-				if (b.getBounds().contains(x, y)) {
-					if (!(isMoneyEnough(b.getId()))){
-						return;
-					}	
-					else {
-						curStall = new Stall(0, 0, -1, b.getId());
-						playing.setCurStall(curStall);
-						return;
-					}
+		}
+		
+		if (dispStall != null) {
+			if (stallUp.getBounds().contains(x, y) && dispStall.getGrade() < 3) {
+				upgradeStall();
+				return;
+			} else if (stallSell.getBounds().contains(x, y)) {
+				sellStall();
+				return;
+			}
+		}
+		
+		displayStall(null);
+		for (Button b : stallButtons) {
+			if (b.getBounds().contains(x, y)) {
+				if (!(isMoneyEnough(b.getId()))){
+					return;
+				}	
+				else {
+					curStall = new Stall(0, 0, -1, b.getId());
+					playing.setCurStall(curStall);
+					return;
 				}
 			}
 		}
@@ -306,6 +321,7 @@ public class ButtonBar {
 		stallUp.setMouseOverButton(false);
 		stallSell.setMouseOverButton(false);
 		pauseButton.setMouseOverButton(false);
+		menuButton.setMouseOverButton(false);
 		
 		for (Button b : stallButtons) {
 			b.setMouseOverButton(false);
@@ -313,25 +329,30 @@ public class ButtonBar {
 		
 		if (pauseButton.getBounds().contains(x, y)) {
 			pauseButton.setMouseOverButton(true);
-		}else {
+			return;
+		}
 		
-			if (dispStall != null) {
-				if (stallUp.getBounds().contains(x, y) && dispStall.getGrade() < 3) {
-					stallUp.setMouseOverButton(true);
-					return;
-				} else if (stallSell.getBounds().contains(x, y)) {
-					stallSell.setMouseOverButton(true);
-					return;
-				}
+		if (menuButton.getBounds().contains(x, y)) {
+			menuButton.setMouseOverButton(true);
+			return;
+		}
+		
+		if (dispStall != null) {
+			if (stallUp.getBounds().contains(x, y) && dispStall.getGrade() < 3) {
+				stallUp.setMouseOverButton(true);
+				return;
+			} else if (stallSell.getBounds().contains(x, y)) {
+				stallSell.setMouseOverButton(true);
+				return;
 			}
-			
-			for (Button b : stallButtons) {
-				if (b.getBounds().contains(x, y)) {
-					b.setMouseOverButton(true);
-					showStallPrice = true;
-					stallCostType = b.getId();
-					return;
-				}
+		}
+		
+		for (Button b : stallButtons) {
+			if (b.getBounds().contains(x, y)) {
+				b.setMouseOverButton(true);
+				showStallPrice = true;
+				stallCostType = b.getId();
+				return;
 			}
 		}
 	}
@@ -340,23 +361,28 @@ public class ButtonBar {
 		
 		if (pauseButton.getBounds().contains(x, y)) {
 			pauseButton.setMousePressedButton(true);
+			return;
 		}
-		else {
-			if (dispStall != null) {
-				if (stallUp.getBounds().contains(x, y) && dispStall.getGrade() < 3) {
-					stallUp.setMousePressedButton(true);
-					return;
-				} else if (stallSell.getBounds().contains(x, y)) {
-					stallSell.setMousePressedButton(true);
-					return;
-				}
+		
+		if (menuButton.getBounds().contains(x, y)) {
+			menuButton.setMousePressedButton(true);
+			return;
+		}
+		
+		if (dispStall != null) {
+			if (stallUp.getBounds().contains(x, y) && dispStall.getGrade() < 3) {
+				stallUp.setMousePressedButton(true);
+				return;
+			} else if (stallSell.getBounds().contains(x, y)) {
+				stallSell.setMousePressedButton(true);
+				return;
 			}
-			
-			for (Button b : stallButtons) {
-				if (b.getBounds().contains(x, y)) {
-					b.setMousePressedButton(true);
-					return;
-				}
+		}
+		
+		for (Button b : stallButtons) {
+			if (b.getBounds().contains(x, y)) {
+				b.setMousePressedButton(true);
+				return;
 			}
 		}
 	}
@@ -365,6 +391,7 @@ public class ButtonBar {
 		stallSell.resetMouseState();
 		stallUp.resetMouseState();
 		pauseButton.resetMouseState();
+		menuButton.resetMouseState();
 		for (Button b : stallButtons) {
 			b.resetMouseState();
 		}
