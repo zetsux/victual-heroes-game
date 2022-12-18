@@ -11,6 +11,7 @@ import vh.objectManagers.MapTileManager;
 import vh.objectManagers.StallFoodManager;
 import vh.objectManagers.StallManager;
 import vh.objectManagers.WaveManager;
+import vh.sound.Sound;
 import vh.objectManagers.StallFoodManager;
 import vh.ui.ButtonBar;
 import vh.helper.LevelBuilder;
@@ -319,4 +320,5 @@ public class Playing extends GameScene implements SceneMethods {
 	public boolean getGamePaused() {
 		return gamePaused;
 	}
+
 }

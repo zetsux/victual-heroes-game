@@ -17,6 +17,7 @@ import vh.helper.LoadSave;
 import vh.hungries.Hungries;
 import vh.object.Stall;
 import vh.scene.Playing;
+import vh.sound.Sound;
 
 public class ButtonBar {
 	
@@ -301,6 +302,10 @@ public class ButtonBar {
 			JOptionPane.INFORMATION_MESSAGE);
 			if (choose == JOptionPane.YES_OPTION) {
 				playing.resetGame();
+				//Buat Sound di playing 
+				//playing.stop();
+				//playing.playMusic(0);
+				
 				setGameState(MENU);
 			}
 		}
@@ -440,4 +445,5 @@ public class ButtonBar {
 		curStall = null;
 		dispStall = null;
 	}
+
 }

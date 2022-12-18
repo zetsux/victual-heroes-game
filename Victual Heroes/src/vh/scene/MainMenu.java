@@ -10,7 +10,10 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import vh.main.GameMain;
+import vh.sound.Sound;
 import vh.ui.Button;
+import vh.ui.ButtonBar;
+
 import static vh.main.GameStates.*;
 
 public class MainMenu extends GameScene implements SceneMethods {
@@ -23,6 +26,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 	private BufferedImage mainMenuIMG;
 	private Random rand;
 	private Button playingButton, aboutButton, quitButton; 
+	private Sound sound;
 	
 	public MainMenu(GameMain game) {
 		super(game);
@@ -30,8 +34,20 @@ public class MainMenu extends GameScene implements SceneMethods {
 		this.mainMenu = mainMenuIMG;
 		this.rand = new Random();
 		initializeButton();
+		sound = new Sound();
+		playMusic(0);
+	}
+	
+	private void stopMusic() {
+		sound.stop();
 	}
 
+	public void playMusic(int playMusic) {
+		sound.setMusic(playMusic);
+		sound.play();
+		sound.loop();
+	}
+	
 	private void initializeButton() {
 
 		int x = 1024;
@@ -73,6 +89,8 @@ public class MainMenu extends GameScene implements SceneMethods {
 	public void mouseClicked(int x, int y) {
 
 		if(playingButton.getBounds().contains(x, y)) {
+			stopMusic();
+			playMusic(1);
 			setGameState(PLAYING);
 		}
 		
@@ -128,5 +146,6 @@ public class MainMenu extends GameScene implements SceneMethods {
 	@Override
 	public void keyTyped(int n) {	
 	}
-
+	
+	
 }
