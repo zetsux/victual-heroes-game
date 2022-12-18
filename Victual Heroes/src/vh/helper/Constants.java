@@ -88,6 +88,27 @@ public class Constants {
 			return 0;
 			
 		}
+		
+		public static int getCapacityCount(int eType) {
+			switch (eType) {
+				case BALD :
+					return 1;
+				case YELLOW :
+					return 1;
+				case POLICE :
+					return 2;
+				case ORANGE :
+					return 1;
+				case PURPLE :
+					return 1;
+				case MOHAWK :
+					return 2;
+				case GREEN :
+					return 3;
+			}
+			return 0;
+			
+		}
 	}
 	
 	public static class Towers {

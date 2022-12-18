@@ -146,7 +146,7 @@ public class HungriesManager {
 		
 		else if (isEnd(h)) {
 			h.setSatisfied();
-			playing.getButtonBar().unhealthyPass();
+			playing.getButtonBar().unhealthyPass(h);
 		}
 		
 		else {
@@ -163,7 +163,7 @@ public class HungriesManager {
 		
 		if (isEnd(h)) {
 			h.setSatisfied();
-			playing.getButtonBar().unhealthyPass();
+			playing.getButtonBar().unhealthyPass(h);
 			return;
 		}
 		

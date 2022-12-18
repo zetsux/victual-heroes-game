@@ -15,6 +15,7 @@ public abstract class Hungries {
 	private int maxhunger;
 	private int id;
 	private int type;
+	private int capCount;
 	private int lastDir;
 	private boolean hungry;
 	protected int slowedTickLimit = 120;
@@ -40,12 +41,13 @@ public abstract class Hungries {
 		burnedIndex = rand.nextInt(0, 4);
 		
 		hungriesBound = new Rectangle((int)x - 16 , (int)y - 16, 48, 48);
-		setHungriesHP();
+		setHungriesAttr();
 	}
 	
-	private void setHungriesHP() {
-		hunger = vh.helper.Constants.Enemies.getHunger(id);
+	private void setHungriesAttr() {
+		hunger = vh.helper.Constants.Enemies.getHunger(type);
 		maxhunger = hunger;
+		capCount = vh.helper.Constants.Enemies.getCapacityCount(type);
 	}
 
 	public void move(float speed, int direction) {
@@ -174,5 +176,9 @@ public abstract class Hungries {
 	
 	public int getBurnedIndex() {
 		return burnedIndex;
+	}
+	
+	public int getCapacityCount() {
+		return capCount;
 	}
 }

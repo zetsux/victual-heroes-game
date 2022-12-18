@@ -427,8 +427,8 @@ public class ButtonBar {
 		return unhealthyCap;
 	}
 	
-	public void unhealthyPass() {
-		unhealthyCap--;
+	public void unhealthyPass(Hungries h) {
+		unhealthyCap -= h.getCapacityCount();
 		if (unhealthyCap <= 0) setGameState(OVER);
 	}
 	
