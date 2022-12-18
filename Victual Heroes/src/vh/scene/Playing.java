@@ -37,6 +37,8 @@ public class Playing extends GameScene implements SceneMethods {
 	
 	private int xMouse, yMouse;
 	private int moneyTick;
+
+	private boolean gamePaused;
 	
 	public Playing(GameMain game) {
 		super(game);
@@ -54,30 +56,32 @@ public class Playing extends GameScene implements SceneMethods {
 	}
 
 	public void update() {
-		updateTick();
-		waveManager.update();
-		
-		moneyTick++;
-		if(moneyTick % (60 * 3) == 0)
-			buttonBar.addGold(1);
+		if (!gamePaused ) {
+			updateTick();
+			waveManager.update();
 			
-		if (isHungriesSatisfied()) {
-			if (!(isItEnd())) {
-				waveManager.setWaveTimer();
-				if (isWaveIntervalOver()) {
-					waveManager.isNextWave();
-					hungriesManager.getAllHungries().clear();
+			moneyTick++;
+			if(moneyTick % (60 * 3) == 0)
+				buttonBar.addGold(1);
+				
+			if (isHungriesSatisfied()) {
+				if (!(isItEnd())) {
+					waveManager.setWaveTimer();
+					if (isWaveIntervalOver()) {
+						waveManager.isNextWave();
+						hungriesManager.getAllHungries().clear();
+					}
 				}
 			}
+			
+			if (isTimeToSpawn()) {
+				spawnHungry();
+			}
+			
+			hungriesManager.update();
+			stallManager.update();
+			foodManager.update();
 		}
-		
-		if (isTimeToSpawn()) {
-			spawnHungry();
-		}
-		
-		hungriesManager.update();
-		stallManager.update();
-		foodManager.update();
 	}
 	
 	private boolean isWaveIntervalOver() {
@@ -230,7 +234,7 @@ public class Playing extends GameScene implements SceneMethods {
 	
 	@Override
 	public void mouseClicked(int x, int y) {
-		if (y >= 576) {
+		if (y >= 576 || y<= 70 ) {
 			buttonBar.mouseClicked(x, y);
 		} else if (curStall != null && isStallSpot(xMouse, yMouse) && getStallIntersect(xMouse, yMouse) == null && !notForStall(xMouse, yMouse)) {
 			stallManager.addStall(curStall, xMouse, yMouse);
@@ -256,7 +260,7 @@ public class Playing extends GameScene implements SceneMethods {
 
 	@Override
 	public void mouseMoved(int x, int y) {
-		if (y >= 576) {
+		if (y >= 576 || y >= 20 && y<= 70 && !gamePaused && x >= 20 && x<=70) {
 			buttonBar.mouseMoved(x, y);
 		} else {
 			xMouse = (x/16) * 16;
@@ -267,16 +271,17 @@ public class Playing extends GameScene implements SceneMethods {
 
 	@Override
 	public void mousePressed(int x, int y) {
-		if (y >= 576) {
+		if (y >= 576 ||y<= 70 ) {
 			buttonBar.mousePressed(x, y);
 		}
 	}
 
 	@Override
 	public void mouseReleased(int x, int y) {
-		if (y >= 576) {
+		if (y >= 576 || y >= 20 && y<= 70 && x >= 20 && x<=70) {
 			buttonBar.mouseReleased(x, y);
 		}
+		buttonBar.mouseReleased(x, y);
 		
 	}
 	
@@ -299,5 +304,13 @@ public class Playing extends GameScene implements SceneMethods {
 
 	public void setWaveManager(WaveManager waveManager) {
 		this.waveManager = waveManager;
+	}
+	
+	public void setGamePaused(boolean gamePaused) {
+		this.gamePaused = gamePaused;
+	}
+	
+	public boolean getGamePaused() {
+		return gamePaused;
 	}
 }
