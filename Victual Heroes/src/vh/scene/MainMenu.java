@@ -18,34 +18,20 @@ import static vh.main.GameStates.*;
 
 public class MainMenu extends GameScene implements SceneMethods {
 
-//	private BufferedImage map;
-//	private BufferedImage sprite;
-//	private BufferedImage mapIMG;
-//	private BufferedImage spriteIMG;
 	private BufferedImage mainMenu;
 	private BufferedImage mainMenuIMG;
 	private Random rand;
 	private Button playingButton, aboutButton, quitButton; 
-	private Sound sound;
+	private GameMain game;
 	
 	public MainMenu(GameMain game) {
 		super(game);
+		this.game = game;
+		
 		importImg();
 		this.mainMenu = mainMenuIMG;
 		this.rand = new Random();
 		initializeButton();
-		sound = new Sound();
-		playMusic(0);
-	}
-	
-	private void stopMusic() {
-		sound.stop();
-	}
-
-	public void playMusic(int playMusic) {
-		sound.setMusic(playMusic);
-		sound.play();
-		sound.loop();
 	}
 	
 	private void initializeButton() {
@@ -89,12 +75,14 @@ public class MainMenu extends GameScene implements SceneMethods {
 	public void mouseClicked(int x, int y) {
 
 		if(playingButton.getBounds().contains(x, y)) {
-			stopMusic();
-			playMusic(1);
+			game.stopMusic();
+			game.playMusic(1);
 			setGameState(PLAYING);
 		}
 		
 		else if(aboutButton.getBounds().contains(x, y)) {
+			game.stopMusic();
+			game.playMusic(4);
 			setGameState(ABOUT);
 		}
 

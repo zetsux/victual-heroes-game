@@ -15,9 +15,11 @@ public class About extends GameScene implements SceneMethods {
 	
 	private Button backButton;
 	private BufferedImage bgImage;
+	private GameMain game;
 
 	public About(GameMain game) {
 		super(game);
+		this.game = game;
 		initializeButton();
 		
 		this.bgImage = LoadSave.getAboutBackground();
@@ -73,6 +75,8 @@ public class About extends GameScene implements SceneMethods {
 	@Override
 	public void mousePressed(int x, int y) {
 		if(backButton.getBounds().contains(x, y)) {
+			game.stopMusic();
+			game.playMusic(0);
 			setGameState(MENU);
 		}	
 	}

@@ -5,8 +5,12 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Scanner;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,6 +21,7 @@ import vh.input.MouseInput;
 import vh.scene.GameOver;
 import vh.scene.MainMenu;
 import vh.scene.Playing;
+import vh.sound.Sound;
 import vh.scene.About;
 
 public class GameMain extends JFrame implements Runnable {
@@ -33,6 +38,8 @@ public class GameMain extends JFrame implements Runnable {
 	private Playing playing;
 	private About settings;
 	private GameOver gameOver;
+	
+	private Sound sound;
 	
 	public GameMain() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -52,8 +59,10 @@ public class GameMain extends JFrame implements Runnable {
 			 }
 		 });
 		
+		sound = new Sound();
+		playMusic(0);
 		initializeClasses();
-	
+
 		add(screen);
 		pack();
 		
@@ -72,6 +81,16 @@ public class GameMain extends JFrame implements Runnable {
 		playing = new Playing(this);
 		settings = new About(this);
 		gameOver = new GameOver(this);
+	}
+	
+	public void stopMusic() {
+		sound.stop();
+	}
+
+	public void playMusic(int playMusic) {
+		sound.setMusic(playMusic);
+		sound.play();
+		sound.loop();
 	}
 	
 	private void updateGame()
@@ -145,6 +164,38 @@ public class GameMain extends JFrame implements Runnable {
 				lastTimeCheck = System.currentTimeMillis();
 			}
 		}
+	}
+	
+	public int readHighScore() {
+		int highScore = 0;
+		try {
+		      File myObj = new File("userData.txt");
+		      
+		      if (myObj.createNewFile()) {
+		        System.out.println("File created: " + myObj.getName());
+		        FileWriter myWriter = new FileWriter("userData.txt");
+		        myWriter.write("0");
+		        myWriter.close();
+		      } else {
+		        Scanner myReader = new Scanner(myObj);
+		        
+		        String data = myReader.nextLine();
+		        
+		        try{
+		            highScore = Integer.parseInt(data);
+		        }
+		        catch (NumberFormatException ex){
+		            ex.printStackTrace();
+		        }
+		        
+		        myReader.close();
+		      }
+		    } catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
+		
+		return highScore;
 	}
 	
 	//Getters & Setters
