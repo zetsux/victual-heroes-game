@@ -88,4 +88,15 @@ public class WaveManager {
 	public int getwIndex() {
 		return wIndex;
 	}
+	
+	public void resetWaves() {
+		gWave.clear();
+		createWave();
+		hIndex = 0;
+		wIndex = 0;
+		wTimer = false;
+		wIntervalOver = false;
+		wTimeTick = 0;
+		hSpawnTick = hSpawnLimit;
+	}
 }

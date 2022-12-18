@@ -127,4 +127,9 @@ public class StallManager {
 	public BufferedImage[] getStallImages() {
 		return stallImages;
 	}
+	
+	public void resetStalls() {
+		stalls.clear();
+		stallCount = 0;
+	}
 }

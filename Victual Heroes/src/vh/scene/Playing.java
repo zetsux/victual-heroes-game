@@ -257,6 +257,21 @@ public class Playing extends GameScene implements SceneMethods {
 	public void giveGold(int hType) {
 		buttonBar.addGold(vh.helper.Constants.Enemies.getMoney(hType));
 	}
+	
+	public void resetGame() {
+		buttonBar.resetAll();
+		
+		xMouse = 0;
+		yMouse = 0;
+		moneyTick = 0;
+		gamePaused = false;
+		curStall = null;
+		
+		hungriesManager.resetHungries();
+		stallManager.resetStalls();
+		foodManager.resetFoods();
+		waveManager.resetWaves();
+	}
 
 	@Override
 	public void mouseMoved(int x, int y) {

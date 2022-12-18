@@ -36,6 +36,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			case PLAYING :
 				gameMain.getPlaying().mouseMoved(e.getX(), e.getY());
 				break;
+				
+			case OVER :
+				gameMain.getGameOver().mouseMoved(e.getX(), e.getY());
+				break;
 		}
 	}
 
@@ -56,6 +60,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				
 			case PLAYING :
 				gameMain.getPlaying().mouseClicked(e.getX(), e.getY());
+				break;
+				
+			case OVER :
+				gameMain.getGameOver().mouseClicked(e.getX(), e.getY());
 				break;
 		
 			}
@@ -81,20 +89,12 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			case PLAYING :
 				gameMain.getPlaying().mousePressed(e.getX(), e.getY());
 				break;
+				
+			case OVER :
+				gameMain.getGameOver().mousePressed(e.getX(), e.getY());
+				break;
 			}
 		}
-//		int buttonCode = e.getButton();
-//		if (buttonCode == MouseEvent.BUTTON1) {
-//			System.out.println("Left Button Clicked");
-//		}
-//		
-//		else if (buttonCode == MouseEvent.BUTTON2) {
-//			System.out.println("Middle Button Clicked");
-//		}
-//		
-//		else if (buttonCode == MouseEvent.BUTTON3) {
-//			System.out.println("Right Button Clicked");
-//		}
 	}
 
 	@Override
@@ -112,6 +112,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			
 		case PLAYING :
 			gameMain.getPlaying().mouseReleased(e.getX(), e.getY());
+			break;
+			
+		case OVER :
+			gameMain.getGameOver().mouseReleased(e.getX(), e.getY());
 			break;
 	}
 		

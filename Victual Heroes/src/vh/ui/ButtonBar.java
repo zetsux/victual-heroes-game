@@ -1,7 +1,6 @@
 package vh.ui;
 
-import static vh.main.GameStates.MENU;
-import static vh.main.GameStates.setGameState;
+import static vh.main.GameStates.*;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -33,6 +32,9 @@ public class ButtonBar {
 	private int money = 100;
 	private boolean showStallPrice = false;
 	private int stallCostType;
+	
+	private final int unhealthyMax = 25;
+	private int unhealthyCap = unhealthyMax;
 	
 	public ButtonBar(int x, int y, int w, int h, Playing playing) {
 		this.x = x;
@@ -78,8 +80,23 @@ public class ButtonBar {
 			drawStallCost(g);
 		
 		drawMoneyInfo(g);
+		
+		drawUnhealthyCap(g);
 	}
 	
+	private void drawUnhealthyCap(Graphics g) {
+		if (unhealthyCap < (unhealthyMax/5)) g.setColor(new Color(255, 76, 48));
+		else if (unhealthyCap < (unhealthyMax/2)) g.setColor(new Color(255, 204, 0));
+		else g.setColor(new Color(26, 208, 28));
+		g.fillRect(950, 547, 70, 25);
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(950, 547, 70, 25);	
+		g.setFont(new Font("LucidaSans", Font.BOLD, 16));
+		g.drawString(unhealthyCap + " Left..", 957, 566);
+		
+	}
+
 	private void drawStallCost(Graphics g) {
 		if (isMoneyEnough()) g.setColor(new Color(26, 208, 28));
 		else g.setColor(new Color(255, 76, 48));
@@ -273,7 +290,7 @@ public class ButtonBar {
 	public void mouseClicked(int x, int y) {
 		if (pauseButton.getBounds().contains(x,y)) {
 			pauseGame();
-			pauseButton.setPaused();
+			pauseButton.changePaused();
 			return;
 		}
 		
@@ -283,6 +300,7 @@ public class ButtonBar {
 			JOptionPane.YES_NO_OPTION,
 			JOptionPane.INFORMATION_MESSAGE);
 			if (choose == JOptionPane.YES_OPTION) {
+				playing.resetGame();
 				setGameState(MENU);
 			}
 		}
@@ -403,5 +421,23 @@ public class ButtonBar {
 
 	public void addGold(int hGold) {
 		this.money += hGold;
+	}
+	
+	public int getUnhealthyCap() {
+		return unhealthyCap;
+	}
+	
+	public void unhealthyPass() {
+		unhealthyCap--;
+		if (unhealthyCap <= 0) setGameState(OVER);
+	}
+	
+	public void resetAll() {
+		unhealthyCap = unhealthyMax;
+		stallCostType = 0;
+		showStallPrice = false;
+		money = 100;
+		curStall = null;
+		dispStall = null;
 	}
 }

@@ -18,6 +18,13 @@ public class StallFood {
 		this.foodType = foodType;
 	}
 	
+	public void recookFood(float x, float y, float xSpeed, float ySpeed) {
+		this.position = new Point2D.Float(x,y);
+		this.xSpeed = xSpeed;
+		this.ySpeed = ySpeed;
+		this.active = true;
+	}
+	
 	public int getFoodDamage() {
 		return foodDamage;
 	}

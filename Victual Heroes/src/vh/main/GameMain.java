@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import vh.input.KeyboardInput;
 import vh.input.MouseInput;
+import vh.scene.GameOver;
 import vh.scene.MainMenu;
 import vh.scene.Playing;
 import vh.scene.Settings;
@@ -31,6 +32,7 @@ public class GameMain extends JFrame implements Runnable {
 	private MainMenu menu;
 	private Playing playing;
 	private Settings settings;
+	private GameOver gameOver;
 	
 	public GameMain() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -69,6 +71,7 @@ public class GameMain extends JFrame implements Runnable {
 		menu = new MainMenu(this);
 		playing = new Playing(this);
 		settings = new Settings(this);
+		gameOver = new GameOver(this);
 	}
 	
 	private void updateGame()
@@ -159,5 +162,9 @@ public class GameMain extends JFrame implements Runnable {
 
 	public Settings getSettings() {
 		return settings;
+	}
+	
+	public GameOver getGameOver() {
+		return gameOver;
 	}
 }

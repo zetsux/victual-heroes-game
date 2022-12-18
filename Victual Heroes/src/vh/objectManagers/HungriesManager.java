@@ -146,6 +146,7 @@ public class HungriesManager {
 		
 		else if (isEnd(h)) {
 			h.setSatisfied();
+			playing.getButtonBar().unhealthyPass();
 		}
 		
 		else {
@@ -162,6 +163,7 @@ public class HungriesManager {
 		
 		if (isEnd(h)) {
 			h.setSatisfied();
+			playing.getButtonBar().unhealthyPass();
 			return;
 		}
 		
@@ -294,5 +296,9 @@ public class HungriesManager {
 
 	public void giveMoney(int type) {
 		playing.giveGold(type);
+	}
+	
+	public void resetHungries() {
+		hungries.clear();
 	}
 }

@@ -33,6 +33,10 @@ public class GameRenders {
 			case PLAYING :
 				game.getPlaying().render(g);
 				break;
+				
+			case OVER :
+				game.getGameOver().render(g);
+				break;
 		
 		}
 	}

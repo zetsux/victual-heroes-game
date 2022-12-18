@@ -2,7 +2,7 @@ package vh.main;
 
 public enum GameStates {
 	
-	PLAYING, MENU, SETTINGS;
+	PLAYING, MENU, SETTINGS, OVER;
 	
 	public static GameStates gameState = MENU;
 
