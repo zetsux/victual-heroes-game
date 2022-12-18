@@ -14,6 +14,8 @@ public class Button {
 	private boolean mouseOverButton = false;
 	private boolean mousePressedButton = false;
 	
+	private boolean paused = false;
+	
 	public Button (String name, int x, int y, int width, int height, int id) {
 		
 		this.name = name;
@@ -50,7 +52,11 @@ public class Button {
 		if (name == "Settings") g.drawString(name, x + (2*(width/7)), y + (2 * (height/3)));
 		else if (name == "Upgrade") g.drawString(name, x + (2*(width/11)), y + (2*(height/3)));
 		else if (name == "Sell") g.drawString(name, x + (2*(width/6)), y + (2*(height/3)));
-		else if (name == "Pause") g.drawString("||", x + (2*(width/4) - 2), y + (3*(height/5)));
+		else if (name == "Pause") {
+			if (paused) g.drawString("▶", x + (2*(width/4) - 2), y + (3*(height/5)));
+			else g.drawString("||", x + (2*(width/4) - 2), y + (3*(height/5)));
+		}
+		else if (name == "Back") g.drawString("⬅ Back", x + (2*(width/10) + 1), y + (2*(height/3) - 2));
 		else g.drawString(name, x + (2*width/5), y + (2 * (height/3)));	
 	}
 
@@ -106,5 +112,9 @@ public class Button {
 	
 	public int getId() {
 		return id;
+	}
+	
+	public void setPaused() {
+		this.paused = !(paused);
 	}
 }
