@@ -16,9 +16,9 @@ import vh.hungries.Policeman;
 import vh.hungries.Purpleman;
 import vh.hungries.Yellowman;
 import vh.scene.Playing;
-import static vh.helper.Constants.Direction.*;
-import static vh.helper.Constants.Tiles.*;
-import static vh.helper.Constants.Enemies.*;
+import static vh.helper.Constants.DirectionClass.*;
+import static vh.helper.Constants.TilesClass.*;
+import static vh.helper.Constants.HungriesClass.*;
 
 public class HungriesManager {
 	
@@ -146,6 +146,7 @@ public class HungriesManager {
 		
 		else if (isEnd(h)) {
 			h.setSatisfied();
+			playing.getButtonBar().unhealthyPass(h);
 		}
 		
 		else {
@@ -162,6 +163,7 @@ public class HungriesManager {
 		
 		if (isEnd(h)) {
 			h.setSatisfied();
+			playing.getButtonBar().unhealthyPass(h);
 			return;
 		}
 		
@@ -294,5 +296,9 @@ public class HungriesManager {
 
 	public void giveMoney(int type) {
 		playing.giveGold(type);
+	}
+	
+	public void resetHungries() {
+		hungries.clear();
 	}
 }

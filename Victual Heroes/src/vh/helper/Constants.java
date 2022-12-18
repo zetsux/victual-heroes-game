@@ -1,23 +1,21 @@
 package vh.helper;
 
-import java.util.function.IntToDoubleFunction;
-
 public class Constants {
 	
-	public static class Direction {
+	public static class DirectionClass {
 		public static final int LEFT = 0;
 		public static final int UP = 1;
 		public static final int RIGHT = 2;
 		public static final int DOWN = 3;
 	}
 	
-	public static class Tiles {
+	public static class TilesClass {
 		public static final int BLOCKED = 0;
 		public static final int TOWERSPOT = 1;
 		public static final int ENEMYROAD = 2;
 	}
 	
-	public static class Enemies {
+	public static class HungriesClass {
 		public static final int BALD = 0;
 		public static final int YELLOW = 1;
 		public static final int POLICE = 2;
@@ -26,8 +24,8 @@ public class Constants {
 		public static final int MOHAWK = 5;
 		public static final int GREEN = 6;
 		
-		public static int getMoney(int eType) {
-			switch (eType) {	
+		public static int getMoney(int hType) {
+			switch (hType) {	
 				case BALD :
 					return 5;
 				case YELLOW :
@@ -88,16 +86,37 @@ public class Constants {
 			return 0;
 			
 		}
+		
+		public static int getCapacityCount(int eType) {
+			switch (eType) {
+				case BALD :
+					return 1;
+				case YELLOW :
+					return 1;
+				case POLICE :
+					return 2;
+				case ORANGE :
+					return 1;
+				case PURPLE :
+					return 1;
+				case MOHAWK :
+					return 2;
+				case GREEN :
+					return 3;
+			}
+			return 0;
+			
+		}
 	}
 	
-	public static class Towers {
+	public static class StallsClass {
 		public static final int PUKIS = 0;
 		public static final int BAKSO = 1;
 		public static final int ESCAMPUR = 2;
 		public static final int GEPREK = 3;
 		
-		public static int getStallPrice(int tType) {
-			switch (tType) {
+		public static int getStallPrice(int sType) {
+			switch (sType) {
 			case PUKIS :
 				return 30;
 			case BAKSO :
@@ -168,21 +187,21 @@ public class Constants {
 		}
 	}
 	
-	public static class TowerProjectiles {
-		public static final int P_PUKIS = 0;
-		public static final int P_BAKSO = 1;
-		public static final int P_ESCAMPUR = 2;
-		public static final int P_GEPREK = 3;
+	public static class FoodsClass {
+		public static final int PUKISFOOD = 0;
+		public static final int BAKSOFOOD = 1;
+		public static final int ESCAMPURFOOD = 2;
+		public static final int GEPREKFOOD = 3;
 		
-		public static float getSpeed (int pType) {
-			switch(pType) {
-				case P_PUKIS :
+		public static float getSpeed (int fType) {
+			switch(fType) {
+				case PUKISFOOD :
 					return 7.5f;
-				case P_BAKSO :
+				case BAKSOFOOD :
 					return 4.5f;
-				case P_ESCAMPUR :
+				case ESCAMPURFOOD :
 					return 6f;
-				case P_GEPREK :
+				case GEPREKFOOD :
 					return 5f;
 			}
 			return 0f;

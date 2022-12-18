@@ -1,6 +1,6 @@
 package vh.hungries;
 
-import static vh.helper.Constants.Enemies.YELLOW;
+import static vh.helper.Constants.HungriesClass.YELLOW;
 
 import vh.objectManagers.HungriesManager;
 

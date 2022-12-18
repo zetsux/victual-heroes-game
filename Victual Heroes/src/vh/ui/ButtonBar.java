@@ -1,7 +1,6 @@
 package vh.ui;
 
-import static vh.main.GameStates.MENU;
-import static vh.main.GameStates.setGameState;
+import static vh.main.GameStates.*;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,7 +12,7 @@ import java.util.Currency;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import vh.helper.Constants.Towers;
+import vh.helper.Constants.StallsClass;
 import vh.helper.LoadSave;
 import vh.hungries.Hungries;
 import vh.object.Stall;
@@ -33,6 +32,9 @@ public class ButtonBar {
 	private int money = 100;
 	private boolean showStallPrice = false;
 	private int stallCostType;
+	
+	private final int unhealthyMax = 25;
+	private int unhealthyCap = unhealthyMax;
 	
 	public ButtonBar(int x, int y, int w, int h, Playing playing) {
 		this.x = x;
@@ -78,8 +80,23 @@ public class ButtonBar {
 			drawStallCost(g);
 		
 		drawMoneyInfo(g);
+		
+		drawUnhealthyCap(g);
 	}
 	
+	private void drawUnhealthyCap(Graphics g) {
+		if (unhealthyCap < (unhealthyMax/5)) g.setColor(new Color(255, 76, 48));
+		else if (unhealthyCap < (unhealthyMax/2)) g.setColor(new Color(255, 204, 0));
+		else g.setColor(new Color(26, 208, 28));
+		g.fillRect(950, 547, 70, 25);
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(950, 547, 70, 25);	
+		g.setFont(new Font("LucidaSans", Font.BOLD, 16));
+		g.drawString(unhealthyCap + " Left..", 957, 566);
+		
+	}
+
 	private void drawStallCost(Graphics g) {
 		if (isMoneyEnough()) g.setColor(new Color(26, 208, 28));
 		else g.setColor(new Color(255, 76, 48));
@@ -101,11 +118,11 @@ public class ButtonBar {
 	}
 
 	private String getStallName() {
-		return vh.helper.Constants.Towers.getName(stallCostType);
+		return vh.helper.Constants.StallsClass.getName(stallCostType);
 	}
 
 	private int getStallPrice() {
-		return vh.helper.Constants.Towers.getStallPrice(stallCostType);	}
+		return vh.helper.Constants.StallsClass.getStallPrice(stallCostType);	}
 
 	private void drawMoneyInfo(Graphics g) {
 		g.setColor(new Color(180, 175, 170));
@@ -169,7 +186,7 @@ public class ButtonBar {
 			g.drawRect(800, 589, 51, 51);
 			g.drawImage(playing.getStallManager().getStallImages()[dispStall.getStallType()], 802, 591, 48, 48, null);
 			g.setFont(new Font("LucidaSans", Font.PLAIN, 15));
-			g.drawString(Towers.getName(dispStall.getStallType()), 865, 609);
+			g.drawString(StallsClass.getName(dispStall.getStallType()), 865, 609);
 			g.drawString("( Grade " + dispStall.getGrade() + " )", 865, 629);
 			
 			drawDispStallAtr(g);
@@ -196,7 +213,7 @@ public class ButtonBar {
 	}
 	
 	private int getUpPrice(Stall dispStall) {
-		return (int) (vh.helper.Constants.Towers.getStallPrice(dispStall.getStallType())*dispStall.getGrade()*0.4f);
+		return (int) (vh.helper.Constants.StallsClass.getStallPrice(dispStall.getStallType())*dispStall.getGrade()*0.4f);
 	}
 
 	private int getSellPrice(Stall dispStall) {
@@ -205,7 +222,7 @@ public class ButtonBar {
 			upCost += (getUpPrice(dispStall)*i);
 		}
 		
-		return ((vh.helper.Constants.Towers.getStallPrice(dispStall.getStallType()) + upCost)/2);
+		return ((vh.helper.Constants.StallsClass.getStallPrice(dispStall.getStallType()) + upCost)/2);
 	}
 
 	private void drawDispStallAtr(Graphics g) {
@@ -273,7 +290,7 @@ public class ButtonBar {
 	public void mouseClicked(int x, int y) {
 		if (pauseButton.getBounds().contains(x,y)) {
 			pauseGame();
-			pauseButton.setPaused();
+			pauseButton.changePaused();
 			return;
 		}
 		
@@ -283,6 +300,7 @@ public class ButtonBar {
 			JOptionPane.YES_NO_OPTION,
 			JOptionPane.INFORMATION_MESSAGE);
 			if (choose == JOptionPane.YES_OPTION) {
+				playing.resetGame();
 				setGameState(MENU);
 			}
 		}
@@ -313,7 +331,7 @@ public class ButtonBar {
 	}
 
 	private boolean isMoneyEnough(int id) {
-		return money >= vh.helper.Constants.Towers.getStallPrice(id);
+		return money >= vh.helper.Constants.StallsClass.getStallPrice(id);
 	}
 
 	public void mouseMoved(int x, int y) {
@@ -398,10 +416,28 @@ public class ButtonBar {
 	}
 
 	public void stallDeployed(int stallType) {
-		this.money -= vh.helper.Constants.Towers.getStallPrice(stallType);
+		this.money -= vh.helper.Constants.StallsClass.getStallPrice(stallType);
 	}
 
 	public void addGold(int hGold) {
 		this.money += hGold;
+	}
+	
+	public int getUnhealthyCap() {
+		return unhealthyCap;
+	}
+	
+	public void unhealthyPass(Hungries h) {
+		unhealthyCap -= h.getCapacityCount();
+		if (unhealthyCap <= 0) setGameState(OVER);
+	}
+	
+	public void resetAll() {
+		unhealthyCap = unhealthyMax;
+		stallCostType = 0;
+		showStallPrice = false;
+		money = 100;
+		curStall = null;
+		dispStall = null;
 	}
 }

@@ -26,12 +26,16 @@ public class GameRenders {
 				game.getMenu().render(g);
 				break;
 				
-			case SETTINGS :
+			case ABOUT :
 				game.getSettings().render(g);
 				break;
 				
 			case PLAYING :
 				game.getPlaying().render(g);
+				break;
+				
+			case OVER :
+				game.getGameOver().render(g);
 				break;
 		
 		}

@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import vh.helper.Constants.Enemies;
+import vh.helper.Constants.HungriesClass;
 import vh.hungries.Hungries;
 import vh.helper.LoadSave;
 import vh.object.Stall;
 import vh.object.StallFood;
 import vh.scene.Playing;
-import static vh.helper.Constants.Towers.*;
-import static vh.helper.Constants.TowerProjectiles.*;
+import static vh.helper.Constants.StallsClass.*;
+import static vh.helper.Constants.FoodsClass.*;
 
 public class StallFoodManager {
 	
@@ -65,14 +65,21 @@ public class StallFoodManager {
 		float xProportion = (float) xDistance/ totalDistance;
 		//float yProportion = 1.0f - xProportion;
 				
-		float xSpeed = xProportion * vh.helper.Constants.TowerProjectiles.getSpeed(s.getStallType());
-		float ySpeed = vh.helper.Constants.TowerProjectiles.getSpeed(s.getStallType()) - xSpeed;
+		float xSpeed = xProportion * vh.helper.Constants.FoodsClass.getSpeed(s.getStallType());
+		float ySpeed = vh.helper.Constants.FoodsClass.getSpeed(s.getStallType()) - xSpeed;
 	
 		if (s.getX() > h.getX()) {
 			xSpeed = -xSpeed;
 		}
 		if (s.getY() > h.getY()) {
 			ySpeed = -ySpeed;
+		}
+		
+		for (StallFood f : foods) {
+			if (!f.isActive() && f.getFoodType() == type) {
+				f.recookFood((s.getX() + s.getStallSize()/2), (s.getY() + s.getStallSize()/2), xSpeed, ySpeed);
+				return;
+			}
 		}
 		
 		foods.add(new StallFood((s.getX() + s.getStallSize()/2), (s.getY() + s.getStallSize()/2), xSpeed, ySpeed, foodId++ , damage,  type));
@@ -82,13 +89,13 @@ public class StallFoodManager {
 	private int getFoodType(Stall s) {
 		switch(s.getStallType()) {
 			case PUKIS :
-				return P_PUKIS;
+				return PUKISFOOD;
 			case BAKSO :
-				return P_BAKSO;
+				return BAKSOFOOD;
 			case ESCAMPUR :
-				return P_ESCAMPUR;
+				return ESCAMPURFOOD;
 			case GEPREK :
-				return P_GEPREK;
+				return GEPREKFOOD;
 		}
 		return 0;
 	}
@@ -99,12 +106,12 @@ public class StallFoodManager {
 				f.move();
 				if (isFoodHitEnemy(f)) {
 					f.setActive(false);
-					if(f.getFoodType() == P_BAKSO) {
+					if(f.getFoodType() == BAKSOFOOD) {
 						explosions.add(new Explosion(f.getPosition()));
 						explodeAOE(f);
 					}
-				}else {
-					// nothing for now
+				} else if (isFoodOutside(f)) {
+					f.setActive(false);
 				}
 			}
 		}
@@ -113,7 +120,7 @@ public class StallFoodManager {
 			if (ex.getIndex() < 7) ex.update();
 		}
 	}
-	
+
 	private void explodeAOE(StallFood f) {
 		for (Hungries h : playing.getHungriesManager().getAllHungries()) {
 			if (h.isHungry()) {
@@ -134,9 +141,9 @@ public class StallFoodManager {
 		for (Hungries h : playing.getHungriesManager().getAllHungries()) {
 			if (h.isHungry() && h.getBound().contains(f.getPosition())) {
 				h.fed(f.getFoodDamage());
-				if (f.getFoodType() == P_ESCAMPUR) {
+				if (f.getFoodType() == ESCAMPURFOOD) {
 					h.slowed();
-				} else if (f.getFoodType() == P_GEPREK) {
+				} else if (f.getFoodType() == GEPREKFOOD) {
 					h.burned();
 				}
 				
@@ -144,6 +151,13 @@ public class StallFoodManager {
 			}
 		}
 		return false;
+	}
+	
+	private boolean isFoodOutside(StallFood f) {
+		if (f.getPosition().x >= 0 && f.getPosition().x <= 1024 && f.getPosition().y >= 0 && f.getPosition().y <= 576)
+			return false;
+		
+		return true;
 	}
 
 	public void draw(Graphics g) {
@@ -188,5 +202,11 @@ public class StallFoodManager {
 				g.drawImage(explosionImages[ex.getIndex()], (int) ex.getPosition().x - 32, (int) ex.getPosition().y - 32, null);
 			}
 		}
+	}
+	
+	public void resetFoods() {
+		foods.clear();
+		explosions.clear();
+		foodId = 0;
 	}
 }

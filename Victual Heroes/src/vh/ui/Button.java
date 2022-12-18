@@ -49,14 +49,16 @@ public class Button {
 
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Helvetica", Font.BOLD, 12)); 
-		if (name == "Settings") g.drawString(name, x + (2*(width/7)), y + (2 * (height/3)));
-		else if (name == "Upgrade") g.drawString(name, x + (2*(width/11)), y + (2*(height/3)));
+		if (name == "Upgrade") g.drawString(name, x + (2*(width/11)), y + (2*(height/3)));
 		else if (name == "Sell") g.drawString(name, x + (2*(width/6)), y + (2*(height/3)));
 		else if (name == "Pause") {
 			if (paused) g.drawString("▶", x + (2*(width/4) - 2), y + (3*(height/5)));
-			else g.drawString("||", x + (2*(width/4) - 2), y + (3*(height/5)));
+			else g.drawString("| |", x + (2*(width/4) - 2), y + (3*(height/5) - 1));
 		}
 		else if (name == "Back") g.drawString("⬅ Back", x + (2*(width/10) + 1), y + (2*(height/3) - 2));
+		else if (name == "Retry") g.drawString(name, x + (2*(width/5) - 1), y + (2*(height/3)));
+		else if (name == "Menu") g.drawString("Back to Menu", x + (2*(width/10) + 2), y + (2*(height/3)));
+		else if (name == "About") g.drawString("About", x + (2*(width/5) - 5), y + (2*(height/3)));
 		else g.drawString(name, x + (2*width/5), y + (2 * (height/3)));	
 	}
 
@@ -71,12 +73,18 @@ public class Button {
 	}
 
 	private void drawButton(Graphics g) {
-		// TODO Auto-generated method stub
 		if (mouseOverButton) {
 			g.setColor(Color.BLACK);
 			g.fillRect(x, y, width, height);
 			
-			g.setColor(Color.ORANGE);
+			if (name == "Pause") {
+				if (paused) g.setColor(new Color(61, 183, 228));
+				else g.setColor(new Color(255, 76, 48));
+			} 
+			else if (name == "Quit") g.setColor(new Color(255, 76, 48));
+			else if (name == "Retry" || name == "About") g.setColor(new Color(133, 255, 0));
+			else g.setColor(new Color(255, 235, 3));
+			
 			g.fillRect(x , y , width, height-3);
 		} else {
 			
@@ -114,7 +122,7 @@ public class Button {
 		return id;
 	}
 	
-	public void setPaused() {
+	public void changePaused() {
 		this.paused = !(paused);
 	}
 }

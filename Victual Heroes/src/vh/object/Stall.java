@@ -1,7 +1,7 @@
 package vh.object;
 
 import java.awt.Rectangle;
-import static vh.helper.Constants.Towers.*;
+import static vh.helper.Constants.StallsClass.*;
 
 public class Stall {
 	
@@ -68,17 +68,17 @@ public class Stall {
 	}
 	
 	private void setDefaultDmg() {
-		stallDamage = vh.helper.Constants.Towers.getDefaultDamage(stallType);
+		stallDamage = vh.helper.Constants.StallsClass.getDefaultDamage(stallType);
 		
 	}
 
 	private void setDefaultRange() {
-		stallRange = vh.helper.Constants.Towers.getDefaultRange(stallType);
+		stallRange = vh.helper.Constants.StallsClass.getDefaultRange(stallType);
 		
 	}
 
 	private void setDefaultCooldown() {
-		stallCooldown = vh.helper.Constants.Towers.getDefaultCooldown(stallType);
+		stallCooldown = vh.helper.Constants.StallsClass.getDefaultCooldown(stallType);
 		
 	}
 

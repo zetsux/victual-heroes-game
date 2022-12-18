@@ -22,17 +22,12 @@ public class MainMenu extends GameScene implements SceneMethods {
 	private BufferedImage mainMenu;
 	private BufferedImage mainMenuIMG;
 	private Random rand;
-	private Button playingButton, settingButton, quitButton; 
-	
-	//private ArrayList<BufferedImage> sprites = new ArrayList<>();
+	private Button playingButton, aboutButton, quitButton; 
 	
 	public MainMenu(GameMain game) {
 		super(game);
 		importImg();
-		//this.map = mapIMG;
-		//this.sprite = spriteIMG;
 		this.mainMenu = mainMenuIMG;
-		//loadSprites();
 		this.rand = new Random();
 		initializeButton();
 	}
@@ -46,7 +41,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 		int buttonHeight = 30;
 		
 		playingButton = new Button("Play", ((x / 2) - (2 *(buttonWidth / 5))) , (2 * (y / 5)), buttonWidth, buttonHeight, 0);
-		settingButton = new Button("Settings", ((x / 2) - (2 *(buttonWidth / 5))), (3 * (y / 5)), buttonWidth, buttonHeight, 1);
+		aboutButton = new Button("About", ((x / 2) - (2 *(buttonWidth / 5))), (3 * (y / 5)), buttonWidth, buttonHeight, 1);
 		quitButton = new Button("Quit", ((x / 2) - (2 *(buttonWidth / 5))), (4 * (y / 5)), buttonWidth, buttonHeight, 2);
 	}
 
@@ -56,22 +51,12 @@ public class MainMenu extends GameScene implements SceneMethods {
 		g.drawImage(mainMenu, 0, 0, null);
 		
 		drawButtons(g);
-		
-		/*
-		g.drawImage(map, 0, 0, null);
-		g.drawImage(sprites.get(0), 0, 0, null);
-		for (int i = 0 ; i < 16 ; i++) {
-			for (int j = 0 ; j < 9; j++){
-				g.drawImage(sprites.get(getRX()), i*40, j*40, null);
-			}
-		}
-		*/
 	}
 	
 	private void drawButtons(Graphics g) {
 		
 		playingButton.draw(g);
-		settingButton.draw(g);
+		aboutButton.draw(g);
 		quitButton.draw(g);
 	}
 
@@ -84,24 +69,6 @@ public class MainMenu extends GameScene implements SceneMethods {
 			e.printStackTrace();
 		}
 	}
-	
-//	private void loadSprites() {
-//		for (int i = 0 ; i < 14 ; i++)
-//		{
-//			for (int j = 0 ; j < 5 ; j++)
-//			{
-//				sprites.add(sprite.getSubimage(i*17, j*29, 17, 29));
-//			}
-//		}
-//	}
-	
-	private int getRX() {
-		return rand.nextInt(14);
-	}
-	
-	private int getRY() {
-		return rand.nextInt(5);
-	}
 
 	public void mouseClicked(int x, int y) {
 
@@ -109,8 +76,8 @@ public class MainMenu extends GameScene implements SceneMethods {
 			setGameState(PLAYING);
 		}
 		
-		else if(settingButton.getBounds().contains(x, y)) {
-			setGameState(SETTINGS);
+		else if(aboutButton.getBounds().contains(x, y)) {
+			setGameState(ABOUT);
 		}
 
 		else if(quitButton.getBounds().contains(x, y)) {
@@ -120,16 +87,15 @@ public class MainMenu extends GameScene implements SceneMethods {
 	}
 
 	public void mouseMoved(int x, int y) {
-		// TODO Auto-generated method stub
 		playingButton.setMouseOverButton(false);
-		settingButton.setMouseOverButton(false);
+		aboutButton.setMouseOverButton(false);
 		quitButton.setMouseOverButton(false);
 		if(playingButton.getBounds().contains(x, y)) {
 			playingButton.setMouseOverButton(true);
 		}
 		
-		else if(settingButton.getBounds().contains(x, y)) {
-			settingButton.setMouseOverButton(true);
+		else if(aboutButton.getBounds().contains(x, y)) {
+			aboutButton.setMouseOverButton(true);
 		}
 		
 		else if(quitButton.getBounds().contains(x, y)) {
@@ -138,14 +104,12 @@ public class MainMenu extends GameScene implements SceneMethods {
 	}
 
 	public void mousePressed(int x, int y) {
-		
-		//playingButton.setMouseOverButton(false);
 		if(playingButton.getBounds().contains(x, y)) {
 			playingButton.setMousePressedButton(true);
 		}
 		
-		else if(settingButton.getBounds().contains(x, y)) {
-			settingButton.setMousePressedButton(true);
+		else if(aboutButton.getBounds().contains(x, y)) {
+			aboutButton.setMousePressedButton(true);
 		}
 		
 		else if(quitButton.getBounds().contains(x, y)) {
@@ -156,16 +120,13 @@ public class MainMenu extends GameScene implements SceneMethods {
 
 	@Override
 	public void mouseReleased(int x, int y) {
-		// TODO Auto-generated method stub
 		playingButton.resetMouseState();
-		settingButton.resetMouseState();
+		aboutButton.resetMouseState();
 		quitButton.resetMouseState();
 	}
 
 	@Override
-	public void keyTyped(int n) {
-		// TODO Auto-generated method stub
-		
+	public void keyTyped(int n) {	
 	}
 
 }

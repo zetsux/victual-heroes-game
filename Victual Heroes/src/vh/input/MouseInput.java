@@ -16,9 +16,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseDragged(MouseEvent e) {	
 	}
 
 	@Override
@@ -29,12 +27,16 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				gameMain.getMenu().mouseMoved(e.getX(), e.getY());
 				break;
 				
-			case SETTINGS :
+			case ABOUT :
 				gameMain.getSettings().mouseMoved(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
 				gameMain.getPlaying().mouseMoved(e.getX(), e.getY());
+				break;
+				
+			case OVER :
+				gameMain.getGameOver().mouseMoved(e.getX(), e.getY());
 				break;
 		}
 	}
@@ -50,12 +52,16 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				gameMain.getMenu().mouseClicked(e.getX(), e.getY());
 				break;
 				
-			case SETTINGS :
+			case ABOUT :
 				gameMain.getSettings().mouseClicked(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
 				gameMain.getPlaying().mouseClicked(e.getX(), e.getY());
+				break;
+				
+			case OVER :
+				gameMain.getGameOver().mouseClicked(e.getX(), e.getY());
 				break;
 		
 			}
@@ -74,27 +80,19 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				gameMain.getMenu().mousePressed(e.getX(), e.getY());
 				break;
 				
-			case SETTINGS :
+			case ABOUT :
 				gameMain.getSettings().mousePressed(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
 				gameMain.getPlaying().mousePressed(e.getX(), e.getY());
 				break;
+				
+			case OVER :
+				gameMain.getGameOver().mousePressed(e.getX(), e.getY());
+				break;
 			}
 		}
-//		int buttonCode = e.getButton();
-//		if (buttonCode == MouseEvent.BUTTON1) {
-//			System.out.println("Left Button Clicked");
-//		}
-//		
-//		else if (buttonCode == MouseEvent.BUTTON2) {
-//			System.out.println("Middle Button Clicked");
-//		}
-//		
-//		else if (buttonCode == MouseEvent.BUTTON3) {
-//			System.out.println("Right Button Clicked");
-//		}
 	}
 
 	@Override
@@ -106,12 +104,16 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			gameMain.getMenu().mouseReleased(e.getX(), e.getY());
 			break;
 			
-		case SETTINGS :
+		case ABOUT :
 			gameMain.getSettings().mouseReleased(e.getX(), e.getY());
 			break;
 			
 		case PLAYING :
 			gameMain.getPlaying().mouseReleased(e.getX(), e.getY());
+			break;
+			
+		case OVER :
+			gameMain.getGameOver().mouseReleased(e.getX(), e.getY());
 			break;
 	}
 		
@@ -119,14 +121,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
