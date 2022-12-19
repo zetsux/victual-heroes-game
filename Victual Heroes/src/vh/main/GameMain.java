@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import vh.helper.LoadSave;
 import vh.input.KeyboardInput;
 import vh.input.MouseInput;
 import vh.scene.GameOver;
@@ -44,6 +45,9 @@ public class GameMain extends JFrame implements Runnable {
 	private Sound sound;
 	
 	public GameMain() {
+		
+		LoadSave.makeFolder();
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -172,11 +176,11 @@ public class GameMain extends JFrame implements Runnable {
 	public int readHighScore() {
 		int highScore = 0;
 		try {
-		      File myObj = new File("userData.txt");
+		      File myObj = LoadSave.getUserData();
 		      
-		      if (myObj.createNewFile()) {
+		      if (myObj.length() == 0) {
 		        System.out.println("File created: " + myObj.getName());
-		        FileWriter myWriter = new FileWriter("userData.txt");
+		        FileWriter myWriter = new FileWriter(LoadSave.getUserData());
 		        myWriter.write("0");
 		        myWriter.close();
 		      } else {

@@ -112,7 +112,7 @@ public class GameOver extends GameScene implements SceneMethods {
 	public void writeHighScore(int newScore) {
 		try {
 			FileWriter myWriter;
-			myWriter = new FileWriter("userData.txt");
+			myWriter = new FileWriter(LoadSave.getUserData());
 			myWriter.write(Integer.toString(newScore));
 	        myWriter.close();
 		} catch (IOException e) {
