@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 
 public class Button {
 
-	protected int x, y, width, height, id;
+	public int x, y, width, height, id;
 	private String name;
 	private Rectangle buttonBound;
 	
@@ -58,7 +58,8 @@ public class Button {
 		else if (name == "Back") g.drawString("⬅ Back", x + (2*(width/10) + 1), y + (2*(height/3) - 2));
 		else if (name == "Retry") g.drawString(name, x + (2*(width/5) - 1), y + (2*(height/3)));
 		else if (name == "Menu") g.drawString("Back to Menu", x + (2*(width/10) + 2), y + (2*(height/3)));
-		else if (name == "About") g.drawString("About", x + (2*(width/5) - 5), y + (2*(height/3)));
+		else if (name == "About") g.drawString(name, x + (2*(width/5) - 5), y + (2*(height/3)));
+		else if (name == "← Back") g.drawString(name, x + (2*(width/6)), y + (2*(height/3)));
 		else g.drawString(name, x + (2*width/5), y + (2 * (height/3)));	
 	}
 
@@ -81,7 +82,7 @@ public class Button {
 				if (paused) g.setColor(new Color(61, 183, 228));
 				else g.setColor(new Color(255, 76, 48));
 			} 
-			else if (name == "Quit") g.setColor(new Color(255, 76, 48));
+			else if (name == "Quit" || name == "← Back") g.setColor(new Color(255, 76, 48));
 			else if (name == "Retry" || name == "About") g.setColor(new Color(133, 255, 0));
 			else g.setColor(new Color(255, 235, 3));
 			

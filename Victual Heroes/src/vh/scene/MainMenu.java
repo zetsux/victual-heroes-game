@@ -1,5 +1,7 @@
 package vh.scene;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -24,6 +26,8 @@ public class MainMenu extends GameScene implements SceneMethods {
 	private Button playingButton, aboutButton, quitButton; 
 	private GameMain game;
 	
+	private int highestScore;
+	
 	public MainMenu(GameMain game) {
 		super(game);
 		this.game = game;
@@ -31,6 +35,9 @@ public class MainMenu extends GameScene implements SceneMethods {
 		importImg();
 		this.mainMenu = mainMenuIMG;
 		this.rand = new Random();
+		
+		refreshHighestScore();
+		
 		initializeButton();
 	}
 	
@@ -40,7 +47,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 		int y = 676;
 		
 		int buttonWidth = 100;
-		int buttonHeight = 30;
+		int buttonHeight = 40;
 		
 		playingButton = new Button("Play", ((x / 2) - (2 *(buttonWidth / 5))) , (2 * (y / 5)), buttonWidth, buttonHeight, 0);
 		aboutButton = new Button("About", ((x / 2) - (2 *(buttonWidth / 5))), (3 * (y / 5)), buttonWidth, buttonHeight, 1);
@@ -52,14 +59,52 @@ public class MainMenu extends GameScene implements SceneMethods {
 		
 		g.drawImage(mainMenu, 0, 0, null);
 		
+		g.setColor(Color.YELLOW);
+		g.fillRect(15, 30, 305, 60);
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(15, 30, 305, 60);
+		
+		if (highestScore < 10) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 34));
+			g.drawString("Highest Score : " + highestScore, 28, 72);
+		} else if (highestScore < 100) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 32));
+			g.drawString("Highest Score : " + highestScore, 28, 71);
+		} else if (highestScore < 1000) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 30));
+			g.drawString("Highest Score : " + highestScore, 28, 70);
+		} else if (highestScore < 10000) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 28));
+			g.drawString("Highest Score : " + highestScore, 28, 70);
+		} else if (highestScore < 100000) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 27));
+			g.drawString("Highest Score : " + highestScore, 24, 69);
+		} else if (highestScore < 1000000) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 26));
+			g.drawString("Highest Score : " + highestScore, 26, 69);
+		} else if (highestScore < 10000000) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 25));
+			g.drawString("Highest Score : " + highestScore, 25, 69);
+		} else if (highestScore < 100000000) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 24));
+			g.drawString("Highest Score : " + highestScore, 25, 69);
+		} else if (highestScore < 1000000000) {
+			g.setFont(new Font("Helvetica", Font.BOLD, 23));
+			g.drawString("Highest Score : " + highestScore, 22, 68);
+		}
+		
 		drawButtons(g);
 	}
 	
 	private void drawButtons(Graphics g) {
 		
 		playingButton.draw(g);
+		drawButtonFb(g, playingButton);
 		aboutButton.draw(g);
+		drawButtonFb(g, aboutButton);
 		quitButton.draw(g);
+		drawButtonFb(g, quitButton);
 	}
 
 	private void importImg() {
@@ -71,6 +116,10 @@ public class MainMenu extends GameScene implements SceneMethods {
 			e.printStackTrace();
 		}
 	}
+	
+	public void refreshHighestScore() {
+		this.highestScore = game.readHighScore();
+	}
 
 	public void mouseClicked(int x, int y) {
 
@@ -81,8 +130,6 @@ public class MainMenu extends GameScene implements SceneMethods {
 		}
 		
 		else if(aboutButton.getBounds().contains(x, y)) {
-			game.stopMusic();
-			game.playMusic(4);
 			setGameState(ABOUT);
 		}
 
@@ -134,6 +181,4 @@ public class MainMenu extends GameScene implements SceneMethods {
 	@Override
 	public void keyTyped(int n) {	
 	}
-	
-	
 }

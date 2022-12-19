@@ -63,12 +63,19 @@ public class WaveManager {
 			
 			int count = 0, upperBound, lowerBound;
 			
-			if (i > 6) upperBound = 7;
-			else upperBound = i+1;
+			if (i > 7) upperBound = 7;
+			else if (i > 6) upperBound = 6;
+			else if (i > 5) upperBound = 5;
+			else if (i > 4) upperBound = 4;
+			else if (i > 1) upperBound = 3;
+			else upperBound = 2;
+			
+			if (i <= 9) lowerBound = 0;
+			else lowerBound = 3;
 			
 			while (count <= (6 + (i*4))) {
 				if (i == 0) wave.add(0);
-				else wave.add(rand.nextInt(0, upperBound));
+				else wave.add(rand.nextInt(lowerBound, upperBound));
 				count++;
 			}
 			

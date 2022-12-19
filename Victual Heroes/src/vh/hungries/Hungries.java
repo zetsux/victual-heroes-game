@@ -25,7 +25,7 @@ public abstract class Hungries {
 	private Random rand;
 	private int slowedIndex, slowedIndexTick = 0;
 	private int burnedIndex, burnedIndexTick = 0;
-	private final int burnDmg = 5;
+	private int burnDmg = 5;
 	
 	public Hungries(float x, float y, int id, int type, HungriesManager hungriesManager) {
 		this.x = x;
@@ -142,6 +142,7 @@ public abstract class Hungries {
 		if (this.hunger <= 0) {
 			this.hungry = false;
 			hungriesManager.giveMoney(type);
+			hungriesManager.incSatisfiedCount();
 		}
 	}
 	

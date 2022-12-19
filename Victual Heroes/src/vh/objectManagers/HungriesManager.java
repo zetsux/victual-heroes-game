@@ -65,9 +65,9 @@ public class HungriesManager {
 		BufferedImage enemyAtlas = LoadSave.getHungriesAtlas();
 		hungriesImages[0] = enemyAtlas.getSubimage(0, 16*4, 16, 16);
 		hungriesImages[1] = enemyAtlas.getSubimage(16*4, 0, 16, 16);
-		hungriesImages[2] = enemyAtlas.getSubimage(16*8, 0, 16, 16);
-		hungriesImages[3] = enemyAtlas.getSubimage(0, 0, 16, 16);
-		hungriesImages[4] = enemyAtlas.getSubimage(16*4, 16*4, 16, 16);
+		hungriesImages[2] = enemyAtlas.getSubimage(16*4, 16*4, 16, 16);
+		hungriesImages[3] = enemyAtlas.getSubimage(16*8, 0, 16, 16);
+		hungriesImages[4] = enemyAtlas.getSubimage(0, 0, 16, 16);
 		hungriesImages[5] = enemyAtlas.getSubimage(16*8, 16*4, 16, 16);
 		hungriesImages[6] = enemyAtlas.getSubimage(16*12, 16*4, 16, 16);
 	}
@@ -298,6 +298,10 @@ public class HungriesManager {
 
 	public void giveMoney(int type) {
 		playing.giveGold(type);
+	}
+	
+	public void incSatisfiedCount() {
+		satisfiedCount++;
 	}
 	
 	public void resetHungries() {

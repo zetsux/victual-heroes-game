@@ -18,7 +18,6 @@ public class Sound {
 		sound[1] = getClass().getResource("/sound/playingMusic.wav");
 		sound[2] = getClass().getResource("/sound/highMusic.wav");
 		sound[3] = getClass().getResource("/sound/lowMusic.wav");
-		sound[4] = getClass().getResource("/sound/aboutMusic.wav");
 	}
 	
 	public void setMusic (int i) {
