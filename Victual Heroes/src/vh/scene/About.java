@@ -48,7 +48,7 @@ public class About extends GameScene implements SceneMethods {
 		
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Helvetica", Font.BOLD, 40));
-		g.drawString("About Game : ", 397, 140);
+		g.drawString("About Game  ", 397, 140);
 		g.drawString("Created by : ", 397, 470);
 		
 		g.setFont(new Font("Helvetica", Font.BOLD, 18));
