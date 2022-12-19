@@ -21,6 +21,7 @@ import vh.input.MouseInput;
 import vh.scene.GameOver;
 import vh.scene.MainMenu;
 import vh.scene.Playing;
+import vh.scene.Settings;
 import vh.sound.Sound;
 import vh.scene.About;
 
@@ -36,8 +37,9 @@ public class GameMain extends JFrame implements Runnable {
 	private GameRenders gameRenderer;
 	private MainMenu menu;
 	private Playing playing;
-	private About settings;
+	private About about;
 	private GameOver gameOver;
+	private Settings settings;
 	
 	private Sound sound;
 	
@@ -79,8 +81,9 @@ public class GameMain extends JFrame implements Runnable {
 		screen = new GameScreen(this);
 		menu = new MainMenu(this);
 		playing = new Playing(this);
-		settings = new About(this);
+		about = new About(this);
 		gameOver = new GameOver(this);
+		settings = new Settings(this, sound);
 	}
 	
 	public void stopMusic() {
@@ -211,11 +214,15 @@ public class GameMain extends JFrame implements Runnable {
 		return playing;
 	}
 
-	public About getSettings() {
-		return settings;
+	public About getAbout() {
+		return about;
 	}
 	
 	public GameOver getGameOver() {
 		return gameOver;
+	}
+	
+	public Settings getSettings() {
+		return settings;
 	}
 }
