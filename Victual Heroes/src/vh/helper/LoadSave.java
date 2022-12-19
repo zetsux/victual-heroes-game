@@ -202,4 +202,19 @@ public class LoadSave {
 		
 		return img;
 	}
+	
+	public static BufferedImage getGameOverBackground() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("overbg.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
 }

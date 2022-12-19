@@ -87,9 +87,9 @@ public class ButtonBar {
 	}
 	
 	private void drawUnhealthyCap(Graphics g) {
-		if (unhealthyCap < (unhealthyMax*1/3)) g.setColor(new Color(255, 76, 48));
-		else if (unhealthyCap < (unhealthyMax*2/3)) g.setColor(new Color(255, 204, 0));
-		else g.setColor(new Color(26, 208, 28));
+		if (unhealthyCap < (unhealthyMax*1/3)) g.setColor(new Color(255, 76, 48, 160));
+		else if (unhealthyCap < (unhealthyMax*2/3)) g.setColor(new Color(255, 204, 0, 160));
+		else g.setColor(new Color(26, 208, 28, 160));
 		g.fillRect(950, 547, 70, 25);
 		
 		g.setColor(Color.BLACK);
@@ -160,10 +160,11 @@ public class ButtonBar {
 	private void drawWaveInfo(Graphics g) {
 		int xWInfo = 860;
 		int yWInfo = 20;
-		g.setColor(Color.ORANGE);
+		g.setColor(new Color(50, 51, 52, 220));
 		g.fillRect(xWInfo, yWInfo, 150, 80);
-		g.setColor(Color.BLACK);
+		g.setColor(new Color(255, 76, 48, 180));
 		g.drawRect(xWInfo, yWInfo, 150, 80);
+		g.setColor(Color.WHITE);
 		g.setFont(new Font("LucidaSans", Font.BOLD, 15));
 		drawHInfo(g, xWInfo, yWInfo);
 		drawWInfo(g, xWInfo, yWInfo);

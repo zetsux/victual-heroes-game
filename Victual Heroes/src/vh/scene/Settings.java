@@ -52,10 +52,10 @@ public class Settings extends GameScene implements SceneMethods {
 	public void render(Graphics g) {
 		g.drawImage(bgImage, 0, 0, null);
 		
-		g.setColor(new Color(50, 51, 52));
+		g.setColor(new Color(20, 21, 22, 220));
 		g.fillRect(265, 170, 500, 350);
 		
-		g.setColor(Color.WHITE);
+		g.setColor(new Color(255, 255, 255, 180));
 		g.drawRect(265, 170, 500, 350);
 		
 		drawVolumeBar(g);

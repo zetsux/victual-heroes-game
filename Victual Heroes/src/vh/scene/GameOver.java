@@ -3,9 +3,11 @@ package vh.scene;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import vh.helper.LoadSave;
 import vh.main.GameMain;
 import vh.ui.Button;
 
@@ -16,11 +18,14 @@ public class GameOver extends GameScene implements SceneMethods {
 	private Button retryButton, menuButton;
 	private GameMain game;
 	private int score, highScore, scoreOffset, highScoreOffset;
+	
+	private BufferedImage gameOverBg;
 
 	public GameOver(GameMain game) {
 		super(game);
 		
 		this.game = game;
+		this.gameOverBg = LoadSave.getGameOverBackground();
 		initializeButtons();
 	}
 
@@ -38,20 +43,20 @@ public class GameOver extends GameScene implements SceneMethods {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.ORANGE);
-		g.fillRect(0, 0, 1024, 676);
+		g.drawImage(gameOverBg, 0, 0, null);
 		
 		retryButton.draw(g);
 		drawButtonFb(g, retryButton);
 		menuButton.draw(g);
 		drawButtonFb(g, menuButton);
 		
-		g.setColor(new Color(255, 76, 48));
+		g.setColor(new Color(50, 51, 52, 127));
 		g.fillRect(200, 50, 640, 280);
 		
-		g.setColor(Color.BLACK);
+		g.setColor(new Color(255, 255, 255, 180));
 		g.drawRect(199, 49, 641, 281);
 		
+		g.setColor(new Color(255, 255, 255, 240));
 		g.setFont(new Font("Helvetica", Font.BOLD, 100));
 		g.drawString("Game Over", 252, 160);
 		
