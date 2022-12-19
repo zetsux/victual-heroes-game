@@ -173,6 +173,21 @@ public class LoadSave {
 		return img;
 	}
 	
+	public static BufferedImage getBaseIcon() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("burger.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
+	
 	public static BufferedImage getSettingsBackground() {
 		
 		BufferedImage img = null;
@@ -185,21 +200,6 @@ public class LoadSave {
 			e.printStackTrace();
 		}
 		
-		return img;
-	}
-	
-	public static BufferedImage getBaseIcon() {
-
-		BufferedImage img = null;
-		InputStream is;
-
-		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("burger.png");
-			img = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		return img;
 	}
 }

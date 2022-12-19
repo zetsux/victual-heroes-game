@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
+
 import vh.objectManagers.HungriesManager;
 import vh.objectManagers.MapTileManager;
 import vh.objectManagers.StallFoodManager;
@@ -41,7 +43,6 @@ public class Playing extends GameScene implements SceneMethods {
 	private int moneyTick;
 
 	private boolean gamePaused;
-	
 	private BufferedImage baseIcon;
 	
 	public Playing(GameMain game) {
@@ -56,7 +57,7 @@ public class Playing extends GameScene implements SceneMethods {
 		foodManager = new StallFoodManager(this);
 		waveManager = new WaveManager(this);
 		buttonBar = new ButtonBar(0, 576, 1024, 100, this);
-		
+
 		initializeIcon();
 	}
 
