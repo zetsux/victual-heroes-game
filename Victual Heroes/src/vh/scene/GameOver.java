@@ -19,13 +19,14 @@ public class GameOver extends GameScene implements SceneMethods {
 	private GameMain game;
 	private int score, highScore, scoreOffset, highScoreOffset;
 	
-	private BufferedImage gameOverBg;
+	private BufferedImage gameOverWinBg, gameOverLoseBg;
 
 	public GameOver(GameMain game) {
 		super(game);
 		
 		this.game = game;
-		this.gameOverBg = LoadSave.getGameOverBackground();
+		this.gameOverWinBg = LoadSave.getGameOverWinBackground();
+		this.gameOverLoseBg = LoadSave.getGameOverLoseBackground();
 		initializeButtons();
 	}
 
@@ -43,7 +44,12 @@ public class GameOver extends GameScene implements SceneMethods {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(gameOverBg, 0, 0, null);
+		if (score > highScore) {
+			g.drawImage(gameOverWinBg, 0, 0, null);
+			
+		} else {
+			g.drawImage(gameOverLoseBg, 0, 0, null);
+		}
 		
 		retryButton.draw(g);
 		drawButtonFb(g, retryButton);
