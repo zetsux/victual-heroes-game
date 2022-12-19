@@ -19,6 +19,7 @@ public class Stall {
 		this.stallSize = 48;
 		this.stallBound = new Rectangle(x, y, (int)stallSize, (int)stallSize);
 		this.grade = 1;
+		
 		setDefaultDmg();
 		setDefaultRange();
 		setDefaultCooldown();
@@ -40,29 +41,29 @@ public class Stall {
 	public void upgradeStall() {
 		this.grade++;
 		
+		stallDamage += (stallDamage/5);
+		stallRange += (stallRange/5);
+		stallCooldown -= (stallCooldown/5);
+		
 		switch (stallType) {
 		case PUKIS:
-			stallDamage += 2;
-			stallRange += 25;
-			stallCooldown -= 2;
+			if (grade == 2) stallDamage += 3;
+			else stallDamage += 5;
 			break;
-			
+		
 		case BAKSO:
-			stallDamage += 8;
-			stallRange += 10;
-			stallCooldown -= 7;
+			if (grade == 2) stallDamage += (stallDamage/10);
+			else stallDamage += (stallDamage/4);
 			break;
 			
 		case ESCAMPUR:
-			stallDamage += 1;
-			stallRange += 20;
-			stallCooldown -= 10;
+			if (grade == 2) stallCooldown -= (stallCooldown/10);
+			else stallCooldown -= (stallCooldown/4);
 			break;
 			
 		case GEPREK:
-			stallDamage += 1;
-			stallRange += 15;
-			stallCooldown -= 3;
+			if (grade == 2) stallRange += (stallRange/10);
+			else stallRange += (stallRange/4);
 			break;
 		}
 	}

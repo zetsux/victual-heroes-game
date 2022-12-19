@@ -49,11 +49,13 @@ public class About extends GameScene implements SceneMethods {
 		g.drawString("Created By : ", 467, 500);
 		g.drawString("- Kevin Nathanael H. / 5025211140", 367, 530);
 		g.drawString("- Frederick Hidayat / 5025211152", 367, 560);
+		
 		drawButtons(g);
 	}
 
 	private void drawButtons(Graphics g) {
 		backButton.draw(g);
+		drawButtonFb(g, backButton);
 	}
 
 	@Override
@@ -75,8 +77,6 @@ public class About extends GameScene implements SceneMethods {
 	@Override
 	public void mousePressed(int x, int y) {
 		if(backButton.getBounds().contains(x, y)) {
-			game.stopMusic();
-			game.playMusic(0);
 			setGameState(MENU);
 		}	
 	}

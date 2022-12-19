@@ -42,7 +42,9 @@ public class GameOver extends GameScene implements SceneMethods {
 		g.fillRect(0, 0, 1024, 676);
 		
 		retryButton.draw(g);
+		drawButtonFb(g, retryButton);
 		menuButton.draw(g);
+		drawButtonFb(g, menuButton);
 		
 		g.setColor(new Color(255, 76, 48));
 		g.fillRect(200, 50, 640, 280);
@@ -128,6 +130,7 @@ public class GameOver extends GameScene implements SceneMethods {
 			game.getPlaying().resetGame();
 			game.stopMusic();
 			game.playMusic(0);
+			game.getMenu().refreshHighestScore();
 			setGameState(MENU);
 		}
 	}

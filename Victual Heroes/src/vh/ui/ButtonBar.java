@@ -35,7 +35,7 @@ public class ButtonBar {
 	private boolean showStallPrice = false;
 	private int stallCostType;
 	
-	private final int unhealthyMax = 1;
+	private final int unhealthyMax = 30;
 	private int unhealthyCap = unhealthyMax;
 	
 	public ButtonBar(int x, int y, int w, int h, Playing playing) {
@@ -87,8 +87,8 @@ public class ButtonBar {
 	}
 	
 	private void drawUnhealthyCap(Graphics g) {
-		if (unhealthyCap < (unhealthyMax*66/100)) g.setColor(new Color(255, 76, 48));
-		else if (unhealthyCap < (unhealthyMax*33/100)) g.setColor(new Color(255, 204, 0));
+		if (unhealthyCap < (unhealthyMax*1/3)) g.setColor(new Color(255, 76, 48));
+		else if (unhealthyCap < (unhealthyMax*2/3)) g.setColor(new Color(255, 204, 0));
 		else g.setColor(new Color(26, 208, 28));
 		g.fillRect(950, 547, 70, 25);
 		
@@ -221,7 +221,7 @@ public class ButtonBar {
 	private int getSellPrice(Stall dispStall) {
 		int upCost = 0;
 		for (int i = 1 ; i < dispStall.getGrade() ; i++) {
-			upCost += (getUpPrice(dispStall)*i);
+			upCost += (vh.helper.Constants.StallsClass.getStallPrice(dispStall.getStallType())*i*0.9f);
 		}
 		
 		return ((vh.helper.Constants.StallsClass.getStallPrice(dispStall.getStallType()) + upCost)/2);
@@ -239,7 +239,9 @@ public class ButtonBar {
 
 	private void drawButtons(Graphics g) {
 		pauseButton.draw(g);
+		drawButtonFb(g, pauseButton);
 		menuButton.draw(g);
+		drawButtonFb(g, menuButton);
 		
 		for (Button b : stallButtons) {
 			g.setColor(new Color(212, 175, 55));
@@ -305,6 +307,7 @@ public class ButtonBar {
 				playing.resetGame();
 				playing.getGame().stopMusic();
 				playing.getGame().playMusic(0);
+				playing.getGame().getMenu().refreshHighestScore();
 				setGameState(MENU);
 			}
 		}

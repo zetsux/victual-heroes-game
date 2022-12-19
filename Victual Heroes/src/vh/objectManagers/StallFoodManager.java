@@ -124,12 +124,12 @@ public class StallFoodManager {
 	private void explodeAOE(StallFood f) {
 		for (Hungries h : playing.getHungriesManager().getAllHungries()) {
 			if (h.isHungry()) {
-				float radius = 40.0f;
+				float explosionRadius = 40.0f;
 				float xDist = Math.abs(f.getPosition().x - h.getX());
 				float yDist = Math.abs(f.getPosition().y - h.getY());
 				float rDist = (float) Math.hypot(xDist, yDist);
 				
-				if (rDist <= radius) {
+				if (rDist <= explosionRadius) {
 					h.fed(f.getFoodDamage());
 				}
 			}
