@@ -188,18 +188,18 @@ public class LoadSave {
 		return img;
 	}
 	
-	public static BufferedImage getJunkFoodIcon() {
-		
+	public static BufferedImage getBaseIcon() {
+
 		BufferedImage img = null;
 		InputStream is;
-		
+
 		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("junkfoodIcon.png");
+			is = LoadSave.class.getClassLoader().getResourceAsStream("burger.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return img;
 	}
 }

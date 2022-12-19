@@ -61,7 +61,8 @@ public class Playing extends GameScene implements SceneMethods {
 	}
 
 	private void initializeIcon() {
-		baseIcon = LoadSave.getJunkFoodIcon();
+		BufferedImage icon = LoadSave.getBaseIcon();
+		baseIcon = icon.getSubimage(0, 0, 32, 32);
 	}
 
 	public void update() {
@@ -138,10 +139,10 @@ public class Playing extends GameScene implements SceneMethods {
 		drawCurStall(g);
 		if (curStall != null) drawStallTileMarker(g);
 		
-		drawIcon(g);
+		drawBaseIcon(g);
 	}
 
-	private void drawIcon(Graphics g) {
+	private void drawBaseIcon(Graphics g) {
 		g.drawImage(baseIcon, 976, 464, null);
 	}
 
