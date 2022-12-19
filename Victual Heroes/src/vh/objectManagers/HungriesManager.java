@@ -273,7 +273,7 @@ public class HungriesManager {
 	}
 	
 	private int getHPBarWidth (Hungries h) {
-		return (int) (HPBarWidth * h.getHungerBar());
+		return (int) (HPBarWidth * (1-h.getHungerBar()));
 	}
 
 	private void drawEnemy(Hungries h, Graphics g) {

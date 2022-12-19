@@ -164,7 +164,7 @@ public class LoadSave {
 		InputStream is;
 		
 		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("aboutbg.jpg");
+			is = LoadSave.class.getClassLoader().getResourceAsStream("aboutBG.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
