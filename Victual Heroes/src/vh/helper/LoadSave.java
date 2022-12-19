@@ -1,12 +1,28 @@
 package vh.helper;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
 public class LoadSave {
+	
+	public static String homePath = System.getProperty("user.home");
+	public static String folderSafe = "Victual Heroes";
+	public static String dataFile = "userData";
+	public static String filePath = homePath + File.separator + folderSafe + File.separator + dataFile;
+	private static File userData = new File(filePath);
+	
+	public static void makeFolder() {
+		File folder = new File(homePath + File.separator + folderSafe);
+		if (!folder.exists()) folder.mkdir();
+	}
+	
+	public static File getUserData() {
+		return userData;
+	}
 	
 	public static BufferedImage getMapAtlas() {
 		
