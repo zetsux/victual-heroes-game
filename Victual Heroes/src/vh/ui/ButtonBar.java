@@ -35,7 +35,7 @@ public class ButtonBar {
 	private boolean showStallPrice = false;
 	private int stallCostType;
 	
-	private final int unhealthyMax = 30;
+	private final int unhealthyMax = 1;
 	private int unhealthyCap = unhealthyMax;
 	
 	public ButtonBar(int x, int y, int w, int h, Playing playing) {

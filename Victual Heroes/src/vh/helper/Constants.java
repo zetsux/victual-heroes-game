@@ -48,7 +48,7 @@ public class Constants {
 		public static float getSpeed(int eType) {
 			switch (eType) {
 				case BALD :
-					return 1f;
+					return 10f;
 				case YELLOW :
 					return 1.6f;
 				case POLICE :

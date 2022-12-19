@@ -84,21 +84,6 @@ public class LoadSave {
 		return img;
 	}
 	
-	public static BufferedImage getTempAtlas() {
-		
-		BufferedImage img = null;
-		InputStream is;
-		
-		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("tempatlas.png");
-			img = ImageIO.read(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return img;
-	}
-	
 	public static BufferedImage getSlowedImage() {
 		
 		BufferedImage img = null;
@@ -219,13 +204,28 @@ public class LoadSave {
 		return img;
 	}
 	
-	public static BufferedImage getGameOverBackground() {
+	public static BufferedImage getGameOverWinBackground() {
 		
 		BufferedImage img = null;
 		InputStream is;
 		
 		try {
-			is = LoadSave.class.getClassLoader().getResourceAsStream("overbg.png");
+			is = LoadSave.class.getClassLoader().getResourceAsStream("overbgwin.png");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
+	
+	public static BufferedImage getGameOverLoseBackground() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("overbglose.png");
 			img = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
