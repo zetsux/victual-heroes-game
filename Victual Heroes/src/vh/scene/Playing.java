@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.Random;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 
 import vh.objectManagers.HungriesManager;
 import vh.objectManagers.MapTileManager;
@@ -15,6 +18,7 @@ import vh.sound.Sound;
 import vh.objectManagers.StallFoodManager;
 import vh.ui.ButtonBar;
 import vh.helper.LevelBuilder;
+import vh.helper.LoadSave;
 import vh.hungries.Hungries;
 import vh.main.GameMain;
 import vh.object.Stall;
@@ -39,6 +43,7 @@ public class Playing extends GameScene implements SceneMethods {
 	private int moneyTick;
 
 	private boolean gamePaused;
+	private BufferedImage baseIcon;
 	
 	public Playing(GameMain game) {
 		super(game);
@@ -52,6 +57,12 @@ public class Playing extends GameScene implements SceneMethods {
 		foodManager = new StallFoodManager(this);
 		waveManager = new WaveManager(this);
 		buttonBar = new ButtonBar(0, 576, 1024, 100, this);
+		initializeIcon();
+	}
+
+	private void initializeIcon() {
+		BufferedImage icon = LoadSave.getBaseIcon();
+		baseIcon = icon.getSubimage(0, 0, 32, 32);
 	}
 
 	public void update() {
@@ -127,6 +138,12 @@ public class Playing extends GameScene implements SceneMethods {
 		
 		drawCurStall(g);
 		if (curStall != null) drawStallTileMarker(g);
+		
+		drawBaseIcon(g);
+	}
+
+	private void drawBaseIcon(Graphics g) {
+		g.drawImage(baseIcon, 976, 464, null);
 	}
 
 	private void drawStallTileMarker(Graphics g) {
