@@ -57,6 +57,7 @@ public class Playing extends GameScene implements SceneMethods {
 		foodManager = new StallFoodManager(this);
 		waveManager = new WaveManager(this);
 		buttonBar = new ButtonBar(0, 576, 1024, 100, this);
+
 		initializeIcon();
 	}
 

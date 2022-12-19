@@ -23,7 +23,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 	private BufferedImage mainMenu;
 	private BufferedImage mainMenuIMG;
 	private Random rand;
-	private Button playingButton, aboutButton, quitButton; 
+	private Button playingButton, aboutButton, quitButton, settingsButton; 
 	private GameMain game;
 	
 	private int highestScore;
@@ -49,9 +49,10 @@ public class MainMenu extends GameScene implements SceneMethods {
 		int buttonWidth = 100;
 		int buttonHeight = 40;
 		
-		playingButton = new Button("Play", ((x / 2) - (2 *(buttonWidth / 5))) , (2 * (y / 5)), buttonWidth, buttonHeight, 0);
-		aboutButton = new Button("About", ((x / 2) - (2 *(buttonWidth / 5))), (3 * (y / 5)), buttonWidth, buttonHeight, 1);
-		quitButton = new Button("Quit", ((x / 2) - (2 *(buttonWidth / 5))), (4 * (y / 5)), buttonWidth, buttonHeight, 2);
+		playingButton = new Button("Play", ((x / 2) - (2 *(buttonWidth / 5))) , (3 * (y / 7)), buttonWidth, buttonHeight, 0);
+		settingsButton = new Button("Settings", ((x / 2) - (2 *(buttonWidth / 5))), (4 * (y / 7)), buttonWidth, buttonHeight, 1);
+		aboutButton = new Button("About", ((x / 2) - (2 *(buttonWidth / 5))), (5 * (y / 7)), buttonWidth, buttonHeight, 2);
+		quitButton = new Button("Quit", ((x / 2) - (2 *(buttonWidth / 5))), (6 * (y / 7)), buttonWidth, buttonHeight, 3);
 	}
 
 	@Override
@@ -105,6 +106,8 @@ public class MainMenu extends GameScene implements SceneMethods {
 		drawButtonFb(g, aboutButton);
 		quitButton.draw(g);
 		drawButtonFb(g, quitButton);
+		settingsButton.draw(g);
+		drawButtonFb(g, settingsButton);
 	}
 
 	private void importImg() {
@@ -132,23 +135,32 @@ public class MainMenu extends GameScene implements SceneMethods {
 		else if(aboutButton.getBounds().contains(x, y)) {
 			setGameState(ABOUT);
 		}
+		
+		else if(settingsButton.getBounds().contains(x, y)) {
+			setGameState(SETTINGS);
+		}
 
 		else if(quitButton.getBounds().contains(x, y)) {
 			System.exit(1);
 		}
-		
 	}
 
 	public void mouseMoved(int x, int y) {
 		playingButton.setMouseOverButton(false);
 		aboutButton.setMouseOverButton(false);
 		quitButton.setMouseOverButton(false);
+		settingsButton.setMouseOverButton(false);
+		
 		if(playingButton.getBounds().contains(x, y)) {
 			playingButton.setMouseOverButton(true);
 		}
 		
 		else if(aboutButton.getBounds().contains(x, y)) {
 			aboutButton.setMouseOverButton(true);
+		}
+		
+		else if(settingsButton.getBounds().contains(x, y)) {
+			settingsButton.setMouseOverButton(true);
 		}
 		
 		else if(quitButton.getBounds().contains(x, y)) {
@@ -165,6 +177,10 @@ public class MainMenu extends GameScene implements SceneMethods {
 			aboutButton.setMousePressedButton(true);
 		}
 		
+		else if(settingsButton.getBounds().contains(x, y)) {
+			settingsButton.setMousePressedButton(true);
+		}
+		
 		else if(quitButton.getBounds().contains(x, y)) {
 			quitButton.setMousePressedButton(true);
 		}
@@ -175,6 +191,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 	public void mouseReleased(int x, int y) {
 		playingButton.resetMouseState();
 		aboutButton.resetMouseState();
+		settingsButton.resetMouseState();
 		quitButton.resetMouseState();
 	}
 

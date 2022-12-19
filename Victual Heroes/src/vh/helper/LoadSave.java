@@ -188,4 +188,18 @@ public class LoadSave {
 		return img;
 	}
 	
+	public static BufferedImage getSettingsBackground() {
+		
+		BufferedImage img = null;
+		InputStream is;
+		
+		try {
+			is = LoadSave.class.getClassLoader().getResourceAsStream("settingsbg.jpg");
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
 }

@@ -27,7 +27,7 @@ public class GameRenders {
 				break;
 				
 			case ABOUT :
-				game.getSettings().render(g);
+				game.getAbout().render(g);
 				break;
 				
 			case PLAYING :
@@ -37,7 +37,10 @@ public class GameRenders {
 			case OVER :
 				game.getGameOver().render(g);
 				break;
-		
+				
+			case SETTINGS :
+				game.getSettings().render(g);
+				break;
 		}
 	}
 }

@@ -14,7 +14,7 @@ public class Button {
 	private boolean mouseOverButton = false;
 	private boolean mousePressedButton = false;
 	
-	private boolean paused = false;
+	private boolean paused = false, muted = false;
 	
 	public Button (String name, int x, int y, int width, int height, int id) {
 		
@@ -60,6 +60,11 @@ public class Button {
 		else if (name == "Menu") g.drawString("Back to Menu", x + (2*(width/10) + 2), y + (2*(height/3)));
 		else if (name == "About") g.drawString(name, x + (2*(width/5) - 5), y + (2*(height/3)));
 		else if (name == "← Back") g.drawString(name, x + (2*(width/6)), y + (2*(height/3)));
+		else if (name == "Settings") g.drawString(name, x + (2*(width/7)), y + (2*(height/3)));
+		else if (name == "Mute") {
+			if (muted) g.drawString("Unmute", x + (2*(width/7) + 2), y + (3*(height/5) + 1));
+			else g.drawString("Mute", x + (2*(width/5) - 2), y + (3*(height/5) + 1));
+		}
 		else g.drawString(name, x + (2*width/5), y + (2 * (height/3)));	
 	}
 
@@ -84,6 +89,11 @@ public class Button {
 			} 
 			else if (name == "Quit" || name == "← Back") g.setColor(new Color(255, 76, 48));
 			else if (name == "Retry" || name == "About") g.setColor(new Color(133, 255, 0));
+			else if (name == "Settings") g.setColor(new Color(61, 183, 228));
+			else if (name == "Mute") {
+				if (muted) g.setColor(new Color(61, 183, 228));
+				else g.setColor(new Color(255, 76, 48));
+			} 
 			else g.setColor(new Color(255, 235, 3));
 			
 			g.fillRect(x , y , width, height-3);
@@ -124,6 +134,14 @@ public class Button {
 	}
 	
 	public void changePaused() {
-		this.paused = !(paused);
+		paused = !(paused);
+	}
+	
+	public void changeMuted() {
+		muted = !(muted);
+	}
+	
+	public boolean isMuted() {
+		return muted;
 	}
 }

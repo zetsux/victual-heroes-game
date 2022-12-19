@@ -17,6 +17,11 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {	
+		switch(GameStates.gameState) {
+			case SETTINGS :
+				gameMain.getSettings().mouseDragged(e.getX(), e.getY());
+				break;
+		}
 	}
 
 	@Override
@@ -28,7 +33,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				break;
 				
 			case ABOUT :
-				gameMain.getSettings().mouseMoved(e.getX(), e.getY());
+				gameMain.getAbout().mouseMoved(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
@@ -37,6 +42,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				
 			case OVER :
 				gameMain.getGameOver().mouseMoved(e.getX(), e.getY());
+				break;
+				
+			case SETTINGS :
+				gameMain.getSettings().mouseMoved(e.getX(), e.getY());
 				break;
 		}
 	}
@@ -53,7 +62,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				break;
 				
 			case ABOUT :
-				gameMain.getSettings().mouseClicked(e.getX(), e.getY());
+				gameMain.getAbout().mouseClicked(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
@@ -62,6 +71,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				
 			case OVER :
 				gameMain.getGameOver().mouseClicked(e.getX(), e.getY());
+				break;
+				
+			case SETTINGS :
+				gameMain.getSettings().mouseClicked(e.getX(), e.getY());
 				break;
 		
 			}
@@ -81,7 +94,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				break;
 				
 			case ABOUT :
-				gameMain.getSettings().mousePressed(e.getX(), e.getY());
+				gameMain.getAbout().mousePressed(e.getX(), e.getY());
 				break;
 				
 			case PLAYING :
@@ -90,6 +103,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				
 			case OVER :
 				gameMain.getGameOver().mousePressed(e.getX(), e.getY());
+				break;
+				
+			case SETTINGS :
+				gameMain.getSettings().mousePressed(e.getX(), e.getY());
 				break;
 			}
 		}
@@ -105,7 +122,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			break;
 			
 		case ABOUT :
-			gameMain.getSettings().mouseReleased(e.getX(), e.getY());
+			gameMain.getAbout().mouseReleased(e.getX(), e.getY());
 			break;
 			
 		case PLAYING :
@@ -114,6 +131,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			
 		case OVER :
 			gameMain.getGameOver().mouseReleased(e.getX(), e.getY());
+			break;
+		
+		case SETTINGS :
+			gameMain.getSettings().mouseReleased(e.getX(), e.getY());
 			break;
 	}
 		
