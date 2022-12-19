@@ -60,7 +60,7 @@ public class MainMenu extends GameScene implements SceneMethods {
 		
 		g.drawImage(mainMenu, 0, 0, null);
 		
-		g.setColor(Color.YELLOW);
+		g.setColor(new Color(255, 255, 51, 200));
 		g.fillRect(15, 30, 305, 60);
 		
 		g.setColor(Color.BLACK);

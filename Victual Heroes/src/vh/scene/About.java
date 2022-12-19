@@ -40,15 +40,28 @@ public class About extends GameScene implements SceneMethods {
 	public void render(Graphics g) {
 		g.drawImage(bgImage, 0, 0, null);
 		
+		g.setColor(new Color(50, 51, 52, 127));
+		g.fillRect(80, 50, 864, 576);
+		
+		g.setColor(new Color(255, 255, 255, 180));
+		g.drawRect(80, 50, 864, 576);
+		
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Helvetica", Font.BOLD, 20));
-		g.drawString("About Game : ", 467, 200);
-		g.drawString("A Tower Defense based game with Indonesian Cuisine as the main theme.", 167, 230);
-		g.drawString("With Cuisine Heroes as the bla bla bla bla anjir bingung gatau la..", 167, 260);
-		g.drawString("Mohon bantuannya fred, aku bingung hehe, semangat :))", 167, 290);
-		g.drawString("Created By : ", 467, 500);
-		g.drawString("- Kevin Nathanael H. / 5025211140", 367, 530);
-		g.drawString("- Frederick Hidayat / 5025211152", 367, 560);
+		g.setFont(new Font("Helvetica", Font.BOLD, 40));
+		g.drawString("About Game : ", 397, 140);
+		g.drawString("Created by : ", 397, 470);
+		
+		g.setFont(new Font("Helvetica", Font.BOLD, 18));
+		g.drawString("Victual Heroes is a Tower Defense Based game with Indonesian Cuisine as the main theme.", 107, 200);
+		g.drawString("We mainly introduced Indonesian food with such excitement in tower defense game,", 107, 230);
+		g.drawString("which is aiming more exposure for every player to know all about Indonesian cuisine.", 107, 260);
+		g.drawString("Victual Heroes offers a playful and entertaining gameplay to make a better gaming experience.", 107, 290);
+		g.drawString("With such features, we cover a lot of fun aspect that will satisfy our player's hunger for", 107, 320);
+		g.drawString("entertainment in the uniqueness of a game.", 107, 350);
+		
+		g.drawString("[ Refrein ] ", 470, 520);
+		g.drawString("- Kevin Nathanael H. / 5025211140", 367, 550);
+		g.drawString("- Frederick Hidayat / 5025211152", 367, 580);
 		
 		drawButtons(g);
 	}
