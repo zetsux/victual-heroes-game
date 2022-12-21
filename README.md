@@ -22,8 +22,10 @@ Victual Heroes is a Tower Defense Based game with Indonesian Cuisine as the main
 - Selling Stall
 - Stalls and Foods Variants
 - Hungries Variants
+- Pause/Play Button
 
 ### Stalls Variants
+![Stalls Image](https://cdn.discordapp.com/attachments/995337235211763722/1055086039523393597/image.png)
 - Pukis (Normal, Fast Shooting Speed, Large Range Area)
 - Bakso (High AoE Explosion Damage, Slow Shooting Speed, Small Range Area)
 - Es Campur (Normal Damage Slow Effect, Medium to Fast Shooting Speed, Medium Range Area)
