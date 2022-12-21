@@ -1,11 +1,17 @@
 
 # Victual Heroes
 
-A Tower Defense Game project created by 2 person with
-Indonesian Cuisine as the main theme, created using Java.
+A Tower Defense Game project created by 2 people for the Mini Final Project
+of our Object-Oriented Programming (OOP) subject with
+Indonesian Cuisine as the main theme, created fully using Java.
+
+![Icon Image](https://cdn.discordapp.com/attachments/995337235211763722/1055084557659017306/image.png)
 
 ## Description
 Victual Heroes is a Tower Defense Based game with Indonesian Cuisine as the main theme. We mainly introduced Indonesian food with such excitement in tower defense game which is aiming more exposure for every player to know all about Indonesian cuisine. Victual Heroes offers a playful, cute, and entertaining gameplay to make a better gaming experience. With such feature, we cover a lot of fun aspect that will satisfy our player hunger for entertaining and unique game.
+
+## Gameplay
+![Gameplay Image](https://cdn.discordapp.com/attachments/995337235211763722/1055085127698497587/image.png)
 
 ## Features
 - Map
