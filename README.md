@@ -40,6 +40,11 @@ Victual Heroes is a Tower Defense Based game with Indonesian Cuisine as the main
 ## Other Features
 - High Score Stored in TXT File
 - Volume Settings (Volume Bar & Mute Button)
+
+  <picture>
+    <img alt="Settings Image" src="https://cdn.discordapp.com/attachments/995337235211763722/1055342702469857320/image.png">
+  </picture>
+
 - Background Music
 - About Us Tab
 - Interactive Buttons
