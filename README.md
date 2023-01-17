@@ -48,3 +48,6 @@ Victual Heroes is a Tower Defense Based game with Indonesian Cuisine as the main
 - Background Music
 - About Us Tab
 - Interactive Buttons
+
+## Reference
+[Kaarin Gaming Youtube Channel](https://www.youtube.com/@KaarinGaming)
